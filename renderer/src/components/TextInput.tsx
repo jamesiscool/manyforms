@@ -1,8 +1,16 @@
 import * as React from 'react'
+import {FormElementProps} from './FormElement'
 
-export interface TextInputProps {
-	lable: string
+export interface TextInputTextInputProps {
+	label: string
 }
 
-export const TextInput = (props: TextInputProps) =>
-	<h1>{props.lable}</h1>
+export interface TextInputProps extends FormElementProps<TextInputTextInputProps> {
+
+}
+
+export class TextInput extends React.Component<TextInputProps, any> {
+	render() {
+		return <h1>TextInput {this.props.definition.type}</h1>
+	}
+}

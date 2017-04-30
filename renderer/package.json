@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "James Leslie <james@jamesleslie.net>",
-  "license": "MIT",
+  "license": "Unlicensed",
   "dependencies": {
-    "@types/react": "^15.0.22",
+    "@types/lodash": "^4.14.63",
+    "@types/react": "^15.0.23",
     "@types/react-dom": "^15.5.0",
     "awesome-typescript-loader": "^3.1.2",
+    "lodash": "^4.17.4",
+    "preact": "^8.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "source-map-loader": "^0.2.1",
-    "tslint": "^5.1.0",
-    "typescript": "^2.2.2",
-    "webpack-dev-server": "^2.4.2"
+    "typescript": "^2.3.1",
+    "webpack": "^2.4.1"
   }
 }

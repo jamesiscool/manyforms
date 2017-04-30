@@ -1,10 +1,17 @@
 import * as React from 'react'
+/*import set = require('lodash/set')
+ import get = require('lodash/get')*/
+
+import {FormElementDef} from './FormElement'
+import {Children} from './Children'
 
 export interface FormProps {
-	formElements: Array<object>
+	formElements: Array<FormElementDef<any>>
 }
 
 export const Form = (props: FormProps) =>
-	<div>
-		{props.formElements.map((element) => <div>Hello</div>)}
+	<div className="form">
+		<Children children={props.formElements}/>
 	</div>
+
+
