@@ -19,9 +19,25 @@ const formElements: Array<FormElementDef<any>> = [
 		},
 		children: []
 	}, {
+		type: 'Heading',
+		attributes: {
+			level: 2,
+			text: 'Personal Details'
+		},
+		children: []
+	}, {
+		fieldId: 'firstName',
 		type: 'TextInput',
 		attributes: {
 			label: 'First Name'
+		},
+		children: []
+	}, {
+		fieldId: 'lastName',
+		type: 'TextInput',
+		attributes: {
+			label: 'Last Name',
+			description: 'Your surname or family name'
 		},
 		children: []
 	}

@@ -6,9 +6,6 @@ import {Heading} from './Heading'
 export interface FormElementDef<Attributes> {
 	type: string,
 	attributes?: Attributes
-	/*{
-	 [propName: string]: (string | number)
-	 }*/
 	fieldId?: string,
 	children?: Array<FormElementDef<any>>
 }
@@ -18,7 +15,7 @@ export class FormElementProps<Attributes> {
 }
 
 export const FormElements: { [name: string]: any } = {
-	'TextInput': TextInput,
-	'Paragraph': Paragraph,
-	'Heading': Heading
+	TextInput: TextInput,
+	Paragraph: Paragraph,
+	Heading: Heading
 }
