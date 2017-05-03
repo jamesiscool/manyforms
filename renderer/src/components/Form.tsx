@@ -6,12 +6,10 @@ import {FormElementDef} from './FormElement'
 import {Children} from './Children'
 
 export interface FormProps {
-	formElements: Array<FormElementDef<any>>
+    formElements: Array<FormElementDef<{}>>
 }
 
 export const Form = (props: FormProps) =>
-	<div className="form">
-		<Children children={props.formElements}/>
-	</div>
-
-
+    <div className="form">
+        <Children children={props.formElements}/>
+    </div>
