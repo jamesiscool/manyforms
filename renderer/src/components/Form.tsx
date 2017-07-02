@@ -1,6 +1,5 @@
 import * as React from 'react'
-/*import set = require('lodash/set')
- import get = require('lodash/get')*/
+import DevTools from 'mobx-react-devtools'
 
 import {FormElementDef} from './FormElement'
 import {Children} from './Children'
@@ -9,7 +8,8 @@ export interface FormProps {
     formElements: Array<FormElementDef<{}>>
 }
 
-export const Form = (props: FormProps) =>
-    <div className="form">
-        <Children children={props.formElements}/>
-    </div>
+export const Form = (props: FormProps) => (
+    <div className="form pb-5">
+        <Children children={props.formElements} parentFieldPath=""/>
+        <DevTools/>
+    </div>)

@@ -21,7 +21,6 @@
     "jsdoc-format": true,
     "jsx-no-lambda": false,
     "jsx-no-multiline-js": false,
-    "jsx-wrap-multiline": false,
     "label-position": true,
     "max-line-length": [false],
     "member-ordering": [

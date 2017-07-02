@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {FormElementProps} from './FormElement'
+import {FormElementProps} from '../FormElement'
 
 export interface ParagraphAttributes {
     text: string
