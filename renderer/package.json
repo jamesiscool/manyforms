@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "author": "James Leslie <james@jamesleslie.net>",
-  "license": "Unlicensed",
+  "license": "MIT",
   "dependencies": {
     "@types/classnames": "^2.2.0",
     "@types/jest": "^19.2.3",
