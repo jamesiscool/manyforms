@@ -1,27 +1,20 @@
 import * as React from 'react'
-import {observer, inject} from 'mobx-react'
 
-import {FormElementProps, FormElementDef} from '../FormElement'
-import {FormState} from '../../store/index'
-import {createKey} from '../../util'
-import {Page} from './Page'
+import { FormElementProps, FormElementDef } from '../FormElement'
+import { Page } from './Page'
+import { createKey } from '../../util'
 
 export interface AccordionAttributes {
-    hello: string
 }
 
 export interface AccordionProps extends FormElementProps<AccordionAttributes> {
-    formState: FormState
 }
 
 interface AccordionState {
     currentPage: number
 }
 
-@inject('formState')
-@observer
 export class Accordion extends React.Component<AccordionProps, AccordionState> {
-    formState = this.props.formState
 
     constructor(props: AccordionProps) {
         super(props)
@@ -34,26 +27,26 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
 
     goToPage(index: number) {
         if (index < this.state.currentPage) {
-            this.setState((prevState) => {
-                return prevState.currentPage = index
+            this.setState(() => {
+                return {currentPage: index}
             })
         }
     }
 
     goToPreviousPage() {
         this.setState((prevState) => {
-            return prevState.currentPage--
+            return {currentPage: prevState.currentPage - 1}
         })
     }
 
     goToNextPage() {
         this.setState((prevState) => {
-            return prevState.currentPage++
+            return {currentPage: prevState.currentPage + 1}
         })
     }
 
     submit() {
-        this.formState.submit()
+        // this.formState.submit()
     }
 
     // tslint:disable-next-line
@@ -77,8 +70,8 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
         return (
             <div id="accordion" style={{border: '1px solid rgba(0,0,0,.125)', borderRadius: '.25rem'}} role="tablist" aria-multiselectable="true">
                 {this.props.definition.children!.map((page, index: number) => {
-                    return <div className="card mp-1" style={{borderLeft: '0', borderRight: '0', borderBottom: '0', borderRadius: '0'}} key={createKey()}>
-                        <a className="card-header h4" onClick={e => this.goToPage(index)}>{page.attributes.label}
+                    return <div className="card" style={{borderLeft: '0', borderRight: '0', borderBottom: '0', borderRadius: '0'}} key={createKey()}>
+                        <a className="card-header h4" onClick={() => this.goToPage(index)}>{page.attributes.label}
                         </a>
                         {this.renderPage(page, index)}
                     </div>

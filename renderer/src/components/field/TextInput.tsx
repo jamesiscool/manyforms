@@ -1,10 +1,8 @@
 import * as React from 'react'
-import {observer, inject} from 'mobx-react'
 
-import {FormElementProps, appendFieldId} from '../FormElement'
-import {Field, FormState} from '../../store/index'
-import {Label} from '../output/Label'
-import {Description} from '../output/Description'
+import { FormElementProps, appendFieldId } from '../FormElement'
+import { Label } from '../output/Label'
+import { Description } from '../output/Description'
 
 export interface TextInputAttributes {
     label: string
@@ -12,7 +10,6 @@ export interface TextInputAttributes {
 }
 
 export interface TextInputProps extends FormElementProps<TextInputAttributes> {
-    formState: FormState
     value: string
 }
 
@@ -20,20 +17,17 @@ interface TextInputState {
     value: string
 }
 
-@inject('formState')
-@observer
 export class TextInput extends React.Component<TextInputProps, TextInputState> {
     fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
-    field: Field = this.props.formState.lookupOrCreateField(this.fieldPath, this.props.definition)
 
     constructor(props: TextInputProps) {
         super(props)
-        this.state = {value: this.field.value}
+        this.state = {value: ''}
     }
 
     handleChange(event: React.FormEvent<HTMLInputElement>) {
         this.setState({value: event.currentTarget.value})
-        this.field.setValue(event.currentTarget.value)
+        // this.field.setValue(event.currentTarget.value)
     }
 
     render() {

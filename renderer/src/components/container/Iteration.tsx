@@ -1,11 +1,9 @@
 import * as React from 'react'
-import {observer, inject} from 'mobx-react'
 
-import {FormElementProps, appendFieldId} from '../FormElement'
-import {FormState} from '../../store/index'
-import {Description} from '../output/Description'
-import {Children} from '../Children'
-import {createKey} from '../../util'
+import { FormElementProps, appendFieldId } from '../FormElement'
+import { Description } from '../output/Description'
+import { Children } from '../Children'
+import { createKey } from '../../util'
 
 export interface IterationAttributes {
     label: string
@@ -14,39 +12,30 @@ export interface IterationAttributes {
 }
 
 export interface IterationProps extends FormElementProps<IterationAttributes> {
-    formState: FormState
 }
 
 interface IterationState {
     items: Array<{ key: string }>
 }
 
-@inject('formState')
-@observer
 export class Iteration extends React.Component<IterationProps, IterationState> {
     fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
-    // items = this.props.formState.lookupOrCreateArray(this.fieldPath)
+
+    static ordinal(n: number): string {
+        const s = ['th', 'st', 'nd', 'rd'],
+            v = n % 100
+        return n + (s[(v - 20) % 10] || s[v] || s[0])
+    }
 
     constructor(props: IterationProps) {
         super(props)
-        this.state = {items: this.props.formState.lookupOrCreateArray(this.fieldPath)}
+        this.state = {items: []}
     }
 
     removeItem(index: number, key: string) {
         this.setState((prevState) => {
-            /*const oldData = this.formState.getFieldData<[{}]>(this.fieldPath, [{}])
-             if (oldData) {
-             oldData.splice(index, 1)
-             }
-             this.formState.setFieldData(this.fieldPath, oldData)*/
             return {items: prevState.items.filter(item => item.key !== key)}
         })
-    }
-
-    ordinal(n: number): string {
-        const s = ['th', 'st', 'nd', 'rd'],
-            v = n % 100
-        return n + (s[(v - 20) % 10] || s[v] || s[0])
     }
 
     render() {
@@ -57,21 +46,21 @@ export class Iteration extends React.Component<IterationProps, IterationState> {
                 {this.state.items.map((item, index: number) => {
                     const childDefs = this.props.definition.children ? this.props.definition.children : []
                     return <div className="card mb-2" key={item.key}>
-                        <h6 className="card-header mb-2">{this.ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
-                            <button className="close" onClick={e => this.removeItem(index, item.key)}>
+                        <h6 className="card-header mb-2">{Iteration.ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
+                            <button className="close" onClick={() => this.removeItem(index, item.key)}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </h6>
-                        <div className="card-block">
+                        <div className="card-block m-3">
                             <Children children={childDefs} parentFieldPath={this.fieldPath + '[' + index + ']'}/>
                         </div>
                     </div>
                 })}
                 <button
-                    className="btn btn-secondary d-inline"
+                    className="btn btn-primary d-inline"
                     onClick={() => {
                         this.setState((prevState) => {
-                            return prevState.items.push({key: createKey()})
+                            return {items: prevState.items.concat([{key: createKey()}])}
 
                         })
                     }}

@@ -1,12 +1,10 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import {Provider} from 'mobx-react'
 
-import {Form} from './components/Form'
-import {FormElementDef} from './components/FormElement'
-import {FormState} from './store/index'
+import { Form } from './components/Form'
+import { FormElementDef } from './components/FormElement'
 
-const formState = new FormState()
+import './index.css'
 
 const formElements: Array<FormElementDef<{}>> = [
     {
@@ -19,14 +17,12 @@ const formElements: Array<FormElementDef<{}>> = [
     {
         type: 'Accordion',
         attributes: {
-            hello: 'asdf'
         },
         children: [
             {
                 type: 'Page',
                 attributes: {
                     label: 'Your loan details',
-                    hello: 'asdf'
                 },
                 children: [{
                     fieldId: 'howManyPeopleApplying',
@@ -119,8 +115,6 @@ const formElements: Array<FormElementDef<{}>> = [
 ]
 
 ReactDOM.render(
-    <Provider formState={formState}>
-        <Form formElements={formElements}/>
-    </Provider>,
+    <Form formElements={formElements}/>,
     document.getElementById('form')
 )
