@@ -37,13 +37,11 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
                     className="form-control custom-select"
                     id={this.props.definition.fieldId}
                     onChange={e => this.handleChange(e)}
-                    // value={this.state.selectedOption}
+                    value={this.state.selectedOption}
                     aria-describedby={this.props.definition.fieldId + '_description'}
                 >
                     <option value="" disabled={true}/>
-                    {this.props.definition.attributes.options.map((option) => {
-                        return <option value={option} key={option}>{option}</option>
-                    })}
+                    {this.props.definition.attributes.options.map((option) => <option value={option} key={option}>{option}</option>)}
                 </select>
                 <Description id={this.fieldPath + '_description'} text={this.props.definition.attributes.description}/>
             </div>)
