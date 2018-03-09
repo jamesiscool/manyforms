@@ -116,7 +116,13 @@ const formElements: Array<FormElementDef<{}>> = [
     }
 ]
 
-const store = createStore<State>(reducer)
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION__: () => State
+    }
+}
+
+const store = createStore<State>(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
     (
