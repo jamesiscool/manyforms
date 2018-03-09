@@ -1,5 +1,8 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { reducer, State } from './state/store'
 
 import { Form } from './components/Form'
 import { FormElementDef } from './components/FormElement'
@@ -16,8 +19,7 @@ const formElements: Array<FormElementDef<{}>> = [
     },
     {
         type: 'Accordion',
-        attributes: {
-        },
+        attributes: {},
         children: [
             {
                 type: 'Page',
@@ -41,10 +43,10 @@ const formElements: Array<FormElementDef<{}>> = [
                         },
                     },
                     {
-                        fieldId: 'whatYourNabId',
+                        fieldId: 'nabId',
                         type: 'TextInput',
                         attributes: {
-                            label: 'What\'s your NAB ID? ',
+                            label: 'What is your NAB ID? ',
                             description: 'This will help us identify you. It\'s an 8-10 digit number found on the back of your NAB card above the black strip. It’s also the number you use to login to internet banking.'
                         }
                     }]
@@ -114,7 +116,13 @@ const formElements: Array<FormElementDef<{}>> = [
     }
 ]
 
+const store = createStore<State>(reducer)
+
 ReactDOM.render(
-    <Form formElements={formElements}/>,
+    (
+        <Provider store={store}>
+            <Form formElements={formElements}/>
+        </Provider>
+    ),
     document.getElementById('form')
 )

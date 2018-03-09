@@ -1,4 +1,4 @@
-import { TextInput } from './field/TextInput'
+import { ConnectedTextInput } from './field/TextInput'
 import { Paragraph } from './output/Paragraph'
 import { Heading } from './output/Heading'
 import { Dropdown } from './field/Dropdown'
@@ -22,7 +22,7 @@ export class FormElementProps<Attributes> {
 
 export const FormElements: { [name: string]: {} } = {
     Dropdown: Dropdown,
-    TextInput: TextInput,
+    TextInput: ConnectedTextInput,
     Paragraph: Paragraph,
     Heading: Heading,
     ButtonGroup: ButtonGroup,

@@ -1,23 +1,34 @@
 import * as React from 'react'
+import { connect, Dispatch } from 'react-redux'
+import { Action } from 'redux'
 
 import { FormElementProps, appendFieldId } from '../FormElement'
 import { Label } from '../output/Label'
 import { Description } from '../output/Description'
+import { setData, SetDataPayload } from '../../state/store'
+
+interface TextInputStateProps {
+}
+
+interface TextInputDispatchProps {
+    setData: (payload: SetDataPayload) => void
+}
 
 export interface TextInputAttributes {
     label: string
     description: string
 }
 
-export interface TextInputProps extends FormElementProps<TextInputAttributes> {
-    value: string
+export interface TextInputOwnProps extends FormElementProps<TextInputAttributes> {
 }
+
+type TextInputProps = TextInputStateProps & TextInputDispatchProps & TextInputOwnProps
 
 interface TextInputState {
     value: string
 }
 
-export class TextInput extends React.Component<TextInputProps, TextInputState> {
+class TextInput extends React.Component<TextInputProps, TextInputState> {
     fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
 
     constructor(props: TextInputProps) {
@@ -27,7 +38,7 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
 
     handleChange(event: React.FormEvent<HTMLInputElement>) {
         this.setState({value: event.currentTarget.value})
-        // this.field.setValue(event.currentTarget.value)
+        this.props.setData({path: this.fieldPath, data: event.currentTarget.value})
     }
 
     render() {
@@ -47,3 +58,11 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
         )
     }
 }
+
+export function mapDispatchToProps(dispatch: Dispatch<Action>) {
+    return {
+        setData: (payload: { path: string, data: string }) => dispatch(setData(payload))
+    }
+}
+
+export const ConnectedTextInput = connect<TextInputStateProps, TextInputDispatchProps, TextInputOwnProps>(null, mapDispatchToProps)(TextInput)
