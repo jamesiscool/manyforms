@@ -8,6 +8,6 @@ export interface FormProps {
 }
 
 export const Form = (props: FormProps) => (
-    <div className="form pb-2">
+    <div className="pb-2">
         <Children children={props.formElements} parentFieldPath=""/>
     </div>)

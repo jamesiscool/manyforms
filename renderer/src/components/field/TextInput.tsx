@@ -5,9 +5,10 @@ import { Action } from 'redux'
 import { FormElementProps, appendFieldId } from '../FormElement'
 import { Label } from '../output/Label'
 import { Description } from '../output/Description'
-import { setData, SetDataPayload } from '../../state/store'
+import { getData, setData, SetDataPayload, State } from '../../state/store'
 
 interface TextInputStateProps {
+    value: string
 }
 
 interface TextInputDispatchProps {
@@ -33,7 +34,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
 
     constructor(props: TextInputProps) {
         super(props)
-        this.state = {value: ''}
+        this.state = {value: props.value}
     }
 
     handleChange(event: React.FormEvent<HTMLInputElement>) {
@@ -65,4 +66,10 @@ export function mapDispatchToProps(dispatch: Dispatch<Action>) {
     }
 }
 
-export const ConnectedTextInput = connect<TextInputStateProps, TextInputDispatchProps, TextInputOwnProps>(null, mapDispatchToProps)(TextInput)
+export function mapStateToProps(state: State, ownProps: TextInputOwnProps) {
+    return {
+        value: getData(state, appendFieldId(ownProps.parentFieldPath, ownProps.definition.fieldId)) || ''
+    }
+}
+
+export const ConnectedTextInput = connect<TextInputStateProps, TextInputDispatchProps, TextInputOwnProps>(mapStateToProps, mapDispatchToProps)(TextInput)
