@@ -5,17 +5,21 @@
   "dependencies": {
     "@types/classnames": "^2.2.3",
     "@types/jest": "^22.2.0",
+    "@types/lodash": "^4.14.104",
     "@types/node": "^9.4.6",
     "@types/react": "^16.0.40",
     "@types/react-dom": "^16.0.4",
     "@types/react-redux": "^5.0.15",
     "classnames": "^2.2.5",
+    "lodash": "^4.17.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "react-scripts-ts": "2.13.0",
     "redux": "^3.7.2",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "typescript-fsa": "^2.5.0",
+    "typescript-fsa-reducers": "^0.4.5"
   },
   "scripts": {
     "start": "react-scripts-ts start",
