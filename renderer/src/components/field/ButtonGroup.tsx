@@ -39,7 +39,7 @@ export class ButtonGroup extends React.Component<ButtonGroupProps, ButtonGroupSt
                 <div>
                     <Label htmlFor={this.fieldPath} text={this.props.definition.attributes.label}/>
                 </div>
-                <div className="btn-group btn-group-toggle" >
+                <div className="btn-group btn-group-toggle">
                     {this.props.definition.attributes.options.map((option) => {
                         const labelClass = classNames({
                             btn: true,
