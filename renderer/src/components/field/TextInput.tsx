@@ -25,20 +25,10 @@ export interface TextInputOwnProps extends FormElementProps<TextInputAttributes>
 
 type TextInputProps = TextInputStateProps & TextInputDispatchProps & TextInputOwnProps
 
-interface TextInputState {
-    value: string
-}
-
-class TextInput extends React.Component<TextInputProps, TextInputState> {
+class TextInput extends React.Component<TextInputProps> {
     fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
 
-    constructor(props: TextInputProps) {
-        super(props)
-        this.state = {value: props.value}
-    }
-
     handleChange(event: React.FormEvent<HTMLInputElement>) {
-        this.setState({value: event.currentTarget.value})
         this.props.setData({path: this.fieldPath, data: event.currentTarget.value})
     }
 
@@ -51,7 +41,7 @@ class TextInput extends React.Component<TextInputProps, TextInputState> {
                     className="form-control"
                     id={this.props.definition.fieldId}
                     aria-describedby={this.fieldPath + '_description'}
-                    value={this.state.value}
+                    value={this.props.value}
                     onChange={e => this.handleChange(e)}
                 />
                 <Description id={this.fieldPath + '_description'} text={this.props.definition.attributes.description}/>
