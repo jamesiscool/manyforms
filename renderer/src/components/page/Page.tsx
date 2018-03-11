@@ -41,7 +41,7 @@ export class Page extends React.Component<PageProps, {}> {
             <div className="card-block m-3">
                 <Children children={this.props.definition.children!} parentFieldPath={this.props.definition.fieldId!}/>
                 <nav aria-label="Page navigation example">
-                    <ul className="pagination">
+                    <ul className="pagination mb-0">
                         {this.previousButton()}
                         {this.nextButton()}
                     </ul>
