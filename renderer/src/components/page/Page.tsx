@@ -16,42 +16,23 @@ export interface PageProps extends FormElementProps<PageAttributes> {
 }
 
 export class Page extends React.Component<PageProps, {}> {
+
+    pageButton(label: string, onClick?: () => void) {
+        return <li className="page-item"><a className="page-link text-primary" onClick={() => onClick!()}>{label}</a></li>
+    }
+
     previousButton() {
         if (this.props.showPrevious) {
-            return (
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => {
-                        this.props.goToPreviousPage()
-                    }}
-                >Previous
-                </button>)
+            return this.pageButton('Previous', this.props.goToPreviousPage)
         }
         return null
     }
 
     nextButton() {
         if (this.props.isLast) {
-            return (
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => {
-                        this.props.submit!()
-                    }}
-                >Submit
-                </button>)
+            return this.pageButton('Submit', this.props.submit)
         } else {
-            return (
-                <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => {
-                        this.props.goToNextPage()
-                    }}
-                >Next
-                </button>)
+            return this.pageButton('Next', this.props.goToNextPage)
         }
     }
 
@@ -59,10 +40,12 @@ export class Page extends React.Component<PageProps, {}> {
         return (
             <div className="card-block m-3">
                 <Children children={this.props.definition.children!} parentFieldPath={this.props.definition.fieldId!}/>
-                <div className="btn-group">
-                    {this.previousButton()}
-                    {this.nextButton()}
-                </div>
+                <nav aria-label="Page navigation example">
+                    <ul className="pagination">
+                        {this.previousButton()}
+                        {this.nextButton()}
+                    </ul>
+                </nav>
             </div>)
     }
 }
