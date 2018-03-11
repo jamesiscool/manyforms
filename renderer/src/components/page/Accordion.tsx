@@ -73,8 +73,8 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
             <div className="accordion" role="tablist" aria-multiselectable="true">
                 {this.props.definition.children!.map((page, index: number) => {
                     return <div className="card" key={createKey()}>
-                        <div className="card-header" onClick={() => this.goToPage(index)}>
-                            <a className="h4">{page.attributes.label}</a>
+                        <div className="card-header cursor-pointer" onClick={() => this.goToPage(index)}>
+                            <h4 className="d-inline">{page.attributes.label}</h4>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}
                         </div>
                         {this.page(page, index)}
                     </div>
