@@ -4,6 +4,8 @@ import { FormElementProps, FormElementDef } from '../FormElement'
 import { Page } from './Page'
 import { createKey } from '../../util'
 
+import './Accordion.css'
+
 export interface AccordionAttributes {
 }
 
@@ -50,7 +52,7 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
     }
 
     // tslint:disable-next-line
-    renderPage(page: FormElementDef<any>, index: number) {
+    page(page: FormElementDef<any>, index: number) {
         if (this.state.currentPage === index) {
             return (
                 <Page
@@ -68,12 +70,13 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
 
     render() {
         return (
-            <div id="accordion" style={{border: '1px solid rgba(0,0,0,.125)', borderRadius: '.25rem'}} role="tablist" aria-multiselectable="true">
+            <div className="accordion" role="tablist" aria-multiselectable="true">
                 {this.props.definition.children!.map((page, index: number) => {
-                    return <div className="card" style={{borderLeft: '0', borderRight: '0', borderBottom: '0', borderRadius: '0'}} key={createKey()}>
-                        <a className="card-header h4" onClick={() => this.goToPage(index)}>{page.attributes.label}
-                        </a>
-                        {this.renderPage(page, index)}
+                    return <div className="card" key={createKey()}>
+                        <div className="card-header" onClick={() => this.goToPage(index)}>
+                            <a className="h4">{page.attributes.label}</a>
+                        </div>
+                        {this.page(page, index)}
                     </div>
                 })}
             </div>)
