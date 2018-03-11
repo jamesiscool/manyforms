@@ -1,8 +1,8 @@
 import { ConnectedTextInput } from './field/TextInput'
+import { ConnectedButtonGroup } from './field/ButtonGroup'
 import { Paragraph } from './output/Paragraph'
 import { Heading } from './output/Heading'
 import { Dropdown } from './field/Dropdown'
-import { ButtonGroup } from './field/ButtonGroup'
 import { Iteration } from './container/Iteration'
 import { Accordion } from './page/Accordion'
 import { Page } from './page/Page'
@@ -25,7 +25,7 @@ export const FormElements: { [name: string]: {} } = {
     TextInput: ConnectedTextInput,
     Paragraph: Paragraph,
     Heading: Heading,
-    ButtonGroup: ButtonGroup,
+    ButtonGroup: ConnectedButtonGroup,
     Iteration: Iteration,
     Accordion: Accordion,
     Page: Page

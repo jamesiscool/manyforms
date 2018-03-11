@@ -1,10 +1,21 @@
 import * as React from 'react'
 import * as classNames from 'classnames'
+import { connect, Dispatch } from 'react-redux'
+import { Action } from 'redux'
 
 import { appendFieldId, FormElementProps } from '../FormElement'
 import { Label } from '../output/Label'
 import { Description } from '../output/Description'
 import { createKey } from '../../util'
+import { getData, setData, SetDataPayload, State } from '../../state/store'
+
+interface ButtonGroupStateProps {
+    value: string
+}
+
+interface ButtonGroupDispatchProps {
+    setData: (payload: SetDataPayload) => void
+}
 
 export interface ButtonGroupAttributes {
     label: string
@@ -12,25 +23,16 @@ export interface ButtonGroupAttributes {
     options: [string]
 }
 
-interface ButtonGroupProps extends FormElementProps<ButtonGroupAttributes> {
+interface ButtonGroupOwnProps extends FormElementProps<ButtonGroupAttributes> {
 }
 
-interface ButtonGroupState {
-    selectedOption: string
-}
+type ButtonGroupProps = ButtonGroupStateProps & ButtonGroupDispatchProps & ButtonGroupOwnProps
 
-export class ButtonGroup extends React.Component<ButtonGroupProps, ButtonGroupState> {
+export class ButtonGroup extends React.Component<ButtonGroupProps> {
     fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
 
-    constructor(props: ButtonGroupProps) {
-        super(props)
-        this.state = {selectedOption: ''}
-    }
-
     handleChange(event: React.FormEvent<HTMLInputElement>) {
-        this.setState({selectedOption: event.currentTarget.value})
-        // this.field.setValue(event.currentTarget.value)
-        // this.props.formState.setFieldData(this.fieldPath, event.currentTarget.value)
+        this.props.setData({path: this.fieldPath, data: event.currentTarget.value})
     }
 
     render() {
@@ -43,7 +45,7 @@ export class ButtonGroup extends React.Component<ButtonGroupProps, ButtonGroupSt
                             const labelClass = classNames({
                                 btn: true,
                                 'btn-outline-primary': true,
-                                active: this.state.selectedOption === option
+                                active: this.props.value === option
                             })
                             return <label className={labelClass} key={createKey()}>
                                 <input type="radio" value={option} id={this.fieldPath + '_' + option} onChange={e => this.handleChange(e)}/>{option}
@@ -55,3 +57,17 @@ export class ButtonGroup extends React.Component<ButtonGroupProps, ButtonGroupSt
             </div>)
     }
 }
+
+export function mapDispatchToProps(dispatch: Dispatch<Action>) {
+    return {
+        setData: (payload: { path: string, data: string }) => dispatch(setData(payload))
+    }
+}
+
+export function mapStateToProps(state: State, ownProps: ButtonGroupOwnProps) {
+    return {
+        value: getData(state, appendFieldId(ownProps.parentFieldPath, ownProps.definition.fieldId)) || ''
+    }
+}
+
+export const ConnectedButtonGroup = connect<ButtonGroupStateProps, ButtonGroupDispatchProps, ButtonGroupOwnProps>(mapStateToProps, mapDispatchToProps)(ButtonGroup)
