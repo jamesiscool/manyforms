@@ -57,7 +57,7 @@ const formElements: Array<FormElementDef<{}>> = [
                 },
                 children: [{
                     fieldId: 'title',
-                    type: 'Dropdown',
+                    type: 'ButtonGroup',
                     attributes: {
                         label: 'Title',
                         options: ['Mr', 'Ms', 'Mrs', 'Miss', 'Dr']
@@ -91,7 +91,7 @@ const formElements: Array<FormElementDef<{}>> = [
                     },
                     children: [{
                         fieldId: 'type',
-                        type: 'Dropdown',
+                        type: 'ButtonGroup',
                         attributes: {
                             label: 'What type of property is this?',
                             options: ['Residential property', 'Investment property']
@@ -104,7 +104,7 @@ const formElements: Array<FormElementDef<{}>> = [
                         }
                     }, {
                         fieldId: 'ownership',
-                        type: 'Dropdown',
+                        type: 'ButtonGroup',
                         attributes: {
                             label: 'Is this property solely or jointly owned?',
                             options: ['Solely owned', 'Jointly owned']
