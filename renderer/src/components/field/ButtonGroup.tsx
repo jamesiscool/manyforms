@@ -36,20 +36,20 @@ export class ButtonGroup extends React.Component<ButtonGroupProps, ButtonGroupSt
     render() {
         return (
             <div className="form-group">
-                <div>
-                    <Label htmlFor={this.fieldPath} text={this.props.definition.attributes.label}/>
-                </div>
-                <div className="btn-group btn-group-toggle">
-                    {this.props.definition.attributes.options.map((option) => {
-                        const labelClass = classNames({
-                            btn: true,
-                            'btn-outline-primary': true,
-                            active: this.state.selectedOption === option
-                        })
-                        return <label className={labelClass} key={createKey()}>
-                            <input type="radio" value={option} id={this.fieldPath + '_' + option} onChange={e => this.handleChange(e)}/>{option}
-                        </label>
-                    })}
+                <Label htmlFor={this.fieldPath} text={this.props.definition.attributes.label}/>
+                <div className="btn-group-wrapper">
+                    <div className="btn-group btn-group-toggle">
+                        {this.props.definition.attributes.options.map((option) => {
+                            const labelClass = classNames({
+                                btn: true,
+                                'btn-outline-primary': true,
+                                active: this.state.selectedOption === option
+                            })
+                            return <label className={labelClass} key={createKey()}>
+                                <input type="radio" value={option} id={this.fieldPath + '_' + option} onChange={e => this.handleChange(e)}/>{option}
+                            </label>
+                        })}
+                    </div>
                 </div>
                 <Description id={this.fieldPath + '_description'} text={this.props.definition.attributes.description}/>
             </div>)
