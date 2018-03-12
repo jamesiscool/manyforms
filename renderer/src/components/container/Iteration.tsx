@@ -52,7 +52,7 @@ export class Iteration extends React.Component<IterationProps, IterationState> {
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </h6>
-                        <div className="card-block m-3">
+                        <div className="card-block m-4">
                             <Children children={childDefs} parentFieldPath={this.fieldPath + '[' + index + ']'}/>
                         </div>
                     </div>
