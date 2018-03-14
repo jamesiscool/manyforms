@@ -46,8 +46,8 @@ export class Iteration extends React.Component<IterationProps, IterationState> {
                 <Description id={this.fieldPath + '_description'} text={this.props.definition.attributes.description}/>
                 {this.state.items.map((item, index: number) => {
                     const childDefs = this.props.definition.children ? this.props.definition.children : []
-                    return <div className="card mb-2" key={item.key}>
-                        <h6 className="card-header mb-2">{ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
+                    return <div className="card mb-3" key={item.key}>
+                        <h6 className="card-header">{ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
                             <button className="close text-dark" onClick={() => this.removeItem(index, item.key)}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
