@@ -17,7 +17,7 @@ interface ButtonGroupDispatchProps {
     setData: (payload: SetDataPayload) => void
 }
 
-export interface ButtonGroupAttributes {
+interface ButtonGroupAttributes {
     label: string
     description: string,
     options: [string]
@@ -28,7 +28,7 @@ interface ButtonGroupOwnProps extends FormElementProps<ButtonGroupAttributes> {
 
 type ButtonGroupProps = ButtonGroupStateProps & ButtonGroupDispatchProps & ButtonGroupOwnProps
 
-export class ButtonGroup extends React.Component<ButtonGroupProps> {
+class ButtonGroup extends React.Component<ButtonGroupProps> {
     fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
 
     handleChange(event: React.FormEvent<HTMLInputElement>) {
@@ -58,15 +58,15 @@ export class ButtonGroup extends React.Component<ButtonGroupProps> {
     }
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<Action>) {
+function mapStateToProps(state: State, ownProps: ButtonGroupOwnProps) {
     return {
-        setData: (payload: { path: string, data: string }) => dispatch(setData(payload))
+        value: getData(state, appendFieldId(ownProps.parentFieldPath, ownProps.definition.fieldId)) || ''
     }
 }
 
-export function mapStateToProps(state: State, ownProps: ButtonGroupOwnProps) {
+function mapDispatchToProps(dispatch: Dispatch<Action>) {
     return {
-        value: getData(state, appendFieldId(ownProps.parentFieldPath, ownProps.definition.fieldId)) || ''
+        setData: (payload: SetDataPayload) => dispatch(setData(payload))
     }
 }
 

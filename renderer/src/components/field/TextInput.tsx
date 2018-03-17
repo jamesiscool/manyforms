@@ -15,12 +15,12 @@ interface TextInputDispatchProps {
     setData: (payload: SetDataPayload) => void
 }
 
-export interface TextInputAttributes {
+interface TextInputAttributes {
     label: string
     description: string
 }
 
-export interface TextInputOwnProps extends FormElementProps<TextInputAttributes> {
+interface TextInputOwnProps extends FormElementProps<TextInputAttributes> {
 }
 
 type TextInputProps = TextInputStateProps & TextInputDispatchProps & TextInputOwnProps
@@ -50,15 +50,15 @@ class TextInput extends React.Component<TextInputProps> {
     }
 }
 
-export function mapDispatchToProps(dispatch: Dispatch<Action>) {
+function mapStateToProps(state: State, ownProps: TextInputOwnProps) {
     return {
-        setData: (payload: { path: string, data: string }) => dispatch(setData(payload))
+        value: getData(state, appendFieldId(ownProps.parentFieldPath, ownProps.definition.fieldId)) || ''
     }
 }
 
-export function mapStateToProps(state: State, ownProps: TextInputOwnProps) {
+function mapDispatchToProps(dispatch: Dispatch<Action>) {
     return {
-        value: getData(state, appendFieldId(ownProps.parentFieldPath, ownProps.definition.fieldId)) || ''
+        setData: (payload: SetDataPayload) => dispatch(setData(payload))
     }
 }
 
