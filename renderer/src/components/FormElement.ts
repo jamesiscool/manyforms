@@ -3,7 +3,7 @@ import { ConnectedButtonGroup } from './field/ButtonGroup'
 import { Paragraph } from './output/Paragraph'
 import { Heading } from './output/Heading'
 import { Dropdown } from './field/Dropdown'
-import { Iteration } from './container/Iteration'
+import { ConnectedIteration } from './container/Iteration'
 import { Accordion } from './page/Accordion'
 import { Page } from './page/Page'
 
@@ -26,7 +26,7 @@ export const FormElements: { [name: string]: {} } = {
     Paragraph: Paragraph,
     Heading: Heading,
     ButtonGroup: ConnectedButtonGroup,
-    Iteration: Iteration,
+    Iteration: ConnectedIteration,
     Accordion: Accordion,
     Page: Page
 }
