@@ -1,0 +1,135 @@
+{
+  "elements": [
+    {
+      "type": "Heading",
+      "attributes": {
+        "level": 1,
+        "text": "Personal Loan"
+      }
+    },
+    {
+      "type": "Accordion",
+      "attributes": {},
+      "children": [
+        {
+          "type": "Page",
+          "attributes": {
+            "label": "Your loan details"
+          },
+          "children": [
+            {
+              "fieldId": "howManyPeopleApplying",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "How many people applying?",
+                "options": [
+                  "1",
+                  "2"
+                ]
+              }
+            },
+            {
+              "fieldId": "areYouAnExistingCustomer",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Are you an existing customer?",
+                "options": [
+                  "Yes",
+                  "No"
+                ]
+              }
+            },
+            {
+              "fieldId": "nabId",
+              "type": "TextInput",
+              "attributes": {
+                "label": "What is your NAB ID? ",
+                "description": "This will help us identify you. It's an 8-10 digit number found on the back of your NAB card above the black strip. It’s also the number you use to login to internet banking."
+              }
+            }
+          ]
+        },
+        {
+          "type": "Page",
+          "attributes": {
+            "label": "Tell us about yourself"
+          },
+          "children": [
+            {
+              "fieldId": "title",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Title",
+                "options": [
+                  "Mr",
+                  "Ms",
+                  "Mrs",
+                  "Miss",
+                  "Dr"
+                ]
+              }
+            },
+            {
+              "fieldId": "firstName",
+              "type": "TextInput",
+              "attributes": {
+                "label": "First Name"
+              }
+            },
+            {
+              "fieldId": "lastName",
+              "type": "TextInput",
+              "attributes": {
+                "label": "Last Name"
+              }
+            }
+          ]
+        },
+        {
+          "type": "Page",
+          "attributes": {
+            "label": "Tell us about what you own"
+          },
+          "children": [
+            {
+              "fieldId": "property",
+              "type": "Iteration",
+              "attributes": {
+                "label": "Properties",
+                "itemLabel": "Property"
+              },
+              "children": [
+                {
+                  "fieldId": "type",
+                  "type": "ButtonGroup",
+                  "attributes": {
+                    "label": "What type of property is this?",
+                    "options": [
+                      "Residential property",
+                      "Investment property"
+                    ]
+                  }
+                },
+                {
+                  "fieldId": "estimatedValue",
+                  "type": "TextInput",
+                  "attributes": {
+                    "label": "What's the estimated value?"
+                  }
+                },
+                {
+                  "fieldId": "ownership",
+                  "type": "ButtonGroup",
+                  "attributes": {
+                    "label": "Is this property solely or jointly owned?",
+                "options": [
+                  "Solely owned", "Jointly owned"
+                ]
+              }
+            }]
+          }]
+        }
+      ]
+    }
+  ]
+}
