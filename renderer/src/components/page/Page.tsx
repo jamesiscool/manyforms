@@ -21,31 +21,24 @@ export class Page extends React.Component<PageProps, {}> {
         return <li className="page-item"><a className="page-link text-primary" onClick={() => onClick!()}>{label}</a></li>
     }
 
-    previousButton() {
-        if (this.props.showPrevious) {
-            return this.pageButton('Previous', this.props.goToPreviousPage)
-        }
-        return null
-    }
-
-    nextButton() {
-        if (this.props.isLast) {
-            return this.pageButton('Submit', this.props.submit)
-        } else {
-            return this.pageButton('Next', this.props.goToNextPage)
-        }
-    }
-
     render() {
         return (
             <div className="card-block m-4">
                 <Children children={this.props.definition.children!} parentFieldPath={this.props.definition.fieldId!}/>
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination mb-0">
-                        {this.previousButton()}
-                        {this.nextButton()}
-                    </ul>
-                </nav>
+                <div className="row">
+                    <div className="col-sm">
+                        <nav aria-label="Page navigation example">
+                            <ul className="pagination mb-0">
+                                {this.props.showPrevious ? this.pageButton('Previous', this.props.goToPreviousPage) : null}
+                                {this.props.isLast ? null : this.pageButton('Next', this.props.goToNextPage)}
+                            </ul>
+                        </nav>
+                    </div>
+                    {this.props.isLast &&
+                    <div className="col-sm">
+                        <button className="btn btn-primary float-right" onClick={() => console.log('Submit')}>Submit</button>
+                    </div>}
+                </div>
             </div>)
     }
 }
