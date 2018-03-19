@@ -24,23 +24,18 @@ interface TextInputOwnProps extends FormElementProps<TextInputAttributes> {
 
 type TextInputProps = TextInputStateProps & TextInputDispatchProps & TextInputOwnProps
 
-class TextInput extends React.Component<TextInputProps> {
-
-    render() {
-        return (
-            <FieldChrome fieldPath={this.props.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
-                <input
-                    type="text"
-                    className="form-control"
-                    id={this.props.definition.fieldId}
-                    aria-describedby={this.props.fieldPath + '_description'}
-                    value={this.props.value}
-                    onChange={event => this.props.setData({path: this.props.fieldPath, data: event.currentTarget.value})}
-                />
-            </FieldChrome>
-        )
-    }
-}
+const TextInput = (props: TextInputProps) => (
+    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description}>
+        <input
+            type="text"
+            className="form-control"
+            id={props.definition.fieldId}
+            aria-describedby={props.fieldPath + '_description'}
+            value={props.value}
+            onChange={event => props.setData({path: props.fieldPath, data: event.currentTarget.value})}
+        />
+    </FieldChrome>
+)
 
 function mapStateToProps(state: State, ownProps: TextInputOwnProps) {
     return {
