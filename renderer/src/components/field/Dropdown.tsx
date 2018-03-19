@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { appendFieldId, FormElementProps } from '../FormElement'
+import { FormElementProps } from '../FormElement'
 import { FieldChrome } from './FieldChrome'
 
 export interface DropdownAttributes {
@@ -17,8 +17,6 @@ interface DropdownState {
 }
 
 export class Dropdown extends React.Component<DropdownProps, DropdownState> {
-    fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
-
     constructor(props: DropdownProps) {
         super(props)
         this.state = {selectedOption: ''}
@@ -30,7 +28,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     render() {
         return (
-            <FieldChrome fieldPath={this.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
+            <FieldChrome fieldPath={this.props.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
                 <select
                     className="form-control custom-select"
                     id={this.props.definition.fieldId}

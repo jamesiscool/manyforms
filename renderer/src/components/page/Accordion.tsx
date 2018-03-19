@@ -60,6 +60,7 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
                     goToPreviousPage={this.goToPreviousPage}
                     goToNextPage={this.goToNextPage}
                     parentFieldPath=""
+                    fieldPath=""
                     showPrevious={index > 0}
                     isLast={index === (this.props.definition.children!.length - 1)}
                     submit={this.submit}
@@ -71,7 +72,7 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
     render() {
         return (
             <div className="accordion" role="tablist" aria-multiselectable="true">
-                {this.props.definition.children!.map((page, index: number) => {
+                {this.props.definition.children!.map((page, index) => {
                     return <div className="card" key={createKey()}>
                         <div className="card-header cursor-pointer" onClick={() => this.goToPage(index)}>
                             <h4 className="d-inline">{page.attributes.label}</h4>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}

@@ -8,15 +8,7 @@ interface ChildProps {
     parentFieldPath: string
 }
 
-export function createFiledPath(parentFieldPath: string, fieldId?: string): string {
-    if (parentFieldPath) {
-        return parentFieldPath + '.' + fieldId
-    } else {
-        return fieldId ? fieldId : ''
-    }
-}
-
-export const Child = (props: ChildProps) => {
+const Child = (props: ChildProps) => {
     // tslint:disable-next-line
     let Child: any = FormElement.FormElements[props.definition.type]
     const fieldPath: string = createFiledPath(props.parentFieldPath, props.definition.fieldId)
@@ -35,4 +27,12 @@ export const Children = (props: ChildrenProps) => {
                 return <Child definition={elementDef} parentFieldPath={props.parentFieldPath} key={createKey()}/>
             })}
         </div>)
+}
+
+function createFiledPath(parentFieldPath: string, fieldId?: string): string {
+    if (parentFieldPath) {
+        return parentFieldPath + '.' + fieldId
+    } else {
+        return fieldId ? fieldId : ''
+    }
 }

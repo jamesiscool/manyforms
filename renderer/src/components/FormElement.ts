@@ -18,6 +18,7 @@ export interface FormElementDef<Attributes> {
 export class FormElementProps<Attributes> {
     definition: FormElementDef<Attributes>
     parentFieldPath: string
+    fieldPath: string
 }
 
 export const FormElements: { [name: string]: {} } = {

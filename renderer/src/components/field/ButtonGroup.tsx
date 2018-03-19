@@ -3,7 +3,7 @@ import * as classNames from 'classnames'
 import { connect, Dispatch } from 'react-redux'
 import { Action } from 'redux'
 
-import { appendFieldId, FormElementProps } from '../FormElement'
+import { FormElementProps } from '../FormElement'
 import { createKey } from '../../util'
 import { getData, setData, SetDataPayload, State } from '../../state/store'
 import { FieldChrome } from './FieldChrome'
@@ -28,15 +28,14 @@ interface ButtonGroupOwnProps extends FormElementProps<ButtonGroupAttributes> {
 type ButtonGroupProps = ButtonGroupStateProps & ButtonGroupDispatchProps & ButtonGroupOwnProps
 
 class ButtonGroup extends React.Component<ButtonGroupProps> {
-    fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
 
     handleChange(event: React.FormEvent<HTMLInputElement>) {
-        this.props.setData({path: this.fieldPath, data: event.currentTarget.value})
+        this.props.setData({path: this.props.fieldPath, data: event.currentTarget.value})
     }
 
     render() {
         return (
-            <FieldChrome fieldPath={this.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
+            <FieldChrome fieldPath={this.props.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
                 <div className="btn-group-wrapper">
                     <div className="btn-group btn-group-toggle">
                         {this.props.definition.attributes.options.map((option) => {
@@ -46,7 +45,7 @@ class ButtonGroup extends React.Component<ButtonGroupProps> {
                                 active: this.props.value === option
                             })
                             return <label className={labelClass} key={createKey()}>
-                                <input type="radio" value={option} id={this.fieldPath + '_' + option} onChange={e => this.handleChange(e)}/>{option}
+                                <input type="radio" value={option} id={this.props.fieldPath + '_' + option} onChange={e => this.handleChange(e)}/>{option}
                             </label>
                         })}
                     </div>
@@ -57,7 +56,7 @@ class ButtonGroup extends React.Component<ButtonGroupProps> {
 
 function mapStateToProps(state: State, ownProps: ButtonGroupOwnProps) {
     return {
-        value: getData(state, appendFieldId(ownProps.parentFieldPath, ownProps.definition.fieldId)) || ''
+        value: getData(state, ownProps.fieldPath) || ''
     }
 }
 
