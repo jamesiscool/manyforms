@@ -1,8 +1,7 @@
 import * as React from 'react'
 
 import { appendFieldId, FormElementProps } from '../FormElement'
-import { Label } from '../output/Label'
-import { Description } from '../output/Description'
+import { FieldChrome } from './FieldChrome'
 
 export interface DropdownAttributes {
     label: string
@@ -31,8 +30,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     render() {
         return (
-            <div className="form-group">
-                <Label htmlFor={this.props.definition.fieldId || ''} text={this.props.definition.attributes.label}/>
+            <FieldChrome fieldPath={this.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
                 <select
                     className="form-control custom-select"
                     id={this.props.definition.fieldId}
@@ -43,7 +41,6 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
                     <option value="" disabled={true}/>
                     {this.props.definition.attributes.options.map((option) => <option value={option} key={option}>{option}</option>)}
                 </select>
-                <Description id={this.fieldPath + '_description'} text={this.props.definition.attributes.description}/>
-            </div>)
+            </FieldChrome>)
     }
 }

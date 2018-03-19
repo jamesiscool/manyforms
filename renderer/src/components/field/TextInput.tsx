@@ -3,9 +3,8 @@ import { connect, Dispatch } from 'react-redux'
 import { Action } from 'redux'
 
 import { FormElementProps, appendFieldId } from '../FormElement'
-import { Label } from '../output/Label'
-import { Description } from '../output/Description'
 import { getData, setData, SetDataPayload, State } from '../../state/store'
+import { FieldChrome } from './FieldChrome'
 
 interface TextInputStateProps {
     value: string
@@ -34,8 +33,7 @@ class TextInput extends React.Component<TextInputProps> {
 
     render() {
         return (
-            <div className="form-group">
-                <Label htmlFor={this.fieldPath} text={this.props.definition.attributes.label}/>
+            <FieldChrome fieldPath={this.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
                 <input
                     type="text"
                     className="form-control"
@@ -44,8 +42,7 @@ class TextInput extends React.Component<TextInputProps> {
                     value={this.props.value}
                     onChange={e => this.handleChange(e)}
                 />
-                <Description id={this.fieldPath + '_description'} text={this.props.definition.attributes.description}/>
-            </div>
+            </FieldChrome>
         )
     }
 }

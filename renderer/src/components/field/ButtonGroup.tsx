@@ -4,10 +4,9 @@ import { connect, Dispatch } from 'react-redux'
 import { Action } from 'redux'
 
 import { appendFieldId, FormElementProps } from '../FormElement'
-import { Label } from '../output/Label'
-import { Description } from '../output/Description'
 import { createKey } from '../../util'
 import { getData, setData, SetDataPayload, State } from '../../state/store'
+import { FieldChrome } from './FieldChrome'
 
 interface ButtonGroupStateProps {
     value: string
@@ -37,8 +36,7 @@ class ButtonGroup extends React.Component<ButtonGroupProps> {
 
     render() {
         return (
-            <div className="form-group">
-                <Label htmlFor={this.fieldPath} text={this.props.definition.attributes.label}/>
+            <FieldChrome fieldPath={this.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
                 <div className="btn-group-wrapper">
                     <div className="btn-group btn-group-toggle">
                         {this.props.definition.attributes.options.map((option) => {
@@ -53,8 +51,7 @@ class ButtonGroup extends React.Component<ButtonGroupProps> {
                         })}
                     </div>
                 </div>
-                <Description id={this.fieldPath + '_description'} text={this.props.definition.attributes.description}/>
-            </div>)
+            </FieldChrome>)
     }
 }
 
