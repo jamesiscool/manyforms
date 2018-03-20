@@ -43,8 +43,83 @@
               "fieldId": "nabId",
               "type": "TextInput",
               "attributes": {
-                "label": "What is your NAB ID? ",
+                "label": "What is your NAB ID?",
                 "description": "This will help us identify you. It's an 8-10 digit number found on the back of your NAB card above the black strip. It’s also the number you use to login to internet banking."
+              }
+            },
+            {
+              "fieldId": "loanAmount",
+              "type": "TextInput",
+              "attributes": {
+                "label": "How much would you like to borrow?",
+                "description": "The minimum loan amount is $5000. You can borrow up to $55000. Don't include spaces or other punctuation."
+              }
+            },
+            {
+              "fieldId": "rateType",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Would you like a Fixed or Variable interest rate?",
+                "options": [
+                  "Variable",
+                  "Fixed"
+                ]
+              }
+            },
+            {
+              "fieldId": "loanTerm",
+              "type": "Dropdown",
+              "attributes": {
+                "label": "What loan term would you like?",
+                "options": [
+                  "7 years",
+                  "6 years",
+                  "5 years",
+                  "4 years",
+                  "3 years",
+                  "2 years",
+                  "1 years"
+                ],
+                "description": "A shorter term means higher repayments (as they're spread over less years). A longer term means lower repayments, but more interest paid by the end of the loan term."
+              }
+            },
+            {
+              "fieldId": "repaymentFrequency",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "How often would you like to make repayments?",
+                "options": [
+                  "Weekly",
+                  "Fortnightly",
+                  "Monthly"
+                ]
+              }
+            },
+            {
+              "fieldId": "loanPurpose",
+              "type": "Dropdown",
+              "attributes": {
+                "label": "What's the main purpose for this loan?",
+                "options": [
+                  "New car",
+                  "Used car",
+                  "Debt consolidation",
+                  "House hold / Personal goods",
+                  "Refinance NAB debts",
+                  "Travel / Holidays",
+                  "Boat / Caravan / Trailer",
+                  "Motorcycle / Scooter",
+                  "Shares / Other assets",
+                  "Renovations / Alteration",
+                  "Engagement / Wedding / Funeral",
+                  "Education",
+                  "Medical / Dental",
+                  "Multiple reasons",
+                  "Business purpose or expense",
+                  "House / land Purchase",
+                  "Other"
+                ],
+                "description": "Select what most of the money will be used for."
               }
             }
           ]
@@ -55,6 +130,13 @@
             "label": "Tell us about yourself"
           },
           "children": [
+            {
+              "type": "Heading",
+              "attributes": {
+                "level": 5,
+                "text": "Personal details"
+              }
+            },
             {
               "fieldId": "title",
               "type": "ButtonGroup",
@@ -77,10 +159,95 @@
               }
             },
             {
+              "fieldId": "middleName",
+              "type": "TextInput",
+              "attributes": {
+                "label": "Middle Name"
+              }
+            },
+            {
               "fieldId": "lastName",
               "type": "TextInput",
               "attributes": {
                 "label": "Last Name"
+              }
+            },
+            {
+              "fieldId": "dob",
+              "type": "TextInput",
+              "attributes": {
+                "label": "Date of birth",
+                "description": "Enter as DD MM YYYY (eg. 1st January 1980 would be 01 01 1980)"
+              }
+            },
+            {
+              "fieldId": "maritalStatus",
+              "type": "Dropdown",
+              "attributes": {
+                "label": "Marital status",
+                "options": [
+                  "Single",
+                  "Married",
+                  "Defacto",
+                  "Separated",
+                  "Divorced",
+                  "Widowed"
+                ]
+              }
+            },
+            {
+              "fieldId": "numberOfFinancialDependants",
+              "type": "Dropdown",
+              "attributes": {
+                "label": "Number of financial dependants",
+                "options": [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9+"
+                ]
+              }
+            },
+            {
+              "fieldId": "driversLicenceNumber",
+              "type": "TextInput",
+              "attributes": {
+                "label": "Driver's licence number",
+                "description": "We'll use this to identify you when we complete a credit check."
+              }
+            },
+            {
+              "fieldId": "driversLicenceState",
+              "type": "Dropdown",
+              "attributes": {
+                "label": "State of issue",
+                "options": [
+                  "ACT",
+                  "NSW",
+                  "NT",
+                  "QLD",
+                  "SA",
+                  "TAS",
+                  "VIC",
+                  "WA"
+                ]
+              }
+            },
+            {
+              "fieldId": "australianResidentForTaxPurposes",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Are you an Australian resident for tax purposes?",
+                "options": [
+                  "Yes",
+                  "No"
+                ]
               }
             }
           ]
@@ -101,7 +268,7 @@
               "children": [
                 {
                   "fieldId": "type",
-                  "type": "ButtonGroup",
+                  "type": "Dropdown",
                   "attributes": {
                     "label": "What type of property is this?",
                     "options": [
@@ -122,12 +289,15 @@
                   "type": "ButtonGroup",
                   "attributes": {
                     "label": "Is this property solely or jointly owned?",
-                "options": [
-                  "Solely owned", "Jointly owned"
-                ]
-              }
-            }]
-          }]
+                    "options": [
+                      "Solely owned",
+                      "Jointly owned"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     }
