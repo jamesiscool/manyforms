@@ -1,7 +1,18 @@
 import * as React from 'react'
+import { connect, Dispatch } from 'react-redux'
+import { Action } from 'redux'
 
 import { FormElementProps } from '../FormElement'
 import { FieldChrome } from './FieldChrome'
+import { getData, setData, SetDataPayload, State } from '../../state/store'
+
+interface DropdownStateProps {
+    value: string
+}
+
+interface DropdownDispatchProps {
+    setData: (payload: SetDataPayload) => void
+}
 
 export interface DropdownAttributes {
     label: string
@@ -9,36 +20,35 @@ export interface DropdownAttributes {
     options: [string]
 }
 
-export interface DropdownProps extends FormElementProps<DropdownAttributes> {
+export interface DropdownOwnProps extends FormElementProps<DropdownAttributes> {
 }
 
-interface DropdownState {
-    selectedOption: string
-}
+type DropdownProps = DropdownStateProps & DropdownDispatchProps & DropdownOwnProps
 
-export class Dropdown extends React.Component<DropdownProps, DropdownState> {
-    constructor(props: DropdownProps) {
-        super(props)
-        this.state = {selectedOption: ''}
-    }
+const Dropdown = (props: DropdownProps) => (
+    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description}>
+        <select
+            className="form-control custom-select"
+            id={props.definition.fieldId}
+            onChange={event => props.setData({path: props.fieldPath, data: event.currentTarget.value})}
+            value={props.value}
+            aria-describedby={props.definition.fieldId + '_description'}
+        >
+            <option value="" disabled={true}/>
+            {props.definition.attributes.options.map((option) => <option value={option} key={option}>{option}</option>)}
+        </select>
+    </FieldChrome>)
 
-    handleChange(event: React.FormEvent<HTMLSelectElement>) {
-        this.setState({selectedOption: event.currentTarget.value})
-    }
-
-    render() {
-        return (
-            <FieldChrome fieldPath={this.props.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
-                <select
-                    className="form-control custom-select"
-                    id={this.props.definition.fieldId}
-                    onChange={e => this.handleChange(e)}
-                    value={this.state.selectedOption}
-                    aria-describedby={this.props.definition.fieldId + '_description'}
-                >
-                    <option value="" disabled={true}/>
-                    {this.props.definition.attributes.options.map((option) => <option value={option} key={option}>{option}</option>)}
-                </select>
-            </FieldChrome>)
+function mapStateToProps(state: State, ownProps: DropdownOwnProps) {
+    return {
+        value: getData(state, ownProps.fieldPath) || ''
     }
 }
+
+function mapDispatchToProps(dispatch: Dispatch<Action>) {
+    return {
+        setData: (payload: SetDataPayload) => dispatch(setData(payload))
+    }
+}
+
+export const ConnectedDropdown = connect<DropdownStateProps, DropdownDispatchProps, DropdownOwnProps>(mapStateToProps, mapDispatchToProps)(Dropdown)
