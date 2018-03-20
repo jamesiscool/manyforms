@@ -26,7 +26,7 @@ export class Page extends React.Component<PageProps, {}> {
             <div className="card-block m-4">
                 <Children children={this.props.definition.children!} parentFieldPath={this.props.definition.fieldId!}/>
                 <div className="row">
-                    <div className="col-sm">
+                    <div className="col">
                         <nav aria-label="Page navigation example">
                             <ul className="pagination mb-0">
                                 {this.props.showPrevious ? this.pageButton('Previous', this.props.goToPreviousPage) : null}
@@ -35,7 +35,7 @@ export class Page extends React.Component<PageProps, {}> {
                         </nav>
                     </div>
                     {this.props.isLast &&
-                    <div className="col-sm">
+                    <div className="col">
                         <button className="btn btn-primary float-right" onClick={() => console.log('Submit')}>Submit</button>
                     </div>}
                 </div>
