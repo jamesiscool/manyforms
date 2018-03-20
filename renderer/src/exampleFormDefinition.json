@@ -72,13 +72,13 @@
               "attributes": {
                 "label": "What loan term would you like?",
                 "options": [
-                  "7 years",
-                  "6 years",
-                  "5 years",
-                  "4 years",
-                  "3 years",
+                  "1 years",
                   "2 years",
-                  "1 years"
+                  "3 years",
+                  "4 years",
+                  "5 years",
+                  "6 years",
+                  "7 years"
                 ],
                 "description": "A shorter term means higher repayments (as they're spread over less years). A longer term means lower repayments, but more interest paid by the end of the loan term."
               }
