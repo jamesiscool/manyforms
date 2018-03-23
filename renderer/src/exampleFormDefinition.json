@@ -60,6 +60,7 @@
               "type": "ButtonGroup",
               "attributes": {
                 "label": "Would you like a Fixed or Variable interest rate?",
+                "info": "A fixed rate means your loan's interest rate and repayments will stay the same for the loan term. Redraw won't be available. A variable rate means your loan's interest rate and repayments could move up or down.",
                 "options": [
                   "Variable",
                   "Fixed"
@@ -200,6 +201,7 @@
               "type": "Dropdown",
               "attributes": {
                 "label": "Number of financial dependants",
+                "info": "A financial dependant is someone who you support financially. This can include children (of any age), grandparents, foster children, etc.",
                 "options": [
                   "0",
                   "1",
