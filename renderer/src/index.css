@@ -33,7 +33,7 @@ label {
 }
 
 .info-icon {
-    height: 1rem;
+    height: .9rem;
     cursor: pointer;
     position: relative;
     top: -2px;
