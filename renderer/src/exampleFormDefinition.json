@@ -177,7 +177,7 @@
               "type": "TextInput",
               "attributes": {
                 "label": "Date of birth",
-                "description": "Enter as DD MM YYYY (eg. 1st January 1980 would be 01 01 1980)"
+                "description": "Enter as DD/MM/YYYY (eg. 1st January 1980 would be 01/01/1980)"
               }
             },
             {
@@ -248,6 +248,101 @@
                   "Yes",
                   "No"
                 ]
+              }
+            },
+            {
+              "fieldId": "usResidentForTaxPurposes",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Are you a US citizen or US resident for tax purposes?",
+                "options": [
+                  "Yes",
+                  "No"
+                ],
+                "info": "NAB is required to identify certain U.S. persons in order to meet account information reporting requirements under local and international laws."
+              }
+            },
+            {
+              "fieldId": "otherCountryResidentForTaxPurposes",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Are you a resident of any other country for tax purposes?",
+                "options": [
+                  "Yes",
+                  "No"
+                ]
+              }
+            },
+            {
+              "type": "Heading",
+              "attributes": {
+                "level": 5,
+                "text": "Where do you live?"
+              }
+            },
+            {
+              "fieldId": "residentialStatus",
+              "type": "Dropdown",
+              "attributes": {
+                "label": "Residential Status",
+                "options": [
+                  "Renting",
+                  "Home owner (no mortgage)",
+                  "Home owner (with mortgage)",
+                  "Living with parent / relative",
+                  "Boarding",
+                  "Employer supplied"
+                ]
+              }
+            },
+            {
+              "fieldId": "residentialAddress",
+              "type": "TextInput",
+              "attributes": {
+                "label": "Residential address",
+                "description": "This can not be a P.O. Box"
+              }
+            },
+            {
+              "fieldId": "dateMoveToResidentialAddress",
+              "type": "TextInput",
+              "attributes": {
+                "label": "When did you move to this address?",
+                "description": "If you’re unsure about the exact date just select the 1st of the month."
+              }
+            },
+            {
+              "fieldId": "residentialAddressIsPostalAddress",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Is your postal address the same as your residential address?",
+                "options": [
+                  "Yes",
+                  "No"
+                ]
+              }
+            },
+            {
+              "type": "Heading",
+              "attributes": {
+                "level": 5,
+                "text": "Your contact details"
+              }
+            },
+            {
+              "fieldId": "mobileNumber",
+              "type": "TextInput",
+              "attributes": {
+                "label": "Mobile number",
+                "description": "We may send you a SMS to let you know the outcome of your application and next steps."
+              }
+            },
+            {
+              "fieldId": "emailAddress",
+              "type": "TextInput",
+              "attributes": {
+                "label": "Email address",
+                "description": "We may send you an email to let you know the outcome of your application and next steps."
               }
             }
           ]
