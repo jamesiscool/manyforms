@@ -54,3 +54,7 @@ small, .small {
     border-left: 0;
     border-radius: 0;
 }
+
+.tool-tip {
+    max-width: 20rem;
+}
