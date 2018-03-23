@@ -17,6 +17,7 @@ interface DropdownDispatchProps {
 export interface DropdownAttributes {
     label: string
     description: string
+    info?: string
     options: [string]
 }
 
@@ -26,7 +27,7 @@ export interface DropdownOwnProps extends FormElementProps<DropdownAttributes> {
 type DropdownProps = DropdownStateProps & DropdownDispatchProps & DropdownOwnProps
 
 const Dropdown = (props: DropdownProps) => (
-    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description}>
+    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} info={props.definition.attributes.info} description={props.definition.attributes.description}>
         <select
             className="form-control custom-select"
             id={props.definition.fieldId}

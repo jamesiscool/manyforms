@@ -17,6 +17,7 @@ interface TextInputDispatchProps {
 interface TextInputAttributes {
     label: string
     description: string
+    info?: string
 }
 
 interface TextInputOwnProps extends FormElementProps<TextInputAttributes> {
@@ -25,7 +26,7 @@ interface TextInputOwnProps extends FormElementProps<TextInputAttributes> {
 type TextInputProps = TextInputStateProps & TextInputDispatchProps & TextInputOwnProps
 
 const TextInput = (props: TextInputProps) => (
-    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description}>
+    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description} info={props.definition.attributes.info}>
         <input
             type="text"
             className="form-control"
