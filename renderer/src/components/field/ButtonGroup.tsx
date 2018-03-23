@@ -18,7 +18,8 @@ interface ButtonGroupDispatchProps {
 
 interface ButtonGroupAttributes {
     label: string
-    description: string,
+    description?: string
+    info?: string
     options: [string]
 }
 
@@ -35,7 +36,7 @@ class ButtonGroup extends React.Component<ButtonGroupProps> {
 
     render() {
         return (
-            <FieldChrome fieldPath={this.props.fieldPath} label={this.props.definition.attributes.label} description={this.props.definition.attributes.description}>
+            <FieldChrome fieldPath={this.props.fieldPath} label={this.props.definition.attributes.label} info={this.props.definition.attributes.info} description={this.props.definition.attributes.description}>
                 <div className="btn-group-wrapper">
                     <div className="btn-group btn-group-toggle">
                         {this.props.definition.attributes.options.map((option) => {

@@ -1,4 +1,12 @@
 import * as React from 'react'
 
-export const Label = (props: { text: string, htmlFor: string }) =>
-    <label htmlFor={props.htmlFor} className="mr-2 h6">{props.text}</label>
+interface LabelProps {
+    text: string,
+    htmlFor: string
+    info?: string
+}
+
+export const Label = (props: LabelProps) => (
+    <label htmlFor={props.htmlFor} className="mr-2 h6">{props.text + ' '}
+        {props.info && <img className="info-icon" src="/icons/info-circle.svg"/>}
+    </label>)
