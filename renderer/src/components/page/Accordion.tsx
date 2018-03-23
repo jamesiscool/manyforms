@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Element, scroller } from 'react-scroll'
 
-import { FormElementProps, FormElementDef } from '../FormElement'
+import { FormElementProps } from '../FormElement'
 import { Page } from './Page'
 import { createKey } from '../../util'
 
@@ -54,24 +54,6 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
         // this.formState.submit()
     }
 
-    // tslint:disable-next-line
-    page(page: FormElementDef<any>, index: number) {
-        if (this.state.currentPage === index) {
-            return (
-                <Page
-                    definition={page}
-                    goToPreviousPage={this.goToPreviousPage}
-                    goToNextPage={this.goToNextPage}
-                    parentFieldPath=""
-                    fieldPath=""
-                    showPrevious={index > 0}
-                    isLast={index === (this.props.definition.children!.length - 1)}
-                    submit={this.submit}
-                />)
-        }
-        return null
-    }
-
     render() {
         return (
             <div className="accordion" role="tablist" aria-multiselectable="true">
@@ -82,7 +64,16 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
                                 <h4 className="d-inline">{page.attributes.label}</h4>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}
                             </Element>
                         </div>
-                        {this.page(page, index)}
+                        {this.state.currentPage === index && <Page
+                            definition={page}
+                            goToPreviousPage={this.goToPreviousPage}
+                            goToNextPage={this.goToNextPage}
+                            parentFieldPath=""
+                            fieldPath=""
+                            showPrevious={index > 0}
+                            isLast={index === (this.props.definition.children!.length - 1)}
+                            submit={this.submit}
+                        />}
                     </div>
                 })}
             </div>)
