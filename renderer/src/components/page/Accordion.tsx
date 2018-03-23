@@ -1,10 +1,9 @@
 import * as React from 'react'
+import { Element, scroller } from 'react-scroll'
 
 import { FormElementProps, FormElementDef } from '../FormElement'
 import { Page } from './Page'
 import { createKey } from '../../util'
-
-import './Accordion.css'
 
 export interface AccordionAttributes {
 }
@@ -27,24 +26,28 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
         this.goToNextPage = this.goToNextPage.bind(this)
     }
 
+    componentDidUpdate() {
+        scroller.scrollTo('page_' + this.state.currentPage, {offset: -100})
+    }
+
+    setCurrentPage(index: number) {
+        this.setState(() => {
+            return {currentPage: index}
+        })
+    }
+
     goToPage(index: number) {
         if (index < this.state.currentPage) {
-            this.setState(() => {
-                return {currentPage: index}
-            })
+            this.setCurrentPage(index)
         }
     }
 
     goToPreviousPage() {
-        this.setState((prevState) => {
-            return {currentPage: prevState.currentPage - 1}
-        })
+        this.setCurrentPage(this.state.currentPage - 1)
     }
 
     goToNextPage() {
-        this.setState((prevState) => {
-            return {currentPage: prevState.currentPage + 1}
-        })
+        this.setCurrentPage(this.state.currentPage + 1)
     }
 
     submit() {
@@ -75,7 +78,9 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
                 {this.props.definition.children!.map((page, index) => {
                     return <div className="card" key={createKey()}>
                         <div className="card-header cursor-pointer" onClick={() => this.goToPage(index)}>
-                            <h4 className="d-inline">{page.attributes.label}</h4>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}
+                            <Element name={'page_' + index}>
+                                <h4 className="d-inline">{page.attributes.label}</h4>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}
+                            </Element>
                         </div>
                         {this.page(page, index)}
                     </div>
