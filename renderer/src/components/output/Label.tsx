@@ -9,6 +9,6 @@ interface LabelProps {
 
 export const Label = (props: LabelProps) => (
     <label htmlFor={props.htmlFor} className="mr-2 h6">{props.text + ' '}
-        {props.info && <img className="info-icon" data-tip={props.info} src="/icons/info-circle.svg"/>}
+        {props.info && <span className="info-icon" data-tip={props.info}/>}
         <ReactTooltip className="tool-tip" effect="solid"/>
     </label>)
