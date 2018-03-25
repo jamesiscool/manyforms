@@ -352,6 +352,173 @@
         {
           "type": "Page",
           "attributes": {
+            "label": "Tell us about your employment"
+          },
+          "children": [
+            {
+              "fieldId": "employment",
+              "type": "Iteration",
+              "attributes": {
+                "label": "Jobs",
+                "itemLabel": "Job"
+              },
+              "children": [
+                {
+                  "fieldId": "status",
+                  "type": "Dropdown",
+                  "attributes": {
+                    "label": "What is your employment status?",
+                    "options": [
+                      "Full time",
+                      "Part time",
+                      "Casual",
+                      "Self-employed",
+                      "Contractor",
+                      "Retired",
+                      "Home Duties",
+                      "Student",
+                      "Unemployed"
+                    ]
+                  }
+                },
+                {
+                  "fieldId": "employerName",
+                  "type": "TextInput",
+                  "attributes": {
+                    "label": "Employer's name"
+                  }
+                },
+                {
+                  "fieldId": "jobTitle",
+                  "type": "TextInput",
+                  "attributes": {
+                    "label": "What's your job title?"
+                  }
+                },
+                {
+                  "fieldId": "startDate",
+                  "type": "TextInput",
+                  "attributes": {
+                    "label": "When did you start working here?",
+                    "description": "If you’re unsure about the actual date just put the 1st of the month"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Page",
+          "attributes": {
+            "label": "Tell us about what you earn"
+          },
+          "children": [
+            {
+              "fieldId": "income",
+              "type": "Iteration",
+              "attributes": {
+                "label": "Income",
+                "itemLabel": "Income"
+              },
+              "children": [
+                {
+                  "fieldId": "status",
+                  "type": "Dropdown",
+                  "attributes": {
+                    "label": "Income type",
+                    "description": "Including all of your sources of income will help to ensure your application outcome is accurate.",
+                    "info": "Dividends, Managed Funds, or Superannuation: Include income from shares, managed investments, superannuation, interest bearing deposits or other income with at least two direct credits as investment income. Commission, Overtime payments: Include income from commissions, overtime payments that have been paid to you for more than six months. Bonus: Include income from bonus payments earned for the most recent two financial years. This must be income paid as a salary plus the bonus payments.",
+                    "options": [
+                      "Salary",
+                      "Family allowance",
+                      "Pensions",
+                      "All Department of Veteran Affairs income",
+                      "Rental income",
+                      "Self-employed income",
+                      "Superannuation income",
+                      "Dividend income",
+                      "Overtime",
+                      "Commission",
+                      "Child support",
+                      "Bonus"
+                    ]
+                  }
+                },
+                {
+                  "fieldId": "frequency",
+                  "type": "Dropdown",
+                  "attributes": {
+                    "label": "Frequency of income",
+                    "options": [
+                      "Weekly",
+                      "Fortnightly",
+                      "Pensions",
+                      "Monthly",
+                      "Quarterly",
+                      "Half yearly",
+                      "Yearly"
+                    ]
+                  }
+                },
+                {
+                  "fieldId": "incomeGross",
+                  "type": "TextInput",
+                  "attributes": {
+                    "label": "Before tax (Gross)"
+                  }
+                },
+                {
+                  "fieldId": "incomeNet",
+                  "type": "TextInput",
+                  "attributes": {
+                    "label": "After tax (Net)"
+                  }
+                }
+              ]
+            },
+            {
+              "fieldId": "foreseeFinancialChanges",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Do you foresee any major changes to your employment, income and/or expenses over the next 12 months that will make it difficult for you to meet your financial commitments?",
+                "description": "For example if you know of anything likely to happen in the next 12 months that will make it harder for you to meet your financial commitments (eg. make your loan and/or credit card repayments) answer \"Yes\".",
+                "info": "For example changing from full time to part time employment; changing jobs (resulting in your income reducing); taking a 12 month break from your job; your existing loan repayments will be increasing by a large amount (due to the ending of a honeymoon interest rate period)",
+                "options": [
+                  "Yes",
+                  "No"
+                ]
+              }
+            },
+            {
+              "fieldId": "pastFinancialDifficulties",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Have you had any difficulties in making your loan repayments in the last 2 years?",
+                "description": "For example are you currently behind in your repayments on an existing loan?",
+                "info": "If you've missed, or had problems making, any loan or credit card payments in the past two years answer \"Yes\". If you answer \"Yes\" we'll ask you for more information - for example the loan provider, type of loan, amounts you missed, when and why it happened, and whether the problem has been resolved or ongoing.",
+                "options": [
+                  "Yes",
+                  "No"
+                ]
+              }
+            },
+            {
+              "fieldId": "pastFinancialJudgments",
+              "type": "ButtonGroup",
+              "attributes": {
+                "label": "Have you ever had, or are there any judgments, attachments or legal proceedings against you relating to financial matters?",
+                "info": "You need to let us know about any time that your financial situation has led to a legal judgment being made against you, an attachment (eg. a judgment which transferred property of yours to another person who you were in debt to), legal proceedings being taken against you. An example of the sort of situation we're asking about bankruptcy. If you answer \"yes\" we'll ask you for more details.",
+                "options": [
+                  "Yes",
+                  "No"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Page",
+          "attributes": {
             "label": "Tell us about what you own"
           },
           "children": [
