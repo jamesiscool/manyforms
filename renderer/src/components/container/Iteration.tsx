@@ -46,7 +46,7 @@ export class Iteration extends React.Component<IterationProps> {
         return (
             <div className="form-group">
                 <label className="h5 mr-2">{this.props.definition.attributes.label}</label>
-                <Description fieldPath={this.fieldPath} text={this.props.definition.attributes.description}/>
+                {this.props.definition.attributes.description && <Description fieldPath={this.fieldPath} text={this.props.definition.attributes.description}/>}
                 {times(this.props.size, (index: number) => {
                     return (<div className="card mb-3" key={createKey()}>
                         <h6 className="card-header">{ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
