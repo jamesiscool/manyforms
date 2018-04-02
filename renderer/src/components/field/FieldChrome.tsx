@@ -12,7 +12,7 @@ interface FieldChromeProps {
 
 export const FieldChrome = (props: FieldChromeProps) => (
     <div className="form-group py-2">
-        {props.label && <Label htmlFor={props.fieldPath} text={props.label} info={props.info}/>}
+        {props.label && <Label htmlFor={props.fieldPath} text={props.label}/>}
         {props.children}
         {props.description && <Description fieldPath={props.fieldPath} text={props.description}/>}
     </div>)
