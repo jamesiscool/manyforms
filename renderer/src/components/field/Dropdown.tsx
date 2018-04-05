@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { Action } from 'redux'
-
+import { setData, SetDataPayload } from '../../state/actions'
+import { State } from '../../state/reducer'
+import { getData } from '../../state/selectors'
 import { FormElementProps } from '../FormElement'
 import { FieldChrome } from './FieldChrome'
-import { getData, setData, SetDataPayload, State } from '../../state/store'
 
 interface DropdownStateProps {
     value: string
@@ -29,7 +30,7 @@ type DropdownProps = DropdownStateProps & DropdownDispatchProps & DropdownOwnPro
 const Dropdown = (props: DropdownProps) => (
     <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} info={props.definition.attributes.info} description={props.definition.attributes.description}>
         <select
-            className="form-control custom-select"
+            className="form-control"
             id={props.definition.fieldId}
             onChange={event => props.setData({path: props.fieldPath, data: event.currentTarget.value})}
             value={props.value}

@@ -1,7 +1,6 @@
 import * as React from 'react'
-
-import * as FormElement from './FormElement'
 import { createKey } from '../util'
+import * as FormElement from './FormElement'
 
 interface ChildProps {
     definition: FormElement.FormElementDef<{}>

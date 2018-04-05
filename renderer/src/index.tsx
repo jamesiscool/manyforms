@@ -2,12 +2,10 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { reducer, State } from './state/store'
-
 import { Form } from './components/Form'
 import { FormElementDef } from './components/FormElement'
-
 import './index.css'
+import { reducer, State } from './state/reducer'
 
 const formElements: Array<FormElementDef<{}>> = require('./exampleFormDefinition.json').elements
 

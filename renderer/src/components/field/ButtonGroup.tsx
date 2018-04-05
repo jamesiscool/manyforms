@@ -1,11 +1,13 @@
-import * as React from 'react'
 import * as classNames from 'classnames'
+import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { Action } from 'redux'
 
-import { FormElementProps } from '../FormElement'
+import { setData, SetDataPayload } from '../../state/actions'
+import { State } from '../../state/reducer'
+import { getData } from '../../state/selectors'
 import { createKey } from '../../util'
-import { getData, setData, SetDataPayload, State } from '../../state/store'
+import { FormElementProps } from '../FormElement'
 import { FieldChrome } from './FieldChrome'
 
 interface ButtonGroupStateProps {

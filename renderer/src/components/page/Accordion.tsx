@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { Element, scroller } from 'react-scroll'
-
+import { createKey } from '../../util'
 import { FormElementProps } from '../FormElement'
 import { Page } from './Page'
-import { createKey } from '../../util'
 
 export interface AccordionAttributes {
 }

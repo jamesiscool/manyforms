@@ -1,7 +1,6 @@
 import * as React from 'react'
-
-import { FormElementProps } from '../FormElement'
 import { Children } from '../Children'
+import { FormElementProps } from '../FormElement'
 
 export interface PageAttributes {
     label: string

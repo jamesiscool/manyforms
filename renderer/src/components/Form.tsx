@@ -1,7 +1,6 @@
 import * as React from 'react'
-
-import { FormElementDef } from './FormElement'
 import { Children } from './Children'
+import { FormElementDef } from './FormElement'
 
 export interface FormProps {
     formElements: Array<FormElementDef<{}>>

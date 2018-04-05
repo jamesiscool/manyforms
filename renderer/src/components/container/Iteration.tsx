@@ -1,14 +1,15 @@
 import * as React from 'react'
-
-const times = require('lodash/times')
-
-import { FormElementProps, appendFieldId } from '../FormElement'
-import { Description } from '../output/Description'
-import { Children } from '../Children'
-import { createKey, ordinal } from '../../util'
-import { addToCollection, AddToCollectionPayload, deleteFromCollection, DeleteFromCollectionPayload, getCollectionSize, State } from '../../state/store'
 import { connect, Dispatch } from 'react-redux'
 import { Action } from 'redux'
+import { addToCollection, AddToCollectionPayload, deleteFromCollection, DeleteFromCollectionPayload } from '../../state/actions'
+import { State } from '../../state/reducer'
+import { getCollectionSize } from '../../state/selectors'
+import { createKey, ordinal } from '../../util'
+import { Children } from '../Children'
+import { appendFieldId, FormElementProps } from '../FormElement'
+import { Description } from '../output/Description'
+
+const times = require('lodash/times')
 
 interface IterationStateProps {
     size: number
