@@ -5,7 +5,6 @@ import { setData, SetDataPayload } from '../../state/actions'
 import { State } from '../../state/reducer'
 import { getData } from '../../state/selectors'
 import { FormElementProps } from '../FormElement'
-
 import { FieldChrome } from './FieldChrome'
 
 interface TextInputStateProps {
