@@ -19,7 +19,7 @@ export interface DropdownAttributes {
     label: string
     description: string
     info?: string
-    options: [string]
+    options: string[]
 }
 
 export interface DropdownOwnProps extends FormElementProps<DropdownAttributes> {

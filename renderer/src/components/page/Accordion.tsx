@@ -60,7 +60,7 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
                     return <div className="card" key={createKey()}>
                         <div className="card-header cursor-pointer" onClick={() => this.goToPage(index)}>
                             <Element name={'page_' + index}>
-                                <h4 className="d-inline">{page.attributes.label}</h4>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}
+                                <h3 className="d-inline">{page.attributes.label}</h3>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}
                             </Element>
                         </div>
                         {this.state.currentPage === index && <Page

@@ -10,7 +10,8 @@ import { FormElementProps } from '../FormElement'
 import { FieldChrome } from './FieldChrome'
 
 interface ButtonGroupStateProps {
-    value: string
+    value: string,
+    error?: string
 }
 
 interface ButtonGroupDispatchProps {
@@ -21,7 +22,7 @@ interface ButtonGroupAttributes {
     label: string
     description?: string
     info?: string
-    options: [string]
+    options: string[]
 }
 
 interface ButtonGroupOwnProps extends FormElementProps<ButtonGroupAttributes> {
@@ -37,16 +38,20 @@ class ButtonGroup extends React.Component<ButtonGroupProps> {
 
     render() {
         return (
-            <FieldChrome fieldPath={this.props.fieldPath} label={this.props.definition.attributes.label} info={this.props.definition.attributes.info} description={this.props.definition.attributes.description}>
+            <FieldChrome
+                fieldPath={this.props.fieldPath}
+                label={this.props.definition.attributes.label}
+                info={this.props.definition.attributes.info}
+                description={this.props.definition.attributes.description}
+                error={this.props.error}
+            >
                 <div className="btn-group-wrapper">
                     <div className="btn-group btn-group-toggle">
                         {this.props.definition.attributes.options.map((option) => {
-                            const labelClass = classNames({
-                                btn: true,
-                                'btn-outline-primary': true,
+                            const labelClasses = classNames('btn btn-outline-dark', {
                                 active: this.props.value === option
                             })
-                            return <label className={labelClass} key={createKey()}>
+                            return <label className={labelClasses} key={createKey()}>
                                 <input type="radio" value={option} id={this.props.fieldPath + '_' + option} onChange={e => this.handleChange(e)}/>{option}
                             </label>
                         })}
@@ -56,9 +61,10 @@ class ButtonGroup extends React.Component<ButtonGroupProps> {
     }
 }
 
-function mapStateToProps(state: State, ownProps: ButtonGroupOwnProps) {
+function mapStateToProps(state: State, ownProps: ButtonGroupOwnProps): ButtonGroupStateProps {
     return {
-        value: getData(state, ownProps.fieldPath) || ''
+        value: getData(state, ownProps.fieldPath) || '',
+        // error: '',
     }
 }
 
