@@ -50,11 +50,11 @@ export class Iteration extends React.Component<IterationProps> {
                 {this.props.definition.attributes.description && <Description fieldPath={this.fieldPath} text={this.props.definition.attributes.description}/>}
                 {times(this.props.size, (index: number) => {
                     return (<div className="card mb-3" key={createKey()}>
-                        <h6 className="card-header">{ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
+                        <h5 className="card-header">{ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
                             <button className="close text-dark" onClick={() => this.removeItem(index)}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                        </h6>
+                        </h5>
                         <div className="card-block m-4">
                             <Children children={childrenDefinitions} parentFieldPath={this.fieldPath + '[' + index + ']'}/>
                         </div>

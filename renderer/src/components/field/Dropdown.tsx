@@ -9,6 +9,7 @@ import { FieldChrome } from './FieldChrome'
 
 interface DropdownStateProps {
     value: string
+    error?: string
 }
 
 interface DropdownDispatchProps {
@@ -28,7 +29,7 @@ export interface DropdownOwnProps extends FormElementProps<DropdownAttributes> {
 type DropdownProps = DropdownStateProps & DropdownDispatchProps & DropdownOwnProps
 
 const Dropdown = (props: DropdownProps) => (
-    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} info={props.definition.attributes.info} description={props.definition.attributes.description}>
+    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} info={props.definition.attributes.info} description={props.definition.attributes.description} error={props.error}>
         <select
             className="form-control"
             id={props.definition.fieldId}
@@ -43,7 +44,8 @@ const Dropdown = (props: DropdownProps) => (
 
 function mapStateToProps(state: State, ownProps: DropdownOwnProps) {
     return {
-        value: getData(state, ownProps.fieldPath) || ''
+        value: getData(state, ownProps.fieldPath) || '',
+        // error: 'This field is required'
     }
 }
 

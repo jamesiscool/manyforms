@@ -9,6 +9,7 @@ import { FieldChrome } from './FieldChrome'
 
 interface TextInputStateProps {
     value: string
+    error?: string
 }
 
 interface TextInputDispatchProps {
@@ -27,7 +28,7 @@ interface TextInputOwnProps extends FormElementProps<TextInputAttributes> {
 type TextInputProps = TextInputStateProps & TextInputDispatchProps & TextInputOwnProps
 
 const TextInput = (props: TextInputProps) => (
-    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description} info={props.definition.attributes.info}>
+    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description} info={props.definition.attributes.info} error={props.error}>
         <input
             type="text"
             className="form-control"
@@ -41,7 +42,8 @@ const TextInput = (props: TextInputProps) => (
 
 function mapStateToProps(state: State, ownProps: TextInputOwnProps) {
     return {
-        value: getData(state, ownProps.fieldPath) || ''
+        value: getData(state, ownProps.fieldPath) || '',
+        // error: 'This field is required'
     }
 }
 

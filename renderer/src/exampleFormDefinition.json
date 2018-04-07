@@ -134,7 +134,7 @@
             {
               "type": "Heading",
               "attributes": {
-                "level": 5,
+                "level": 4,
                 "text": "Personal details"
               }
             },
@@ -278,7 +278,7 @@
             {
               "type": "Heading",
               "attributes": {
-                "level": 5,
+                "level": 4,
                 "text": "Where do you live?"
               }
             },
@@ -327,7 +327,7 @@
             {
               "type": "Heading",
               "attributes": {
-                "level": 5,
+                "level": 4,
                 "text": "Your contact details"
               }
             },
