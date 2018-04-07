@@ -31,7 +31,7 @@ type DropdownProps = DropdownStateProps & DropdownDispatchProps & DropdownOwnPro
 const Dropdown = (props: DropdownProps) => (
     <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} info={props.definition.attributes.info} description={props.definition.attributes.description} error={props.error}>
         <select
-            className="form-control"
+            className="form-control custom-select"
             id={props.definition.fieldId}
             onChange={event => props.setData({path: props.fieldPath, data: event.currentTarget.value})}
             value={props.value}

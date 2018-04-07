@@ -36,7 +36,7 @@ class ButtonGroup extends React.Component<ButtonGroupProps> {
                 <div className="btn-group-wrapper">
                     <div className="btn-group btn-group-toggle">
                         {this.props.definition.attributes.options.map(option => (
-                            <label className={classNames('btn btn-outline-dark', {active: this.props.value === option})} key={option}>
+                            <label className={classNames('btn btn-outline-secondary', {active: this.props.value === option})} key={option}>
                                 <input type="radio" value={option} id={this.props.fieldPath + '_' + option} onChange={event => this.props.setData({path: this.props.fieldPath, data: event.currentTarget.value})}/>{option}
                             </label>))
                         }
