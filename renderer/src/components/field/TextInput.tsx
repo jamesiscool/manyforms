@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux'
 import { Action } from 'redux'
 import { setData, SetDataPayload } from '../../state/actions'
 import { State } from '../../state/reducer'
-import { getData } from '../../state/selectors'
+import { getData, validate } from '../../state/selectors'
 import { FormElementProps } from '../FormElement'
 import { FieldChrome } from './FieldChrome'
 
@@ -43,7 +43,7 @@ const TextInput = (props: TextInputProps) => (
 function mapStateToProps(state: State, ownProps: TextInputOwnProps) {
     return {
         value: getData(state, ownProps.fieldPath) || '',
-        // error: 'This field is required'
+        error: validate(state, ownProps.fieldPath, ownProps.definition),
     }
 }
 

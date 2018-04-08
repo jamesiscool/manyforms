@@ -13,9 +13,25 @@ export interface FormElementDef<Attributes> {
     fieldId?: string,
     // tslint:disable-next-line
     children?: Array<FormElementDef<any>>
+    validation?: {
+        required?: boolean
+        rules?: ValidationRuleDef[]
+        expression?: {
+            expression: string,
+            message: string
+        }[]
+    }
 }
 
-export class FormElementProps<Attributes> {
+export interface ValidationRuleDef {
+    name: string,
+    secondArgument?: string,
+    options?: {}
+    message?: string
+
+}
+
+export interface FormElementProps<Attributes> {
     definition: FormElementDef<Attributes>
     parentFieldPath: string
     fieldPath: string

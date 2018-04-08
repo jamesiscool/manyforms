@@ -5,6 +5,7 @@ import { createStore } from 'redux'
 import { Form } from './components/Form'
 import { FormElementDef } from './components/FormElement'
 import './index.css'
+import './polyfills'
 import { reducer, State } from './state/reducer'
 
 const formElements: Array<FormElementDef<{}>> = require('./exampleFormDefinition.json').elements
