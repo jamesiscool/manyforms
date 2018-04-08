@@ -2,6 +2,7 @@ import * as isAlpha from 'validator/lib/isAlpha'
 import * as isAlphanumeric from 'validator/lib/isAlphanumeric'
 import * as isCurrency from 'validator/lib/isCurrency'
 import * as isEmail from 'validator/lib/isEmail'
+import * as isNumeric from 'validator/lib/isNumeric'
 
 export default {
     email: {
@@ -15,6 +16,12 @@ export default {
             return isAlpha(value)
         },
         defaultMessage: 'Please enter only letters'
+    },
+    numeric: {
+        validate: (value: string) => {
+            return isNumeric(value)
+        },
+        defaultMessage: 'Please enter only numbers'
     },
     alphanumeric: {
         validate: (value: string) => {
