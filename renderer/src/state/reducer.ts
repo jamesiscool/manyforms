@@ -1,19 +1,29 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
-import { addToCollection, deleteFromCollection, setData } from './actions'
+import { addToCollection, deleteFromCollection, setData, setState } from './actions'
 
 const get = require('lodash/get')
 const set = require('lodash/set')
 
 export interface State {
     formData: FormData
+    formState: FormState
 }
 
 interface FormData {
-    [fieldId: string]: string | FormData | [FormData]
+    [fieldId: string]: FormData | FormData[] | string
+}
+
+interface FormState {
+    [fieldId: string]: FormState | FormState[] | FieldState
+}
+
+export interface FieldState {
+    touched?: boolean
 }
 
 const INITIAL_STATE: State = {
-    formData: {}
+    formData: {},
+    formState: {}
 }
 
 export const reducer = reducerWithInitialState(INITIAL_STATE)
@@ -25,7 +35,7 @@ export const reducer = reducerWithInitialState(INITIAL_STATE)
         }
     )
     .case(addToCollection, (state, payload) => {
-            const oldCollection = <[FormData]> get(state.formData, payload.path, [])
+            const oldCollection = <FormData[]> get(state.formData, payload.path, [])
             const newCollection = [...oldCollection, {}]
             return {
                 ...state,
@@ -34,11 +44,18 @@ export const reducer = reducerWithInitialState(INITIAL_STATE)
         }
     )
     .case(deleteFromCollection, (state, payload) => {
-            const oldCollection = <[FormData]> get(state.formData, payload.path) || []
+            const oldCollection = <FormData[]> get(state.formData, payload.path) || []
             const newCollection = [...oldCollection.slice(0, payload.index), ...oldCollection.slice(payload.index + 1)]
             return {
                 ...state,
                 formData: set({...state.formData}, payload.path, newCollection)
+            }
+        }
+    )
+    .case(setState, (state, payload) => {
+            return {
+                ...state,
+                formState: set({...state.formState}, payload.path + '.' + payload.name, payload.value)
             }
         }
     )

@@ -21,7 +21,7 @@
               "fieldId": "howManyPeopleApplying",
               "type": "ButtonGroup",
               "attributes": {
-                "label": "How many people applying?",
+                "label": "How many people are applying?",
                 "options": [
                   "1",
                   "2"

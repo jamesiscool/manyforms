@@ -1,19 +1,21 @@
 import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 import { Action } from 'redux'
-import { setData, SetDataPayload } from '../../state/actions'
-import { State } from '../../state/reducer'
-import { getData, validate } from '../../state/selectors'
+import { setData, SetDataPayload, setState, SetStatePayload, } from '../../state/actions'
+import { FieldState, State } from '../../state/reducer'
+import { getData, getState, validate } from '../../state/selectors'
 import { FormElementProps } from '../FormElement'
 import { FieldChrome } from './FieldChrome'
 
-interface TextInputStateProps {
+interface StateProps {
     value: string
     error?: string
+    state: FieldState
 }
 
-interface TextInputDispatchProps {
+interface DispatchProps {
     setData: (payload: SetDataPayload) => void
+    setState: (payload: SetStatePayload) => void
 }
 
 interface TextInputAttributes {
@@ -22,13 +24,13 @@ interface TextInputAttributes {
     info?: string
 }
 
-interface TextInputOwnProps extends FormElementProps<TextInputAttributes> {
+interface OwnProps extends FormElementProps<TextInputAttributes> {
 }
 
-type TextInputProps = TextInputStateProps & TextInputDispatchProps & TextInputOwnProps
+type Props = StateProps & DispatchProps & OwnProps
 
-const TextInput = (props: TextInputProps) => (
-    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description} info={props.definition.attributes.info} error={props.error}>
+const TextInput = (props: Props) => (
+    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} description={props.definition.attributes.description} info={props.definition.attributes.info} error={props.state.touched ? props.error : undefined}>
         <input
             type="text"
             className="form-control"
@@ -36,21 +38,24 @@ const TextInput = (props: TextInputProps) => (
             aria-describedby={props.fieldPath + '_description'}
             value={props.value}
             onChange={event => props.setData({path: props.fieldPath, data: event.currentTarget.value})}
+            onBlur={() => props.setState({path: props.fieldPath, name: 'touched', value: true})}
         />
     </FieldChrome>
 )
 
-function mapStateToProps(state: State, ownProps: TextInputOwnProps) {
+function mapStateToProps(state: State, ownProps: OwnProps): StateProps {
     return {
         value: getData(state, ownProps.fieldPath) || '',
         error: validate(state, ownProps.fieldPath, ownProps.definition),
+        state: getState(state, ownProps.fieldPath) || {}
     }
 }
 
-function mapDispatchToProps(dispatch: Dispatch<Action>) {
+function mapDispatchToProps(dispatch: Dispatch<Action>): DispatchProps {
     return {
-        setData: (payload: SetDataPayload) => dispatch(setData(payload))
+        setData: (payload: SetDataPayload) => dispatch(setData(payload)),
+        setState: (payload: SetStatePayload) => dispatch(setState(payload))
     }
 }
 
-export const ConnectedTextInput = connect<TextInputStateProps, TextInputDispatchProps, TextInputOwnProps>(mapStateToProps, mapDispatchToProps)(TextInput)
+export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(TextInput)

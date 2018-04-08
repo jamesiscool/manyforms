@@ -21,3 +21,11 @@ export interface DeleteFromCollectionPayload {
 }
 
 export const deleteFromCollection = actionCreator<DeleteFromCollectionPayload>('DELETE_FROM_COLLECTION')
+
+export interface SetStatePayload {
+    path: string
+    name: string
+    value: string | number | boolean
+}
+
+export const setState = actionCreator<SetStatePayload>('SET_STATE')

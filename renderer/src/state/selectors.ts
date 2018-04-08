@@ -1,15 +1,15 @@
 import { FormElementDef, ValidationRuleDef } from '../components/FormElement'
-import { State } from './reducer'
+import { FieldState, State } from './reducer'
 import ruleValidators from './validation/ruleValidators'
 
 const get = require('lodash/get')
 
-export function getData(state: State, path: string): string | void {
-    const found = get(state.formData, path)
-    if (typeof found === 'string') {
-        return found
-    }
-    return
+export function getData(state: State, path: string): string {
+    return get(state.formData, path)
+}
+
+export function getState(state: State, path: string): FieldState {
+    return get(state.formState, path)
 }
 
 export function getCollectionSize(state: State, path: string): number | void {

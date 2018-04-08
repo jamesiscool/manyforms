@@ -8,7 +8,7 @@ import './index.css'
 import './polyfills'
 import { reducer, State } from './state/reducer'
 
-const formElements: Array<FormElementDef<{}>> = require('./exampleFormDefinition.json').elements
+const formElements: FormElementDef<{}>[] = require('./exampleFormDefinition.json').elements
 
 declare global {
     interface Window {

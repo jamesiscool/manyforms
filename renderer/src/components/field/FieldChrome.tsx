@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Description } from '../output/Description'
 import { Label } from '../output/Label'
 
-interface FieldChromeProps {
+interface Props {
     fieldPath: string
     label: string
     description?: string
@@ -11,7 +11,7 @@ interface FieldChromeProps {
     children: React.ReactNode
 }
 
-export const FieldChrome = (props: FieldChromeProps) => (
+export const FieldChrome = (props: Props) => (
     <div className="form-group py-2">
         {props.label && <Label htmlFor={props.fieldPath} text={props.label} error={!!props.error}/>}
         {props.children}

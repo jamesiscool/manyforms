@@ -60,7 +60,7 @@ export class Iteration extends React.Component<IterationProps> {
                         </div>
                     </div>)
                 })}
-                <button className="btn btn-primary d-inline" onClick={() => this.addItem()}>Add</button>
+                <button className="btn btn-secondary d-inline" onClick={() => this.addItem()}>Add</button>
             </div>)
     }
 }
