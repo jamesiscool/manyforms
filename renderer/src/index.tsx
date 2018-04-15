@@ -1,28 +1,32 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
 import { Form } from './components/Form'
 import { FormElementDef } from './components/FormElement'
 import './index.css'
 import './polyfills'
-import { reducer, State } from './state/reducer'
+import store from './state/store'
 
 const formElements: FormElementDef<{}>[] = require('./exampleFormDefinition.json').elements
 
-declare global {
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION__: () => State
+class Store extends React.Component {
+
+    componentDidMount() {
+        store.subscribe(() => {
+            console.log('store.state', store.state)
+            this.forceUpdate()
+        })
+    }
+
+    render() {
+        return (
+            this.props.children
+        )
     }
 }
 
-const store = createStore<State>(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-
 ReactDOM.render(
-    (
-        <Provider store={store}>
-            <Form formElements={formElements}/>
-        </Provider>
-    ),
+    <Store>
+        <Form formElements={formElements}/>
+    </Store>,
     document.getElementById('form')
 )

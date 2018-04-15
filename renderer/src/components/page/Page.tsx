@@ -2,11 +2,11 @@ import * as React from 'react'
 import { Children } from '../Children'
 import { FormElementProps } from '../FormElement'
 
-export interface PageAttributes {
+interface PageAttributes {
     label: string
 }
 
-export interface PageProps extends FormElementProps<PageAttributes> {
+interface PageProps extends FormElementProps<PageAttributes> {
     showPrevious: boolean
     isLast: boolean
     goToPreviousPage: () => void
@@ -14,7 +14,7 @@ export interface PageProps extends FormElementProps<PageAttributes> {
     submit?: () => void
 }
 
-export class Page extends React.Component<PageProps, {}> {
+class Page extends React.Component<PageProps, {}> {
 
     pageButton(label: string, onClick?: () => void) {
         return <li className="page-item"><a className="page-link text-primary" onClick={() => onClick!()}>{label}</a></li>
@@ -41,3 +41,5 @@ export class Page extends React.Component<PageProps, {}> {
             </div>)
     }
 }
+
+export default Page

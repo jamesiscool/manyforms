@@ -1,11 +1,11 @@
-import { ConnectedIteration } from './container/Iteration'
-import { ConnectedButtonGroup } from './field/ButtonGroup'
+import Iteration  from './container/Iteration'
+import ButtonGroup from './field/ButtonGroup'
 import ConnectedDropdown from './field/Dropdown'
 import ConnectedTextInput from './field/TextInput'
-import { Heading } from './output/Heading'
-import { Paragraph } from './output/Paragraph'
-import { Accordion } from './page/Accordion'
-import { Page } from './page/Page'
+import  Heading from './output/Heading'
+import Paragraph from './output/Paragraph'
+import Accordion from './page/Accordion'
+import  Page from './page/Page'
 
 export interface FormElementDef<Attributes> {
     type: string,
@@ -42,8 +42,8 @@ export const FormElements: { [name: string]: {} } = {
     TextInput: ConnectedTextInput,
     Paragraph: Paragraph,
     Heading: Heading,
-    ButtonGroup: ConnectedButtonGroup,
-    Iteration: ConnectedIteration,
+    ButtonGroup: ButtonGroup,
+    Iteration: Iteration,
     Accordion: Accordion,
     Page: Page
 }

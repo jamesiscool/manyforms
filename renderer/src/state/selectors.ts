@@ -1,30 +1,31 @@
 import { FormElementDef, ValidationRuleDef } from '../components/FormElement'
-import { FieldState, State } from './reducer'
+import { FieldState, store } from './store'
 import ruleValidators from './validation/ruleValidators'
 
 const get = require('lodash/get')
 
-export function getData(state: State, path: string): string {
-    return get(state.formData, path)
+export function getData(path: string): string {
+    return get(store.state.formData, path)
 }
 
-export function getState(state: State, path: string): FieldState {
-    return get(state.formState, path)
+export function getState(path: string): FieldState {
+    const found = get(store.state.formState, path)
+    return found ? found : {}
 }
 
-export function getCollectionSize(state: State, path: string): number | void {
-    const found = get(state.formData, path)
+export function getCollectionSize(path: string): number | void {
+    const found = get(store.state.formData, path)
     if (found instanceof Array) {
         return found.length
     }
     return
 }
 
-export function validate(state: State, path: string, fieldDef: FormElementDef<{}>): string | undefined {
+export function validate(path: string, fieldDef: FormElementDef<{}>): string | undefined {
     if (!fieldDef.validation) {
         return undefined
     }
-    const found = get(state.formData, path)
+    const found = get(store.state.formData, path)
     if (fieldDef.validation.required && (!found || found.length < 1)) {
         return 'This field is required'
     }

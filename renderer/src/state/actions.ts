@@ -1,31 +1,20 @@
-import actionCreatorFactory from 'typescript-fsa'
+import { store } from './store'
 
-const actionCreator = actionCreatorFactory()
+const get = require('lodash/get')
+const set = require('lodash/set')
 
-export interface SetDataPayload {
-    path: string,
-    data: string
+export const setData = (path: string, data: string) => {
+    store.update(state => set(state.formData, path, data))
 }
 
-export const setData = actionCreator<SetDataPayload>('SET_DATA')
-
-export interface AddToCollectionPayload {
-    path: string
+export const addToCollection = (path: string) => {
+    store.update(state => get(state.formData, path, []).push({}))
 }
 
-export const addToCollection = actionCreator<AddToCollectionPayload>('ADD_TO_COLLECTION')
-
-export interface DeleteFromCollectionPayload {
-    path: string,
-    index: number
+export const deleteFromCollection = (path: string, index: number) => {
+    store.update(state => get(state.formData, path).splice(index, 1))
 }
 
-export const deleteFromCollection = actionCreator<DeleteFromCollectionPayload>('DELETE_FROM_COLLECTION')
-
-export interface SetStatePayload {
-    path: string
-    name: string
-    value: string | number | boolean
+export const setState = (path: string, name: string, value: string | boolean) => {
+    store.update(state => set(state.formState, path + '.' + name, value))
 }
-
-export const setState = actionCreator<SetStatePayload>('SET_STATE')

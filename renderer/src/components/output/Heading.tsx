@@ -9,12 +9,11 @@ interface HeadingAttributes {
 export interface HeadingProps extends FormElementProps<HeadingAttributes> {
 }
 
-export class Heading extends React.Component<HeadingProps, undefined> {
-    render() {
-        const HeadingTag = 'h' + this.props.definition.attributes.level
-        return (
-            <HeadingTag>
-                {this.props.definition.attributes.text}
-            </HeadingTag>)
-    }
+const Heading = (props: HeadingProps) => {
+    const HeadingTag = 'h' + props.definition.attributes.level
+    return (
+        <HeadingTag>
+            {props.definition.attributes.text}
+        </HeadingTag>)
 }
+export default Heading

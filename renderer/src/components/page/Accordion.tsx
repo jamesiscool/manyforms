@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Element, scroller } from 'react-scroll'
 import { createKey } from '../../util'
 import { FormElementProps } from '../FormElement'
-import { Page } from './Page'
+import  Page from './Page'
 
 export interface AccordionAttributes {
 }
@@ -14,7 +14,7 @@ interface AccordionState {
     currentPage: number
 }
 
-export class Accordion extends React.Component<AccordionProps, AccordionState> {
+class Accordion extends React.Component<AccordionProps, AccordionState> {
 
     constructor(props: AccordionProps) {
         super(props)
@@ -78,3 +78,5 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
             </div>)
     }
 }
+
+export default Accordion

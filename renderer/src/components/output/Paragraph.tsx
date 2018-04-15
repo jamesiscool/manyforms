@@ -1,12 +1,14 @@
 import * as React from 'react'
 import { FormElementProps } from '../FormElement'
 
-export interface ParagraphAttributes {
+interface ParagraphAttributes {
     text: string
 }
 
-export interface ParagraphProps extends FormElementProps<ParagraphAttributes> {
+interface ParagraphProps extends FormElementProps<ParagraphAttributes> {
 }
 
-export const Paragraph = (props: ParagraphProps) =>
+const Paragraph = (props: ParagraphProps) => (
     <p>{props.definition.attributes.text}</p>
+)
+export default Paragraph
