@@ -49,13 +49,13 @@ export class Iteration extends React.Component<IterationProps> {
                 <label className="h4 mr-2">{this.props.definition.attributes.label}</label>
                 {this.props.definition.attributes.description && <Description fieldPath={this.fieldPath} text={this.props.definition.attributes.description}/>}
                 {times(this.props.size, (index: number) => {
-                    return (<div className="card mb-3" key={createKey()}>
+                    return (<div className="card border-bottom mb-3" key={createKey()}>
                         <h5 className="card-header">{ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
                             <button className="close text-dark" onClick={() => this.removeItem(index)}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </h5>
-                        <div className="card-block m-4">
+                        <div className="card-body m-4">
                             <Children children={childrenDefinitions} parentFieldPath={this.fieldPath + '[' + index + ']'}/>
                         </div>
                     </div>)
