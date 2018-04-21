@@ -9,21 +9,26 @@ import './index.css'
 import './polyfills'
 import { reducer, State } from './state/reducer'
 
-const formElements: FormElementDef<{}>[] = require('./exampleFormDefinition.json').elements
+const store = createStore<State>(reducer)
 
-declare global {
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION__: () => State
-    }
+interface FormDefinition {
+    elements: FormElementDef<{}>[]
 }
 
-const store = createStore<State>(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-
-ReactDOM.render(
-    (
-        <Provider store={store}>
-            <Form formElements={formElements}/>
-        </Provider>
-    ),
-    document.getElementById('form')
-)
+fetch('exampleFormDefinition.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(response.statusText)
+        }
+        return response.json()
+    })
+    .then((formDef: FormDefinition) => {
+        ReactDOM.render(
+            (
+                <Provider store={store}>
+                    <Form formElements={formDef.elements}/>
+                </Provider>
+            ),
+            document.getElementById('form')
+        )
+    })
