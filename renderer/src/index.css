@@ -31,3 +31,11 @@ label {
 small, .small {
     font-size: 85%;
 }
+
+.bg-black {
+    background-color: black;
+}
+
+.first-card:first-of-type {
+    margin-top: 10px;
+}

@@ -46,10 +46,10 @@ export class Iteration extends React.Component<IterationProps> {
         const childrenDefinitions = this.props.definition.children ? this.props.definition.children : []
         return (
             <div className="form-group">
-                <label className="h4 mr-2">{this.props.definition.attributes.label}</label>
+                <span className="h4 align-middle mr-2">{this.props.definition.attributes.label}</span>
                 {this.props.definition.attributes.description && <Description fieldPath={this.fieldPath} text={this.props.definition.attributes.description}/>}
                 {times(this.props.size, (index: number) => {
-                    return (<div className="card border-bottom mb-3" key={createKey()}>
+                    return (<div className="card border-bottom first-card mb-3" key={createKey()}>
                         <h5 className="card-header">{ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
                             <button className="close text-dark" onClick={() => this.removeItem(index)}>
                                 <span aria-hidden="true">&times;</span>

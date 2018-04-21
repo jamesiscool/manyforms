@@ -22,7 +22,7 @@ export class Page extends React.Component<PageProps, {}> {
 
     render() {
         return (
-            <div className="card-body m-4">
+            <div className="card-body m-1">
                 <Children children={this.props.definition.children!} parentFieldPath={this.props.definition.fieldId!}/>
                 <div className="row">
                     <div className="col">
