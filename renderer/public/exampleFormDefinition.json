@@ -567,6 +567,9 @@
                   "type": "TextInput",
                   "attributes": {
                     "label": "What's the estimated value?"
+                  },
+                  "validation": {
+                    "required": true
                   }
                 },
                 {
