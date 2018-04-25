@@ -32,28 +32,24 @@ interface OwnProps extends FormElementProps<ButtonGroupAttributes> {
 
 type Props = StateProps & DispatchProps & OwnProps
 
-class ButtonGroup extends React.Component<Props> {
-    render() {
-        return (
-            <FieldChrome fieldPath={this.props.fieldPath} label={this.props.definition.attributes.label} info={this.props.definition.attributes.info} description={this.props.definition.attributes.description} error={this.props.state.touched ? this.props.error : undefined}>
-                <div className="btn-group-wrapper">
-                    <div className="btn-group btn-group-toggle">
-                        {this.props.definition.attributes.options.map((option) => (
-                            <label className={classNames('btn btn-outline-secondary', {active: this.props.value === option})} key={createKey()}>
-                                <input
-                                    type="radio"
-                                    value={option}
-                                    id={this.props.fieldPath + '_' + option}
-                                    onChange={event => this.props.setData({path: this.props.fieldPath, data: event.currentTarget.value})}
-                                    onBlur={() => this.props.setState({path: this.props.fieldPath, name: 'touched', value: true})}
-                                />{option}
-                            </label>))
-                        }
-                    </div>
-                </div>
-            </FieldChrome>)
-    }
-}
+const ButtonGroup = (props: Props) => (
+    <FieldChrome fieldPath={props.fieldPath} label={props.definition.attributes.label} info={props.definition.attributes.info} description={props.definition.attributes.description} error={props.state.touched ? props.error : undefined}>
+        <div className="btn-group-wrapper">
+            <div className="btn-group btn-group-toggle">
+                {props.definition.attributes.options.map((option) => (
+                    <label className={classNames('btn btn-outline-secondary', {active: props.value === option})} key={createKey()}>
+                        <input
+                            type="radio"
+                            value={option}
+                            id={props.fieldPath + '_' + option}
+                            onChange={event => props.setData({path: props.fieldPath, data: event.currentTarget.value})}
+                            onBlur={() => props.setState({path: props.fieldPath, name: 'touched', value: true})}
+                        />{option}
+                    </label>))
+                }
+            </div>
+        </div>
+    </FieldChrome>)
 
 function mapStateToProps(state: State, ownProps: OwnProps): StateProps {
     return {
@@ -70,4 +66,4 @@ function mapDispatchToProps(dispatch: Dispatch<Action>): DispatchProps {
     }
 }
 
-export const ConnectedButtonGroup = connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(ButtonGroup)
+export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(ButtonGroup)

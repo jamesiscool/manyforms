@@ -1,7 +1,7 @@
-import { ConnectedIteration } from './container/Iteration'
-import { ConnectedButtonGroup } from './field/ButtonGroup'
-import ConnectedDropdown from './field/Dropdown'
-import ConnectedTextInput from './field/TextInput'
+import Iteration from './container/Iteration'
+import ButtonGroup from './field/ButtonGroup'
+import Dropdown from './field/Dropdown'
+import TextInput from './field/TextInput'
 import { Heading } from './output/Heading'
 import { Paragraph } from './output/Paragraph'
 import { Accordion } from './page/Accordion'
@@ -38,14 +38,14 @@ export interface FormElementProps<Attributes> {
 }
 
 export const FormElements: { [name: string]: {} } = {
-    Dropdown: ConnectedDropdown,
-    TextInput: ConnectedTextInput,
-    Paragraph: Paragraph,
-    Heading: Heading,
-    ButtonGroup: ConnectedButtonGroup,
-    Iteration: ConnectedIteration,
-    Accordion: Accordion,
-    Page: Page
+    Dropdown,
+    TextInput,
+    Paragraph,
+    Heading,
+    ButtonGroup,
+    Iteration,
+    Accordion,
+    Page
 }
 
 export function appendFieldId(parentFieldPath: string, fieldId?: string): string {

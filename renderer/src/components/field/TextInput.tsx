@@ -40,8 +40,7 @@ const TextInput = (props: Props) => (
             onChange={event => props.setData({path: props.fieldPath, data: event.currentTarget.value})}
             onBlur={() => props.setState({path: props.fieldPath, name: 'touched', value: true})}
         />
-    </FieldChrome>
-)
+    </FieldChrome>)
 
 function mapStateToProps(state: State, ownProps: OwnProps): StateProps {
     return {

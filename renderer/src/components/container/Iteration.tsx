@@ -11,11 +11,11 @@ import { Description } from '../output/Description'
 
 const times = require('lodash/times')
 
-interface IterationStateProps {
+interface StateProps {
     size: number
 }
 
-interface IterationDispatchProps {
+interface DispatchProps {
     addToCollection: (payload: AddToCollectionPayload) => void
     deleteFromCollection: (payload: DeleteFromCollectionPayload) => void
 }
@@ -26,46 +26,32 @@ export interface IterationAttributes {
     description: string
 }
 
-export interface IterationOwnProps extends FormElementProps<IterationAttributes> {
+export interface OwnProps extends FormElementProps<IterationAttributes> {
 }
 
-type IterationProps = IterationStateProps & IterationDispatchProps & IterationOwnProps
+type Props = StateProps & DispatchProps & OwnProps
 
-export class Iteration extends React.Component<IterationProps> {
-    fieldPath = appendFieldId(this.props.parentFieldPath, this.props.definition.fieldId)
+const Iteration = (props: Props) => (
+    <div className="form-group">
+        <span className="h4 align-middle mr-2">{props.definition.attributes.label}</span>
+        {props.definition.attributes.description && <Description fieldPath={props.fieldPath} text={props.definition.attributes.description}/>}
+        {times(props.size, (index: number) => {
+            return (
+                <div className="card border-bottom first-card mb-3" key={createKey()}>
+                    <h5 className="card-header">{ordinal(index + 1)} {props.definition.attributes.itemLabel}
+                        <button className="close text-dark" onClick={() => props.deleteFromCollection({path: props.fieldPath, index: index})}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h5>
+                    <div className="card-body m-4">
+                        <Children children={props.definition.children ? props.definition.children : []} parentFieldPath={props.fieldPath + '[' + index + ']'}/>
+                    </div>
+                </div>)
+        })}
+        <button className="btn btn-secondary d-inline" onClick={() => props.addToCollection({path: props.fieldPath})}>Add</button>
+    </div>)
 
-    addItem() {
-        this.props.addToCollection({path: this.fieldPath})
-    }
-
-    removeItem(index: number) {
-        this.props.deleteFromCollection({path: this.fieldPath, index: index})
-    }
-
-    render() {
-        const childrenDefinitions = this.props.definition.children ? this.props.definition.children : []
-        return (
-            <div className="form-group">
-                <span className="h4 align-middle mr-2">{this.props.definition.attributes.label}</span>
-                {this.props.definition.attributes.description && <Description fieldPath={this.fieldPath} text={this.props.definition.attributes.description}/>}
-                {times(this.props.size, (index: number) => {
-                    return (<div className="card border-bottom first-card mb-3" key={createKey()}>
-                        <h5 className="card-header">{ordinal(index + 1)} {this.props.definition.attributes.itemLabel}
-                            <button className="close text-dark" onClick={() => this.removeItem(index)}>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </h5>
-                        <div className="card-body m-4">
-                            <Children children={childrenDefinitions} parentFieldPath={this.fieldPath + '[' + index + ']'}/>
-                        </div>
-                    </div>)
-                })}
-                <button className="btn btn-secondary d-inline" onClick={() => this.addItem()}>Add</button>
-            </div>)
-    }
-}
-
-function mapStateToProps(state: State, ownProps: IterationOwnProps) {
+function mapStateToProps(state: State, ownProps: OwnProps) {
     return {
         size: getCollectionSize(state, appendFieldId(ownProps.parentFieldPath, ownProps.definition.fieldId)) || 0
     }
@@ -78,4 +64,4 @@ function mapDispatchToProps(dispatch: Dispatch<Action>) {
     }
 }
 
-export const ConnectedIteration = connect<IterationStateProps, IterationDispatchProps, IterationOwnProps>(mapStateToProps, mapDispatchToProps)(Iteration)
+export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(Iteration)
