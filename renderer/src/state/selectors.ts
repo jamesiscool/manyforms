@@ -36,5 +36,19 @@ export function validate(state: State, path: string, fieldDef: FormElementDef<{}
             return firstRuleThatFails.message || ruleValidators[firstRuleThatFails.name].defaultMessage
         }
     }
-    return undefined
+    return
+}
+
+interface Error {
+    path: string,
+    error: string
+}
+
+export function validateRecursively(state: State, path: string, fieldDef: FormElementDef<{}>): Error[] | undefined {
+    const errors: Error[] = []
+    const localError = validate(state, path, fieldDef)
+    if (localError) {
+        errors.push({path: path, error: localError})
+    }
+    return errors
 }
