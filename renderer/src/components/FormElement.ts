@@ -4,7 +4,7 @@ import Dropdown from './field/Dropdown'
 import TextInput from './field/TextInput'
 import { Heading } from './output/Heading'
 import { Paragraph } from './output/Paragraph'
-import { Accordion } from './page/Accordion'
+import Accordion from './page/Accordion'
 import { Page } from './page/Page'
 
 export interface FormElementDef<Attributes> {

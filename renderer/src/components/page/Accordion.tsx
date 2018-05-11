@@ -1,23 +1,35 @@
 import * as React from 'react'
 import { findDOMNode } from 'react-dom'
+import { connect } from 'react-redux'
+import { State } from '../../state/reducer'
+import { Error, validateRecursively } from '../../state/selectors'
 import { createKey } from '../../util'
 import { FormElementProps } from '../FormElement'
 import { Page } from './Page'
 
+interface StateProps {
+    errors?: Error[]
+}
+
+interface DispatchProps {
+}
+
 export interface AccordionAttributes {
 }
 
-export interface AccordionProps extends FormElementProps<AccordionAttributes> {
+export interface OwnProps extends FormElementProps<AccordionAttributes> {
 }
+
+type Props = StateProps & DispatchProps & OwnProps
 
 interface AccordionState {
     currentPage: number
 }
 
-export class Accordion extends React.Component<AccordionProps, AccordionState> {
+class Accordion extends React.Component<Props, AccordionState> {
     private currentPageRef: Page | null
 
-    constructor(props: AccordionProps) {
+    constructor(props: OwnProps) {
         super(props)
         this.state = {
             currentPage: 0
@@ -60,25 +72,44 @@ export class Accordion extends React.Component<AccordionProps, AccordionState> {
 
     render() {
         return (
-            <div className="accordion" role="tablist" aria-multiselectable="true">
-                {this.props.definition.children!.map((page, index) => {
-                    return <div className="card" key={createKey()}>
-                        <div className="card-header cursor-pointer" onClick={() => this.goToPage(index)}>
-                            <h3 className="d-inline">{page.attributes.label}</h3>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}
+            <>
+                <div className="accordion" role="tablist" aria-multiselectable="true">
+                    {this.props.definition.children!.map((page, index) => {
+                        return <div className="card" key={createKey()}>
+                            <div className="card-header cursor-pointer" onClick={() => this.goToPage(index)}>
+                                <h3 className="d-inline">{page.attributes.label}</h3>{index < this.state.currentPage && <a className="d-inline text-muted"> <u>edit</u></a>}
+                            </div>
+                            {this.state.currentPage === index && <Page
+                                ref={(ref) => this.currentPageRef = ref}
+                                definition={page}
+                                goToPreviousPage={this.goToPreviousPage}
+                                goToNextPage={this.goToNextPage}
+                                parentFieldPath=""
+                                fieldPath=""
+                                showPrevious={index > 0}
+                                isLast={index === (this.props.definition.children!.length - 1)}
+                                submit={this.submit}
+                            />}
                         </div>
-                        {this.state.currentPage === index && <Page
-                            ref={(ref) => this.currentPageRef = ref}
-                            definition={page}
-                            goToPreviousPage={this.goToPreviousPage}
-                            goToNextPage={this.goToNextPage}
-                            parentFieldPath=""
-                            fieldPath=""
-                            showPrevious={index > 0}
-                            isLast={index === (this.props.definition.children!.length - 1)}
-                            submit={this.submit}
-                        />}
-                    </div>
-                })}
-            </div>)
+                    })}
+                </div>
+                <div>Errors:{JSON.stringify(this.props.errors)}</div>
+            </>)
     }
 }
+
+function mapStateToProps(state: State, ownProps: OwnProps): StateProps {
+    return {
+        errors: validateRecursively(state, ownProps.fieldPath, ownProps.definition),
+        // state: getState(state, ownProps.fieldPath) || {}
+    }
+}
+
+function mapDispatchToProps(/*dispatch: Dispatch<Action>*/): DispatchProps {
+    return {
+        // setData: (payload: SetDataPayload) => dispatch(setData(payload)),
+        // setState: (payload: SetStatePayload) => dispatch(setState(payload))
+    }
+}
+
+export default connect<StateProps, DispatchProps, OwnProps>(mapStateToProps, mapDispatchToProps)(Accordion)

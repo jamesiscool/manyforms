@@ -1,8 +1,8 @@
+import produce from 'immer'
+import get from 'lodash-es/get'
+import set from 'lodash-es/set'
 import { reducerWithInitialState } from 'typescript-fsa-reducers'
 import { addToCollection, deleteFromCollection, setData, setState } from './actions'
-
-const get = require('lodash/get')
-const set = require('lodash/set')
 
 export interface State {
     formData: FormData
@@ -27,13 +27,10 @@ const INITIAL_STATE: State = {
 }
 
 export const reducer = reducerWithInitialState(INITIAL_STATE)
-    .case(setData, (state, payload) => {
-            return {
-                ...state,
-                formData: set({...state.formData}, payload.path, payload.data)
-            }
-        }
-    )
+    .case(setData, (state, payload) =>
+        produce(state, draftState =>
+            set<State>(draftState.formData, payload.path, payload.data)))
+
     .case(addToCollection, (state, payload) => {
             const oldCollection = <FormData[]> get(state.formData, payload.path, [])
             const newCollection = [...oldCollection, {}]
