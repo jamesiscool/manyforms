@@ -28,9 +28,9 @@ const INITIAL_STATE: State = {
 
 export const reducer = reducerWithInitialState(INITIAL_STATE)
     .case(setData, (state, payload) =>
-        produce(state, draftState =>
-            set<State>(draftState.formData, payload.path, payload.data)))
-
+        produce(state, draftState => {
+            set<State>(draftState.formData, payload.path, payload.data)
+        }))
     .case(addToCollection, (state, payload) => {
             const oldCollection = <FormData[]> get(state.formData, payload.path, [])
             const newCollection = [...oldCollection, {}]

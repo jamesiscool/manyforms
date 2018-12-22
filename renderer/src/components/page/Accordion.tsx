@@ -38,13 +38,9 @@ class Accordion extends React.Component<Props, AccordionState> {
         this.goToNextPage = this.goToNextPage.bind(this)
     }
 
-    componentDidUpdate() {
-        if (this.currentPageRef) {
-            const domNode = findDOMNode(this.currentPageRef) as Element
-            const domRect = domNode.getBoundingClientRect()
-            window.scroll({top: domRect.top - 100})
-        }
-    }
+/*    componentDidUpdate() {
+
+    }*/
 
     setCurrentPage(index: number) {
         this.setState(() => {
@@ -55,6 +51,11 @@ class Accordion extends React.Component<Props, AccordionState> {
     goToPage(index: number) {
         if (index < this.state.currentPage) {
             this.setCurrentPage(index)
+        }
+        if (this.currentPageRef) {
+            const domNode = findDOMNode(this.currentPageRef) as Element
+            const domRect = domNode.getBoundingClientRect()
+            window.scroll({top: domRect.top - 100})
         }
     }
 
