@@ -1,18 +1,18 @@
 {
   "elements": [
     {
-      "type": "Accordion",
+      "type": "accordion",
       "attributes": {},
       "children": [
         {
-          "type": "Page",
+          "type": "page",
           "attributes": {
             "label": "Your loan details"
           },
           "children": [
             {
               "fieldId": "howManyPeopleApplying",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "How many people are applying?",
                 "options": [
@@ -26,7 +26,7 @@
             },
             {
               "fieldId": "areYouAnExistingCustomer",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Are you an existing customer?",
                 "options": [
@@ -37,7 +37,7 @@
             },
             {
               "fieldId": "nabId",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "What is your NAB ID?",
                 "description": "This will help us identify you. It's an 8-10 digit number found on the back of your NAB card above the black strip. It’s also the number you use to login to internet banking."
@@ -53,7 +53,7 @@
             },
             {
               "fieldId": "loanAmount",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "How much would you like to borrow?",
                 "description": "The minimum loan amount is $5000. You can borrow up to $55000. Don't include spaces or other punctuation."
@@ -69,7 +69,7 @@
             },
             {
               "fieldId": "rateType",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Would you like a Fixed or Variable interest rate?",
                 "info": "A fixed rate means your loan's interest rate and repayments will stay the same for the loan term. Redraw won't be available. A variable rate means your loan's interest rate and repayments could move up or down.",
@@ -81,7 +81,7 @@
             },
             {
               "fieldId": "loanTerm",
-              "type": "Dropdown",
+              "type": "dropdown",
               "attributes": {
                 "label": "What loan term would you like?",
                 "options": [
@@ -98,7 +98,7 @@
             },
             {
               "fieldId": "repaymentFrequency",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "How often would you like to make repayments?",
                 "options": [
@@ -110,7 +110,7 @@
             },
             {
               "fieldId": "loanPurpose",
-              "type": "Dropdown",
+              "type": "dropdown",
               "attributes": {
                 "label": "What's the main purpose for this loan?",
                 "options": [
@@ -138,13 +138,13 @@
           ]
         },
         {
-          "type": "Page",
+          "type": "page",
           "attributes": {
             "label": "Tell us about yourself"
           },
           "children": [
             {
-              "type": "Heading",
+              "type": "heading",
               "attributes": {
                 "level": 4,
                 "text": "Personal details"
@@ -152,7 +152,7 @@
             },
             {
               "fieldId": "title",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Title",
                 "options": [
@@ -166,28 +166,28 @@
             },
             {
               "fieldId": "firstName",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "First Name"
               }
             },
             {
               "fieldId": "middleName",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "Middle Name"
               }
             },
             {
               "fieldId": "lastName",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "Last Name"
               }
             },
             {
               "fieldId": "dob",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "Date of birth",
                 "description": "Enter as DD/MM/YYYY (eg. 1st January 1980 would be 01/01/1980)"
@@ -195,7 +195,7 @@
             },
             {
               "fieldId": "maritalStatus",
-              "type": "Dropdown",
+              "type": "dropdown",
               "attributes": {
                 "label": "Marital status",
                 "options": [
@@ -210,7 +210,7 @@
             },
             {
               "fieldId": "numberOfFinancialDependants",
-              "type": "Dropdown",
+              "type": "dropdown",
               "attributes": {
                 "label": "Number of financial dependants",
                 "info": "A financial dependant is someone who you support financially. This can include children (of any age), grandparents, foster children, etc.",
@@ -230,7 +230,7 @@
             },
             {
               "fieldId": "driversLicenceNumber",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "Driver's licence number",
                 "description": "We'll use this to identify you when we complete a credit check."
@@ -238,7 +238,7 @@
             },
             {
               "fieldId": "driversLicenceState",
-              "type": "Dropdown",
+              "type": "dropdown",
               "attributes": {
                 "label": "State of issue",
                 "options": [
@@ -255,7 +255,7 @@
             },
             {
               "fieldId": "australianResidentForTaxPurposes",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Are you an Australian resident for tax purposes?",
                 "options": [
@@ -266,7 +266,7 @@
             },
             {
               "fieldId": "usResidentForTaxPurposes",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Are you a US citizen or US resident for tax purposes?",
                 "options": [
@@ -278,7 +278,7 @@
             },
             {
               "fieldId": "otherCountryResidentForTaxPurposes",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Are you a resident of any other country for tax purposes?",
                 "options": [
@@ -288,7 +288,7 @@
               }
             },
             {
-              "type": "Heading",
+              "type": "heading",
               "attributes": {
                 "level": 4,
                 "text": "Where do you live?"
@@ -296,7 +296,7 @@
             },
             {
               "fieldId": "residentialStatus",
-              "type": "Dropdown",
+              "type": "dropdown",
               "attributes": {
                 "label": "Residential Status",
                 "options": [
@@ -311,7 +311,7 @@
             },
             {
               "fieldId": "residentialAddress",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "Residential address",
                 "description": "This can not be a P.O. Box"
@@ -319,7 +319,7 @@
             },
             {
               "fieldId": "dateMoveToResidentialAddress",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "When did you move to this address?",
                 "description": "If you’re unsure about the exact date just select the 1st of the month."
@@ -327,7 +327,7 @@
             },
             {
               "fieldId": "residentialAddressIsPostalAddress",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Is your postal address the same as your residential address?",
                 "options": [
@@ -337,7 +337,7 @@
               }
             },
             {
-              "type": "Heading",
+              "type": "heading",
               "attributes": {
                 "level": 4,
                 "text": "Your contact details"
@@ -345,7 +345,7 @@
             },
             {
               "fieldId": "mobileNumber",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "Mobile number",
                 "description": "We may send you a SMS to let you know the outcome of your application and next steps."
@@ -353,7 +353,7 @@
             },
             {
               "fieldId": "emailAddress",
-              "type": "TextInput",
+              "type": "textInput",
               "attributes": {
                 "label": "Email address",
                 "description": "We may send you an email to let you know the outcome of your application and next steps."
@@ -371,14 +371,14 @@
           ]
         },
         {
-          "type": "Page",
+          "type": "page",
           "attributes": {
             "label": "Tell us about your employment"
           },
           "children": [
             {
               "fieldId": "employment",
-              "type": "Iteration",
+              "type": "list",
               "attributes": {
                 "label": "Jobs",
                 "itemLabel": "Job"
@@ -386,7 +386,7 @@
               "children": [
                 {
                   "fieldId": "status",
-                  "type": "Dropdown",
+                  "type": "dropdown",
                   "attributes": {
                     "label": "What is your employment status?",
                     "options": [
@@ -404,21 +404,21 @@
                 },
                 {
                   "fieldId": "employerName",
-                  "type": "TextInput",
+                  "type": "textInput",
                   "attributes": {
                     "label": "Employer's name"
                   }
                 },
                 {
                   "fieldId": "jobTitle",
-                  "type": "TextInput",
+                  "type": "textInput",
                   "attributes": {
                     "label": "What's your job title?"
                   }
                 },
                 {
                   "fieldId": "startDate",
-                  "type": "TextInput",
+                  "type": "textInput",
                   "attributes": {
                     "label": "When did you start working here?",
                     "description": "If you’re unsure about the actual date just put the 1st of the month"
@@ -429,14 +429,14 @@
           ]
         },
         {
-          "type": "Page",
+          "type": "page",
           "attributes": {
             "label": "Tell us about what you earn"
           },
           "children": [
             {
               "fieldId": "income",
-              "type": "Iteration",
+              "type": "list",
               "attributes": {
                 "label": "Income",
                 "itemLabel": "Income"
@@ -444,7 +444,7 @@
               "children": [
                 {
                   "fieldId": "status",
-                  "type": "Dropdown",
+                  "type": "dropdown",
                   "attributes": {
                     "label": "Income type",
                     "description": "Including all of your sources of income will help to ensure your application outcome is accurate.",
@@ -467,7 +467,7 @@
                 },
                 {
                   "fieldId": "frequency",
-                  "type": "Dropdown",
+                  "type": "dropdown",
                   "attributes": {
                     "label": "Frequency of income",
                     "options": [
@@ -483,14 +483,14 @@
                 },
                 {
                   "fieldId": "incomeGross",
-                  "type": "TextInput",
+                  "type": "textInput",
                   "attributes": {
                     "label": "Before tax (Gross)"
                   }
                 },
                 {
                   "fieldId": "incomeNet",
-                  "type": "TextInput",
+                  "type": "textInput",
                   "attributes": {
                     "label": "After tax (Net)"
                   }
@@ -499,7 +499,7 @@
             },
             {
               "fieldId": "foreseeFinancialChanges",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Do you foresee any major changes to your employment, income and/or expenses over the next 12 months that will make it difficult for you to meet your financial commitments?",
                 "description": "For example if you know of anything likely to happen in the next 12 months that will make it harder for you to meet your financial commitments (eg. make your loan and/or credit card repayments) answer \"Yes\".",
@@ -512,7 +512,7 @@
             },
             {
               "fieldId": "pastFinancialDifficulties",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Have you had any difficulties in making your loan repayments in the last 2 years?",
                 "description": "For example are you currently behind in your repayments on an existing loan?",
@@ -525,7 +525,7 @@
             },
             {
               "fieldId": "pastFinancialJudgments",
-              "type": "ButtonGroup",
+              "type": "buttonGroup",
               "attributes": {
                 "label": "Have you ever had, or are there any judgments, attachments or legal proceedings against you relating to financial matters?",
                 "info": "You need to let us know about any time that your financial situation has led to a legal judgment being made against you, an attachment (eg. a judgment which transferred property of yours to another person who you were in debt to), legal proceedings being taken against you. An example of the sort of situation we're asking about bankruptcy. If you answer \"yes\" we'll ask you for more details.",
@@ -538,14 +538,14 @@
           ]
         },
         {
-          "type": "Page",
+          "type": "page",
           "attributes": {
             "label": "Tell us about what you own"
           },
           "children": [
             {
               "fieldId": "property",
-              "type": "Iteration",
+              "type": "list",
               "attributes": {
                 "label": "Properties",
                 "itemLabel": "Property"
@@ -553,7 +553,7 @@
               "children": [
                 {
                   "fieldId": "type",
-                  "type": "Dropdown",
+                  "type": "dropdown",
                   "attributes": {
                     "label": "What type of property is this?",
                     "options": [
@@ -564,7 +564,7 @@
                 },
                 {
                   "fieldId": "estimatedValue",
-                  "type": "TextInput",
+                  "type": "textInput",
                   "attributes": {
                     "label": "What's the estimated value?"
                   },
@@ -574,7 +574,7 @@
                 },
                 {
                   "fieldId": "ownership",
-                  "type": "ButtonGroup",
+                  "type": "buttonGroup",
                   "attributes": {
                     "label": "Is this property solely or jointly owned?",
                     "options": [
