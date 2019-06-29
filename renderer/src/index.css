@@ -1,41 +1,27 @@
-body {
+.btn-group {
+    min-width: 100px;
+}
+
+.link-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    display: inline;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
 }
 
-#theme-selector {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.link-button:hover,
+.link-button:focus {
+    text-decoration: none;
 }
 
-.btn-group > .btn {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.description, .error-message {
+    font-size: .95rem;
+    font-weight: 400;
 }
 
-.page-link {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-label {
-    padding-bottom: .2rem;
-}
-
-small, .small {
-    font-size: 85%;
-}
-
-.bg-black {
-    background-color: black;
-}
-
-.first-card:first-of-type {
-    margin-top: 10px;
+.disabled {
+    cursor: not-allowed;
 }

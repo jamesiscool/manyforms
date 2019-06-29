@@ -1,19 +1,8 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import { Form } from './components/Form'
-import { FormElementDef } from './components/FormElement'
-import './css/bootstrap.css'
+import React from "react"
+import ReactDOM from 'react-dom'
+import {Form} from "./Form"
+import FormDef from "./FormDef"
 import './index.css'
-import './polyfills'
-import { reducer, State } from './state/reducer'
-
-const store = createStore<State>(reducer)
-
-interface FormDefinition {
-    elements: FormElementDef<{}>[]
-}
 
 fetch('exampleFormDefinition.json')
     .then(response => {
@@ -22,13 +11,9 @@ fetch('exampleFormDefinition.json')
         }
         return response.json()
     })
-    .then((formDef: FormDefinition) => {
+    .then((formDef: FormDef) => {
         ReactDOM.render(
-            (
-                <Provider store={store}>
-                    <Form formElements={formDef.elements}/>
-                </Provider>
-            ),
+            <Form formDef={formDef}/>,
             document.getElementById('form')
         )
     })
