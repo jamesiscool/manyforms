@@ -1,6 +1,6 @@
 import produce from 'immer'
-import get from 'lodash/get'
-import set from 'lodash/set'
+import get from 'lodash-es/get'
+import set from 'lodash-es/set'
 import {useState} from 'react'
 import {createContainer} from 'unstated-next'
 

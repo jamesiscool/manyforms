@@ -1,4 +1,4 @@
-import {times} from 'lodash'
+import {times} from 'lodash-es'
 import React from 'react'
 import {useContainer} from 'unstated-next'
 import {Description} from '../../display/Description'
