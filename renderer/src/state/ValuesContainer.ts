@@ -12,14 +12,15 @@ export function useFormValues(initialState = {}) {
         })
         setFormValues(nextFormValues)
     }
-    const getValue = (path: string): string => {
+
+    function getValue(path: string): string {
         return get(formValues, path)
     }
+
     const addToCollection = (path: string) => {
         const nextFormValues = produce(formValues, draftFormValues => {
             const oldCollection = get(draftFormValues, path, [])
             const newCollection = [...oldCollection, {}]
-            console.log('newCollection:', newCollection)
             set(draftFormValues, path, newCollection)
         })
         setFormValues(nextFormValues)

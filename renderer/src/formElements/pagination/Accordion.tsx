@@ -11,7 +11,7 @@ export interface AccordionAttributes {
 
 export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     const currentPageRef = useRef<HTMLDivElement>(null)
-    const [currentPage, setCurrentPage] = useState<number>(0)
+    const [currentPage, setCurrentPage] = useState<number>(2)
     const validationContainer = useContainer(ValidationContainer)
 
     if (!props.definition.children) {
@@ -21,11 +21,9 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     const isFirst = currentPage === 0
     const isLast = currentPage === (props.definition.children!.length - 1)
 
-    const currentPageHasErrors = validationContainer.hasErrors(props.fieldPath, props.definition.children[currentPage])
-    console.log('currentPageHasErrors:', currentPageHasErrors)
+    const currentPageHasErrors = validationContainer.hasErrorsRecursively(props.fieldPath, props.definition.children[currentPage])
 
     const goToPage = (newIndex: number) => {
-        console.log('goToPage:', newIndex)
         setCurrentPage(newIndex)
         if (currentPageRef && currentPageRef.current) {
             window.scroll({top: currentPageRef.current.getBoundingClientRect().top - 100})

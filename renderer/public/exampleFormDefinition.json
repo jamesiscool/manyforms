@@ -407,6 +407,9 @@
                   "type": "textInput",
                   "attributes": {
                     "label": "Employer's name"
+                  },
+                  "validation": {
+                    "required": true
                   }
                 },
                 {

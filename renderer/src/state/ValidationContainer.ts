@@ -1,5 +1,6 @@
 import {createContainer, useContainer} from "unstated-next"
 import {FormElementDef} from "../formElements/FormElementDef"
+import {isTypeACollection} from "../formElements/formElementTypes"
 import {createFiledPath} from "../util"
 import {ruleValidatorMap} from "../validation/ruleValidatorMap"
 import ValidationRuleDef from "../validation/ValidationRuleDef"
@@ -32,21 +33,33 @@ function useValidation() {
         return undefined
     }
 
-    function hasErrors(path: string, fieldDef?: FormElementDef<{}>): boolean {
-        if (!fieldDef) return false
-        const localError = validate(path, fieldDef)
-        if (localError) {
+    function hasErrorsRecursively(path: string, fieldDef?: FormElementDef<{}>): boolean {
+        if (!fieldDef) {
+            return false
+        }
+        if (validate(path, fieldDef)) {
             return true
         }
         if (fieldDef.children) {
             return fieldDef.children.some((childFieldDef) => {
-                return hasErrors(createFiledPath(path, childFieldDef.fieldId), childFieldDef)
+                const childPath = createFiledPath(path, childFieldDef.fieldId)
+                if (isTypeACollection(childFieldDef.type)) {
+                    const size = valuesContainer.getCollectionSize(childPath)
+                    for (let index = 0; index < size; index++) {
+                        if (hasErrorsRecursively(childPath + '[' + index + ']', childFieldDef)) {
+                            return true
+                        }
+                    }
+                    return false
+                } else {
+                    return hasErrorsRecursively(childPath, childFieldDef)
+                }
             })
         }
         return false
     }
 
-    return {validate, hasErrors}
+    return {validate, hasErrorsRecursively}
 }
 
 export const ValidationContainer = createContainer(useValidation)

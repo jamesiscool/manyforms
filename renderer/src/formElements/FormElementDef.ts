@@ -2,7 +2,7 @@ import ValidationRuleDef from "../validation/ValidationRuleDef"
 
 export interface FormElementDef<Attributes> {
     type: string,
-    attributes?: Attributes,
+    attributes: Attributes,
     fieldId?: string,
     children?: Array<FormElementDef<any>>
     validation?: {
