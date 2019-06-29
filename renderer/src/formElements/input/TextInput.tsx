@@ -1,8 +1,8 @@
-import React from "react"
-import {useContainer} from "unstated-next"
-import {FieldChrome} from "../../display/FieldChrome"
-import {ValuesContainer} from "../../state/ValuesContainer"
-import {FormElementProps} from "../FormElementProps"
+import React from 'react'
+import {useContainer} from 'unstated-next'
+import {FieldChrome} from '../../display/FieldChrome'
+import {ValuesContainer} from '../../state/ValuesContainer'
+import {FormElementProps} from '../FormElementProps'
 
 interface TextInputAttributes {
     label: string

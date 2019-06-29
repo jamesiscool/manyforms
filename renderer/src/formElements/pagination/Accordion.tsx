@@ -1,17 +1,17 @@
 import classNames from 'classnames'
-import React, {useRef, useState} from "react"
-import {useContainer} from "unstated-next"
-import {ValidationContainer} from "../../state/ValidationContainer"
-import {ChildFormElements} from "../ChildFormElements"
-import {FormElementDef} from "../FormElementDef"
-import {FormElementProps} from "../FormElementProps"
+import React, {useRef, useState} from 'react'
+import {useContainer} from 'unstated-next'
+import {ValidationContainer} from '../../state/ValidationContainer'
+import {ChildFormElements} from '../ChildFormElements'
+import {FormElementDef} from '../FormElementDef'
+import {FormElementProps} from '../FormElementProps'
 
 export interface AccordionAttributes {
 }
 
 export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     const currentPageRef = useRef<HTMLDivElement>(null)
-    const [currentPage, setCurrentPage] = useState<number>(2)
+    const [currentPage, setCurrentPage] = useState<number>(0)
     const validationContainer = useContainer(ValidationContainer)
 
     if (!props.definition.children) {
@@ -47,7 +47,7 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
                                         {!isFirst && <li className="page-item">
                                             <button className="page-link" onClick={() => goToPage(currentPage - 1)}>Previous</button>
                                         </li>}
-                                        {!isLast && <li className={classNames("page-item", {disabled: currentPageHasErrors})}>
+                                        {!isLast && <li className={classNames('page-item', {disabled: currentPageHasErrors})}>
                                             <button className="page-link" onClick={() => goToPage(currentPage + 1)} disabled={currentPageHasErrors}>Next</button>
                                         </li>}
                                     </ul>

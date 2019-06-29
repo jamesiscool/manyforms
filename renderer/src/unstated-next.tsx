@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 export interface ContainerProviderProps<State = void> {
     initialState?: State
@@ -21,7 +21,7 @@ export function createContainer<Value, State = void>(useHook: (initialState?: St
     function useContainer(): Value {
         let value = React.useContext(Context)
         if (value === null) {
-            throw new Error("Component must be wrapped with <Container.Provider>")
+            throw new Error('Component must be wrapped with <Container.Provider>')
         }
         return value
     }

@@ -4,6 +4,13 @@ import isCurrency from 'validator/lib/isCurrency'
 import isEmail from 'validator/lib/isEmail'
 import isNumeric from 'validator/lib/isNumeric'
 
+export interface ValidationRuleDef {
+    name: string,
+    arguments?: string[],
+    options?: {}
+    message?: string
+}
+
 interface RuleValidator {
     validate: (value: string) => boolean,
     defaultMessage: string

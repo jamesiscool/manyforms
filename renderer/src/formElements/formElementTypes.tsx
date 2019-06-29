@@ -1,11 +1,11 @@
-import React from "react"
-import {List} from "./collection/List"
-import {ButtonGroup} from "./input/ButtonGroup"
-import {Dropdown} from "./input/Dropdown"
-import {TextInput} from "./input/TextInput"
-import {Heading} from "./output/Heading"
-import {Paragraph} from "./output/Paragraph"
-import {Accordion} from "./pagination/Accordion"
+import React from 'react'
+import {List} from './collection/List'
+import {ButtonGroup} from './input/ButtonGroup'
+import {Dropdown} from './input/Dropdown'
+import {TextInput} from './input/TextInput'
+import {Heading} from './output/Heading'
+import {Paragraph} from './output/Paragraph'
+import {Accordion} from './pagination/Accordion'
 
 interface FormElementTypesMap {
     [type: string]: React.ReactNode

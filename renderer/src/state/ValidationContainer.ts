@@ -1,15 +1,9 @@
-import {createContainer, useContainer} from "unstated-next"
-import {FormElementDef} from "../formElements/FormElementDef"
-import {isTypeACollection} from "../formElements/formElementTypes"
-import {createFiledPath} from "../util"
-import {ruleValidatorMap} from "../validation/ruleValidatorMap"
-import ValidationRuleDef from "../validation/ValidationRuleDef"
-import {ValuesContainer} from "./ValuesContainer"
-
-interface Error {
-    path: string,
-    error: string
-}
+import {createContainer, useContainer} from 'unstated-next'
+import {FormElementDef} from '../formElements/FormElementDef'
+import {isTypeACollection} from '../formElements/formElementTypes'
+import {createFiledPath} from '../util'
+import {ruleValidatorMap, ValidationRuleDef} from '../validation/ValidationRules'
+import {ValuesContainer} from './ValuesContainer'
 
 function useValidation() {
     const valuesContainer = useContainer(ValuesContainer)

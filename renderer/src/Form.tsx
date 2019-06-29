@@ -1,8 +1,8 @@
-import React from "react"
-import FormDef from "./FormDef"
-import {ChildFormElements} from "./formElements/ChildFormElements"
-import {ValidationContainer} from "./state/ValidationContainer"
-import {ValuesContainer} from "./state/ValuesContainer"
+import React from 'react'
+import FormDef from './FormDef'
+import {ChildFormElements} from './formElements/ChildFormElements'
+import {ValidationContainer} from './state/ValidationContainer'
+import {ValuesContainer} from './state/ValuesContainer'
 
 export interface FormProps {
     formDef: FormDef

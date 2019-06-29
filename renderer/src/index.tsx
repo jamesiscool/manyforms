@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 import ReactDOM from 'react-dom'
-import {Form} from "./Form"
-import FormDef from "./FormDef"
+import {Form} from './Form'
+import FormDef from './FormDef'
 import './index.css'
 
 fetch('exampleFormDefinition.json')

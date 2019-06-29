@@ -1,4 +1,4 @@
-import {FormElementDef} from "./FormElementDef"
+import {FormElementDef} from './FormElementDef'
 
 
 export interface FormElementProps<Attributes> {

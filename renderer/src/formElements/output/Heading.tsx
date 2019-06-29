@@ -1,5 +1,5 @@
-import React from "react"
-import {FormElementProps} from "../FormElementProps"
+import React from 'react'
+import {FormElementProps} from '../FormElementProps'
 
 interface HeadingAttributes {
     level: number

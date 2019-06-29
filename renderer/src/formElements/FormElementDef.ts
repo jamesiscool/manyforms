@@ -1,4 +1,4 @@
-import ValidationRuleDef from "../validation/ValidationRuleDef"
+import {ValidationRuleDef} from '../validation/ValidationRules'
 
 export interface FormElementDef<Attributes> {
     type: string,

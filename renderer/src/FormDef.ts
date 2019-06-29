@@ -1,5 +1,6 @@
-import {FormElementDef} from "./formElements/FormElementDef"
+import {FormElementDef} from './formElements/FormElementDef'
 
 export default interface FormDef {
     elements: FormElementDef<{}>[]
+    config: {}
 }

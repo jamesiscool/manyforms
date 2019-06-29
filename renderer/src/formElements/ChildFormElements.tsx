@@ -1,7 +1,7 @@
-import React from "react"
-import {createFiledPath} from "../util"
-import {FormElementDef} from "./FormElementDef"
-import {lookupElement} from "./formElementTypes"
+import React from 'react'
+import {createFiledPath} from '../util'
+import {FormElementDef} from './FormElementDef'
+import {lookupElement} from './formElementTypes'
 
 interface ChildFormElementsProps {
     childFormElements: FormElementDef<any>[]
