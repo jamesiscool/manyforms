@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useContainer} from 'unstated-next'
 import {FieldChrome} from '../../display/FieldChrome'
+import {FieldStateContainer} from '../../state/FieldStateContainer'
 import {ValuesContainer} from '../../state/ValuesContainer'
 import {FormElementProps} from '../FormElementProps'
 
@@ -13,16 +14,21 @@ interface ButtonGroupAttributes {
 
 export const ButtonGroup = (props: FormElementProps<ButtonGroupAttributes>) => {
     const formValuesContainer = useContainer(ValuesContainer)
-    const value = formValuesContainer.getValue(props.fieldPath)
+    const fieldStateContainer = useContainer(FieldStateContainer)
+    const value = formValuesContainer.getValue(props.path)
     const [focus, setFocus] = useState<number | null>(null)
+
     return (
-        <FieldChrome fieldPath={props.fieldPath} def={props.definition}>
-            <div className="btn-group-wrapper">
+        <FieldChrome path={props.path} def={props.definition}>
+            <div className="btn-group-wrapper"
+                 onFocus={() => fieldStateContainer.focus(props.path)}
+                 onBlur={() => fieldStateContainer.blur(props.path)}
+            >
                 <div className="btn-group btn-group-toggle">
                     {props.definition.attributes.options.map((option, index) => (
                         <label
                             className={'btn btn-outline-secondary' + (value === option ? ' active' : '') + (focus === index ? ' focus' : '')}
-                            key={props.fieldPath + '_OPTION_' + option}
+                            key={props.path + '_OPTION_' + option}
                             onFocus={() => setFocus(index)}
                             onBlur={() => setFocus(null)}
                         >
@@ -30,7 +36,7 @@ export const ButtonGroup = (props: FormElementProps<ButtonGroupAttributes>) => {
                                 type="radio"
                                 value={option}
                                 checked={option === value}
-                                onChange={event => formValuesContainer.setValue(props.fieldPath, event.currentTarget.value)}
+                                onChange={event => formValuesContainer.setValue(props.path, event.currentTarget.value)}
                             />{option}
                         </label>))
                     }

@@ -12,39 +12,29 @@ export interface ValidationRuleDef {
 }
 
 interface RuleValidator {
-    validate: (value: string) => boolean,
+    validate: (value: string, args?: string[]) => boolean,
     defaultMessage: string
 }
 
 export const ruleValidatorMap: { [name: string]: RuleValidator } = {
     email: {
-        validate: (value: string) => {
-            return isEmail(value)
-        },
+        validate: (value: string) => isEmail(value),
         defaultMessage: 'Please enter a email address'
     },
     alpha: {
-        validate: (value: string) => {
-            return isAlpha(value)
-        },
+        validate: (value: string) => isAlpha(value),
         defaultMessage: 'Please enter only letters'
     },
     numeric: {
-        validate: (value: string) => {
-            return isNumeric(value)
-        },
+        validate: (value: string) => isNumeric(value),
         defaultMessage: 'Please enter only numbers'
     },
     alphanumeric: {
-        validate: (value: string) => {
-            return isAlphanumeric(value)
-        },
+        validate: (value: string) => isAlphanumeric(value),
         defaultMessage: 'Please enter only letters and numbers'
     },
     currency: {
-        validate: (value: string) => {
-            return isCurrency(value)
-        },
+        validate: (value: string) => isCurrency(value),
         defaultMessage: 'Please enter a currency amount'
     }
 }

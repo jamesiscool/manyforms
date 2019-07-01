@@ -1,6 +1,7 @@
 import React from 'react'
 import {useContainer} from 'unstated-next'
 import {FieldChrome} from '../../display/FieldChrome'
+import {FieldStateContainer} from '../../state/FieldStateContainer'
 import {ValuesContainer} from '../../state/ValuesContainer'
 import {FormElementProps} from '../FormElementProps'
 
@@ -12,15 +13,18 @@ interface TextInputAttributes {
 
 export const TextInput = (props: FormElementProps<TextInputAttributes>) => {
     const formValuesContainer = useContainer(ValuesContainer)
-    return (<FieldChrome fieldPath={props.fieldPath} def={props.definition}>
+    const fieldStateContainer = useContainer(FieldStateContainer)
+
+    return (<FieldChrome path={props.path} def={props.definition}>
         <input
             type="text"
             className="form-control"
             id={props.definition.fieldId}
-            aria-describedby={props.fieldPath + '_description'}
-            value={formValuesContainer.getValue(props.fieldPath) || ''}
-            onChange={event => formValuesContainer.setValue(props.fieldPath, event.currentTarget.value)}
-            //onBlur={() => props.setState({path: props.fieldPath, name: 'touched', value: true})}
+            aria-describedby={props.path + '_description'}
+            value={formValuesContainer.getValue(props.path) || ''}
+            onChange={event => formValuesContainer.setValue(props.path, event.currentTarget.value)}
+            onFocus={() => fieldStateContainer.focus(props.path)}
+            onBlur={() => fieldStateContainer.blur(props.path)}
         />
     </FieldChrome>)
 }

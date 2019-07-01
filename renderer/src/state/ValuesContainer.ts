@@ -2,15 +2,20 @@ import produce from 'immer'
 import get from 'lodash-es/get'
 import set from 'lodash-es/set'
 import {useState} from 'react'
-import {createContainer} from 'unstated-next'
+import {createContainer, useContainer} from 'unstated-next'
+import {FieldStateContainer} from './FieldStateContainer'
 
-export function useFormValues(initialState = {}) {
+export function useValues(initialState = {}) {
+    const fieldStateContainer = useContainer(FieldStateContainer)
+
     const [formValues, setFormValues] = useState(initialState)
+
     const setValue = (path: string, value: any) => {
         const nextFormValues = produce(formValues, draftFormValues => {
             set(draftFormValues, path, value)
         })
         setFormValues(nextFormValues)
+        fieldStateContainer.valueChanged(path)
     }
 
     function getValue(path: string): string {
@@ -40,4 +45,4 @@ export function useFormValues(initialState = {}) {
     return {formValues, setValue, getValue, addToCollection, deleteFromCollection, getCollectionSize}
 }
 
-export const ValuesContainer = createContainer(useFormValues)
+export const ValuesContainer = createContainer(useValues)

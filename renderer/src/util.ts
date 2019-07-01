@@ -6,12 +6,12 @@ export const ordinal = (n: number): string => {
     return n + (s[(v - 20) % 10] || s[v] || s[0])
 }
 
-export const createFiledPath = (parentFieldPath: string, fieldId?: string): string => {
+export const createFiledPath = (parentPath: string, fieldId?: string): string => {
     if (!fieldId) {
-        return parentFieldPath
+        return parentPath
     }
-    if (parentFieldPath !== '') {
-        return parentFieldPath + '.' + fieldId
+    if (parentPath !== '') {
+        return parentPath + '.' + fieldId
     }
     return fieldId
 

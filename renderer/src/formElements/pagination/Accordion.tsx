@@ -21,7 +21,7 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     const isFirst = currentPage === 0
     const isLast = currentPage === (props.definition.children!.length - 1)
 
-    const currentPageHasErrors = validationContainer.hasErrorsRecursively(props.fieldPath, props.definition.children[currentPage])
+    const currentPageHasErrors = validationContainer.hasErrorsRecursively(props.path, props.definition.children[currentPage])
 
     const goToPage = (newIndex: number) => {
         setCurrentPage(newIndex)
@@ -33,13 +33,13 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     return (
         <div className="accordion" role="tablist" aria-multiselectable="true">
             {props.definition.children!.map((page, index) => (
-                <div className="card" key={props.fieldPath + '_PAGE_' + index}>
+                <div className="card" key={props.path + '_PAGE_' + index}>
                     {currentPage === index && <div ref={currentPageRef}/>}
                     <div className="card-header cursor-pointer" onClick={() => goToPage(index)}>
                         <h3 className="d-inline">{page.attributes.label}</h3>{index < currentPage && <button className="link-button text-muted px-1" onClick={() => goToPage(index)}><u>edit</u></button>}
                     </div>
                     {currentPage === index && <div className="card-body m-1">
-                        {page.children && <ChildFormElements childFormElements={page.children as FormElementDef<any>[]} parentFieldPath={props.parentFieldPath}/>}
+                        {page.children && <ChildFormElements childFormElements={page.children as FormElementDef<any>[]} parentPath={props.parentPath}/>}
                         <div className="row">
                             <div className="col">
                                 <nav aria-label="Page navigation">

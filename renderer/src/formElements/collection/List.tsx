@@ -19,19 +19,19 @@ export const List = (props: FormElementProps<IterationAttributes>) => {
     return (
         <div className="form-group">
             <span className="h4 align-middle mr-2">{props.definition.attributes.label}</span>
-            {props.definition.attributes.description && <Description fieldPath={props.fieldPath} text={props.definition.attributes.description}/>}
-            {times(formValuesContainer.getCollectionSize(props.fieldPath), (index: number) =>
-                <div className={'card border-bottom mb-3' + (index === 0 ? ' mt-2' : '')} key={props.fieldPath + '_COLLECTION_' + index}>
+            {props.definition.attributes.description && <Description path={props.path} text={props.definition.attributes.description}/>}
+            {times(formValuesContainer.getCollectionSize(props.path), (index: number) =>
+                <div className={'card border-bottom mb-3' + (index === 0 ? ' mt-2' : '')} key={props.path + '_COLLECTION_' + index}>
                     <h5 className="card-header">{ordinal(index + 1)} {props.definition.attributes.itemLabel}
-                        <button className="close text-dark" onClick={() => formValuesContainer.deleteFromCollection(props.fieldPath, index)}>
+                        <button className="close text-dark" onClick={() => formValuesContainer.deleteFromCollection(props.path, index)}>
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </h5>
                     <div className="card-body pb-0">
-                        {props.definition.children && <ChildFormElements childFormElements={props.definition.children} parentFieldPath={props.fieldPath + '[' + index + ']'}/>}
+                        {props.definition.children && <ChildFormElements childFormElements={props.definition.children} parentPath={props.path + '[' + index + ']'}/>}
                     </div>
                 </div>
             )}
-            <button className="btn btn-secondary d-inline" onClick={() => formValuesContainer.addToCollection(props.fieldPath)}>Add</button>
+            <button className="btn btn-secondary d-inline" onClick={() => formValuesContainer.addToCollection(props.path)}>Add</button>
         </div>)
 }
