@@ -9,12 +9,11 @@ import {Label} from './Label'
 interface FieldChromeProps {
     path: string
     def: FormElementDef<any>
-    //children: React.ReactNode
 }
 
 export const FieldChrome: React.FC<FieldChromeProps> = (props) => {
     const validationContainer = useContainer(ValidationContainer)
-    const error = validationContainer.validate(props.path, props.def)
+    const error = validationContainer.validateAndShouldShow(props.path, props.def)
 
     return (<div className="form-group py-2">
         {props.def.attributes.label && <Label htmlFor={props.path} text={props.def.attributes.label} error={!!error}/>}
