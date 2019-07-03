@@ -25,7 +25,7 @@ export const Dropdown = (props: FormElementProps<DropdownAttributes>) => {
             onFocus={() => fieldStateContainer.focus(props.path)}
             onBlur={() => fieldStateContainer.blur(props.path)}
         >
-            <option value="" disabled={props.definition.validation && props.definition.validation.required}/>
+            <option value=""/>
             {props.definition.attributes.options.map((option) => <option value={option} key={option}>{option}</option>)}
         </select>
     </FieldChrome>

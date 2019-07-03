@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import {createContainer, useContainer} from 'unstated-next'
-import {FormElementDef, isValidationRuleDef, ValidationConstraintDef} from '../FormDef'
+import {FormElementDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
 import {isTypeACollection} from '../formElements/formElementTypes'
 import {createFiledPath} from '../util'
 import {validationRuleMap} from '../validation/ValidationRule'
@@ -25,34 +25,36 @@ function useValidation() {
     }, [nextTick])
 
     const validate = (path: string, fieldDef: FormElementDef<{}>): string | null => {
-        if (!fieldDef.validation) {
+        if (!fieldDef.validation || fieldDef.validation.length <= 0) {
             return null
         }
-        const fieldValue = valuesContainer.getValue(path)
-        if (fieldDef.validation.required && (fieldValue == null || fieldValue.length <= 0 || fieldValue === '')) {
-            return 'This field is required'
-        }
-        if (fieldDef.validation.constraints) {
-            return fieldDef.validation.constraints.reduce<string | null>((firstErrorMessage, constraint): string | null => {
-                if (firstErrorMessage) {
-                    return firstErrorMessage
-                }
-                return validateConstraint(constraint, path, fieldDef, fieldValue)
-            }, null)
-        }
-        return null
+        return fieldDef.validation.reduce<string | null>((message, constraint): string | null => {
+            if (message != null) {
+                return message
+            }
+            return validateConstraint(constraint, path, fieldDef)
+        }, null)
     }
 
-    function validateConstraint(constraint: ValidationConstraintDef, path: string, fieldDef: FormElementDef<{}>, fieldValue: string) {
-        if (isValidationRuleDef(constraint)) {
+    function validateConstraint(constraint: ValidationConstraintDef | string, path: string, fieldDef: FormElementDef<{}>): string | null {
+        if (typeof constraint === 'string') {
+            const fieldValue = valuesContainer.getValue(path) || ''
+            const validationRule = validationRuleMap[constraint]
+            if (!validationRule.validate(fieldValue)) {
+                return validationRule.defaultMessage
+            }
+            return null
+        } else if (!isValidationExpresionDef(constraint)) {
+            const fieldValue = valuesContainer.getValue(path) || ''
             const validationRule = validationRuleMap[constraint.name]
             if (!validationRule.validate(fieldValue)) {
                 return constraint.message || validationRule.defaultMessage
             }
             return null
         } else {
-            if (!expressionContainer.evaluate(path, fieldDef, constraint.expression)) {
-                return constraint.message
+            const expressionValidation = expressionContainer.expressionValidations[constraint.name]
+            if (!expressionValidation.validate(path, fieldDef, constraint.expression)) {
+                return constraint.message || expressionValidation.defaultMessage
             }
             return null
         }

@@ -10,16 +10,13 @@ export interface FormElementDef<Attributes> {
     attributes: Attributes,
     fieldId?: string,
     children?: Array<FormElementDef<any>>
-    validation?: {
-        required?: boolean
-        constraints?: ValidationConstraintDef[]
-    }
+    validation?: Array<string | ValidationConstraintDef>
 }
 
 export type ValidationConstraintDef = ValidationRuleDef | ValidationExpresionDef
 
-export function isValidationRuleDef(constraint: ValidationConstraintDef): constraint is ValidationRuleDef {
-    return (constraint as ValidationRuleDef).name !== undefined
+export function isValidationExpresionDef(constraint: ValidationConstraintDef): constraint is ValidationExpresionDef {
+    return (constraint as ValidationExpresionDef).expression !== undefined
 }
 
 export interface ValidationRuleDef {
@@ -29,7 +26,8 @@ export interface ValidationRuleDef {
 }
 
 export interface ValidationExpresionDef {
+    name: string,
     expression: string,
-    message: string
+    message?: string
 }
 
