@@ -9,8 +9,8 @@ export interface Config {
 }
 
 const defaultConfig: Config = {
-    showErrors: 'immediately',
-    showErrorsDelay: 0,
+    showErrors: 'afterFocus',
+    showErrorsDelay: 1000   ,
     disableNextWhenErrors: false
 }
 

@@ -76,7 +76,7 @@ function useValidation() {
             return timeHasPassedAndShouldShowError(fieldState.valueChanged)
         }
         if (config.showErrors === 'afterBlur' && fieldState.blur) {
-            return timeHasPassedAndShouldShowError(fieldState.valueChanged)
+            return timeHasPassedAndShouldShowError(fieldState.blur)
         }
         return false
     }

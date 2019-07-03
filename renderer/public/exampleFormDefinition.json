@@ -50,6 +50,10 @@
                   "expression": "formValues.howManyPeopleApplying != 1 || value > 4",
                   "message": "If 1 personal is applying this must greater then 4"
                 }
+              ],
+              "showIf": [
+                "formValues.howManyPeopleApplying == 1 && formValues.areYouAnExistingCustomer _= 'no'",
+                "formValues.areYouAnExistingCustomer _= 'yes'"
               ]
             },
             {

@@ -11,6 +11,7 @@ export interface FormElementDef<Attributes> {
     fieldId?: string,
     children?: Array<FormElementDef<any>>
     validation?: Array<string | ValidationConstraintDef>
+    showIf?: string[]
 }
 
 export type ValidationConstraintDef = ValidationRuleDef | ValidationExpresionDef

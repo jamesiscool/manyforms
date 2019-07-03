@@ -1,5 +1,7 @@
 import React from 'react'
+import {useContainer} from 'unstated-next'
 import {FormElementDef} from '../FormDef'
+import {ShowIfContainer} from '../state/ShowIfContainer'
 import {createFiledPath} from '../util'
 import {lookupElement} from './formElementTypes'
 
@@ -9,14 +11,19 @@ interface ChildFormElementsProps {
 }
 
 export const ChildFormElements = (props: ChildFormElementsProps) => {
+    const showIfContainer = useContainer(ShowIfContainer)
     return (
         <div>
             {props.childFormElements.map((elementDef, index) => {
+                const path = createFiledPath(props.parentPath, elementDef.fieldId)
+                if (!showIfContainer.shouldShow(path, elementDef)) {
+                    return null
+                }
                 const Child: any = lookupElement(elementDef.type)
                 return React.createElement(Child, {
                     definition: elementDef,
                     parentPath: props.parentPath,
-                    path: createFiledPath(props.parentPath, elementDef.fieldId),
+                    path: path,
                     key: props.parentPath + '_' + index
                 })
             })}
