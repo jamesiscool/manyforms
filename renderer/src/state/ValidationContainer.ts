@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {createContainer, useContainer} from 'unstated-next'
 import {FormElementDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
 import {isTypeACollection} from '../formElements/formElementTypes'
-import {createFiledPath} from '../util'
+import {createPath} from '../util'
 import {validationRuleMap} from '../validation/ValidationRule'
 import {ConfigContainer} from './ConfigContainer'
 import {ExpressionContainer} from './ExpressionContainer'
@@ -101,7 +101,7 @@ function useValidation() {
         }
         if (fieldDef.children) {
             return fieldDef.children.some((childFieldDef) => {
-                const childPath = createFiledPath(path, childFieldDef.fieldId)
+                const childPath = createPath(path, childFieldDef.fieldId)
                 if (isTypeACollection(childFieldDef.type)) {
                     const size = valuesContainer.getCollectionSize(childPath)
                     for (let index = 0; index < size; index++) {
