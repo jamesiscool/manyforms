@@ -9,7 +9,7 @@ export interface Config {
 }
 
 const defaultConfig: Config = {
-    showErrors: 'afterBlur',
+    showErrors: 'immediately',
     showErrorsDelay: 0,
     disableNextWhenErrors: false
 }

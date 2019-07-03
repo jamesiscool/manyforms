@@ -1,11 +1,11 @@
 import classNames from 'classnames'
 import React, {useRef, useState} from 'react'
 import {useContainer} from 'unstated-next'
+import {FormElementDef} from '../../FormDef'
 import {ConfigContainer} from '../../state/ConfigContainer'
 import {FormStateContainer} from '../../state/FormStateContainer'
 import {ValidationContainer} from '../../state/ValidationContainer'
 import {ChildFormElements} from '../ChildFormElements'
-import {FormElementDef} from '../FormElementDef'
 import {FormElementProps} from '../FormElementProps'
 
 export interface AccordionAttributes {

@@ -1,6 +1,6 @@
 import React from 'react'
 import {useContainer} from 'unstated-next'
-import {FormElementDef} from '../formElements/FormElementDef'
+import {FormElementDef} from '../FormDef'
 import {ValidationContainer} from '../state/ValidationContainer'
 import {Description} from './Description'
 import {Label} from './Label'

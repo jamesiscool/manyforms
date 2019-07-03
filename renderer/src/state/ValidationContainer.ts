@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react'
 import {createContainer, useContainer} from 'unstated-next'
-import {FormElementDef} from '../formElements/FormElementDef'
+import {FormElementDef, isValidationRuleDef, ValidationConstraintDef} from '../FormDef'
 import {isTypeACollection} from '../formElements/formElementTypes'
 import {createFiledPath} from '../util'
-import {ruleValidatorMap, ValidationRuleDef} from '../validation/ValidationRules'
+import {validationRuleMap} from '../validation/ValidationRule'
 import {ConfigContainer} from './ConfigContainer'
+import {ExpressionContainer} from './ExpressionContainer'
 import {FieldStateContainer} from './FieldStateContainer'
 import {FormStateContainer} from './FormStateContainer'
 import {ValuesContainer} from './ValuesContainer'
@@ -14,6 +15,7 @@ function useValidation() {
     const valuesContainer = useContainer(ValuesContainer)
     const fieldStateContainer = useContainer(FieldStateContainer)
     const formStateContainer = useContainer(FormStateContainer)
+    const expressionContainer = useContainer(ExpressionContainer)
 
     const [nextTick, setNextTick] = useState<number>(0)
     useEffect(() => {
@@ -26,19 +28,34 @@ function useValidation() {
         if (!fieldDef.validation) {
             return null
         }
-        const foundValue = valuesContainer.getValue(path)
-        if (fieldDef.validation.required && (!foundValue || foundValue.length <= 0)) {
+        const fieldValue = valuesContainer.getValue(path)
+        if (fieldDef.validation.required && (fieldValue == null || fieldValue.length <= 0 || fieldValue === '')) {
             return 'This field is required'
         }
-        if (fieldDef.validation.rules) {
-            const firstRuleThatFails = fieldDef.validation.rules.find((validationRuleDef: ValidationRuleDef) => {
-                return !ruleValidatorMap[validationRuleDef.name].validate(foundValue)
-            })
-            if (firstRuleThatFails) {
-                return firstRuleThatFails.message || ruleValidatorMap[firstRuleThatFails.name].defaultMessage
-            }
+        if (fieldDef.validation.constraints) {
+            return fieldDef.validation.constraints.reduce<string | null>((firstErrorMessage, constraint): string | null => {
+                if (firstErrorMessage) {
+                    return firstErrorMessage
+                }
+                return validateConstraint(constraint, path, fieldDef, fieldValue)
+            }, null)
         }
         return null
+    }
+
+    function validateConstraint(constraint: ValidationConstraintDef, path: string, fieldDef: FormElementDef<{}>, fieldValue: string) {
+        if (isValidationRuleDef(constraint)) {
+            const validationRule = validationRuleMap[constraint.name]
+            if (!validationRule.validate(fieldValue)) {
+                return constraint.message || validationRule.defaultMessage
+            }
+            return null
+        } else {
+            if (!expressionContainer.evaluate(path, fieldDef, constraint.expression)) {
+                return constraint.message
+            }
+            return null
+        }
     }
 
     const validateAndShouldShow = (path: string, fieldDef: FormElementDef<{}>): string | null => {
@@ -77,7 +94,7 @@ function useValidation() {
         if (!fieldDef) {
             return false
         }
-        if (validate(path, fieldDef)) {
+        if (validate(path, fieldDef) != null) {
             return true
         }
         if (fieldDef.children) {

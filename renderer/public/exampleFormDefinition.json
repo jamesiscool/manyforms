@@ -44,9 +44,13 @@
               },
               "validation": {
                 "required": true,
-                "rules": [
+                "constraints": [
                   {
                     "name": "numeric"
+                  },
+                  {
+                    "expression": "formValues.howManyPeopleApplying != 1 || value > 4",
+                    "message": "If 1 personal is applying this must grater then 4"
                   }
                 ]
               }
@@ -60,7 +64,7 @@
               },
               "validation": {
                 "required": true,
-                "rules": [
+                "constraints": [
                   {
                     "name": "currency"
                   }
@@ -360,7 +364,7 @@
               },
               "validation": {
                 "required": true,
-                "rules": [
+                "constraints": [
                   {
                     "name": "email",
                     "message": "You must enter a valid email"

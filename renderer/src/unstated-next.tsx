@@ -10,7 +10,7 @@ export interface Container<Value, State = void> {
     useContainer: () => Value
 }
 
-export function createContainer<Value, State = void>(useHook: (initialState?: State) => Value,): Container<Value, State> {
+export function createContainer<Value, State = void>(useHook: (initialState?: State) => Value): Container<Value, State> {
     let Context = React.createContext<Value | null>(null)
 
     function Provider(props: ContainerProviderProps<State>) {

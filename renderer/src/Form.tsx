@@ -2,6 +2,7 @@ import React from 'react'
 import FormDef from './FormDef'
 import {ChildFormElements} from './formElements/ChildFormElements'
 import {ConfigContainer} from './state/ConfigContainer'
+import {ExpressionContainer} from './state/ExpressionContainer'
 import {FieldStateContainer} from './state/FieldStateContainer'
 import {FormStateContainer} from './state/FormStateContainer'
 import {ValidationContainer} from './state/ValidationContainer'
@@ -13,15 +14,17 @@ export interface FormProps {
 
 export const Form = (props: FormProps) =>
     (<div className="p-2 container">
-        <FormStateContainer.Provider>
-            <ConfigContainer.Provider initialState={props.formDef.config}>
+        <ConfigContainer.Provider initialState={props.formDef.config}>
+            <FormStateContainer.Provider>
                 <FieldStateContainer.Provider>
                     <ValuesContainer.Provider>
-                        <ValidationContainer.Provider>
-                            <ChildFormElements childFormElements={props.formDef.elements} parentPath=""/>
-                        </ValidationContainer.Provider>
+                        <ExpressionContainer.Provider>
+                            <ValidationContainer.Provider>
+                                <ChildFormElements childFormElements={props.formDef.elements} parentPath=""/>
+                            </ValidationContainer.Provider>
+                        </ExpressionContainer.Provider>
                     </ValuesContainer.Provider>
                 </FieldStateContainer.Provider>
-            </ConfigContainer.Provider>
-        </FormStateContainer.Provider>
+            </FormStateContainer.Provider>
+        </ConfigContainer.Provider>
     </div>)

@@ -1270,6 +1270,11 @@
   dependencies:
     "@types/jest-diff" "*"
 
+"@types/jexl@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@types/jexl/-/jexl-2.1.0.tgz#5c08251c9890935b83527b3514e574145ef85b26"
+  integrity sha512-bMYxYd+KjQPh517n/Gigsvow1k2hPX3fXBmDxhcRP2Tugkva250y/kETXakkAvuteGAeCQ/xFgRmpSv+OF91dA==
+
 "@types/lodash-es@^4.17.3":
   version "4.17.3"
   resolved "https://registry.yarnpkg.com/@types/lodash-es/-/lodash-es-4.17.3.tgz#87eb0b3673b076b8ee655f1890260a136af09a2d"
@@ -5676,6 +5681,11 @@ jest@24.7.1:
   dependencies:
     import-local "^2.0.0"
     jest-cli "^24.7.1"
+
+jexl@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/jexl/-/jexl-2.1.1.tgz#d4f2cb9e488ff737f73acc08c5afed37e07f886b"
+  integrity sha512-a+dZiuYIKl0nPYdAe7sJ8D/bCAbemwLjLypcT2brXtft/Mi3titp1QRCpTkaHrp+qeno8DKFxVpVKYNvw1AV3A==
 
 js-levenshtein@^1.1.3:
   version "1.1.6"
