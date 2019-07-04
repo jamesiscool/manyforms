@@ -1,7 +1,7 @@
 import React from 'react'
-import {useContainer} from '../../state/useContainer'
 import {FieldChrome} from '../../display/FieldChrome'
 import {FieldStateContainer} from '../../state/FieldStateContainer'
+import {useContainer} from '../../state/useContainer'
 import {ValuesContainer} from '../../state/ValuesContainer'
 import {FormElementProps} from '../FormElementProps'
 

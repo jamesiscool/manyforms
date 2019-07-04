@@ -1,5 +1,4 @@
 import jexl from 'jexl'
-import {createContainer, useContainer} from './useContainer'
 import isAlpha from 'validator/lib/isAlpha'
 import isAlphanumeric from 'validator/lib/isAlphanumeric'
 import isCurrency from 'validator/lib/isCurrency'
@@ -8,6 +7,7 @@ import isNumeric from 'validator/lib/isNumeric'
 import {FormElementDef} from '../FormDef'
 import {validationRuleMap} from '../validation/ValidationRule'
 import {ConfigContainer} from './ConfigContainer'
+import {createContainer, useContainer} from './useContainer'
 import {ValuesContainer} from './ValuesContainer'
 
 //Basic transforms

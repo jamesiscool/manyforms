@@ -20,11 +20,11 @@ export const Form = (props: FormProps) =>
                 <FieldStateContainer.Provider>
                     <ValuesContainer.Provider>
                         <ExpressionContainer.Provider>
-                            <ValidationContainer.Provider>
-                                <ShowIfContainer.Provider>
+                            <ShowIfContainer.Provider>
+                                <ValidationContainer.Provider>
                                     <ChildFormElements childFormElements={props.formDef.elements} parentPath=""/>
-                                </ShowIfContainer.Provider>
-                            </ValidationContainer.Provider>
+                                </ValidationContainer.Provider>
+                            </ShowIfContainer.Provider>
                         </ExpressionContainer.Provider>
                     </ValuesContainer.Provider>
                 </FieldStateContainer.Provider>

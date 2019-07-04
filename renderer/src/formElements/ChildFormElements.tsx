@@ -1,7 +1,7 @@
 import React from 'react'
-import {useContainer} from '../state/useContainer'
 import {FormElementDef} from '../FormDef'
 import {ShowIfContainer} from '../state/ShowIfContainer'
+import {useContainer} from '../state/useContainer'
 import {createPath} from '../util'
 import {lookupElement} from './formElementTypes'
 
