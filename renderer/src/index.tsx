@@ -1,3 +1,4 @@
+//import 'react-app-polyfill/ie11'
 import axios from 'axios'
 import React from 'react'
 import ReactDOM from 'react-dom'
