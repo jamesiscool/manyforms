@@ -37,16 +37,13 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     }
 
     const previous = () => {
-        let numberOfPagesToGoBack = null
-        for (let i = currentPage - 1; i >= 0 && numberOfPagesToGoBack == null; i--) {
-            const page = props.definition.children && props.definition.children[i]
-            if (page && showIfContainer.shouldShow(props.path, page)) {
-                numberOfPagesToGoBack = i
+        for (let i = currentPage - 1; i >= 0; i--) {
+            const pageDef = props.definition.children && props.definition.children[i]
+            if (pageDef && showIfContainer.shouldShow(props.path, pageDef)) {
+                goToPage(i)
+                formStateContainer.clearNextClicked()
+                break
             }
-        }
-        if (numberOfPagesToGoBack) {
-            goToPage(currentPage - numberOfPagesToGoBack)
-            formStateContainer.clearNextClicked()
         }
     }
 
@@ -54,8 +51,14 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
         if (currentPageHasErrors()) {
             formStateContainer.nextClicked()
         } else {
-            formStateContainer.clearNextClicked()
-            goToPage(currentPage + 1)
+            for (let i = currentPage + 1; i < props.definition.children!.length; i++) {
+                const pageDef = props.definition.children && props.definition.children[i]
+                if (pageDef && showIfContainer.shouldShow(props.path, pageDef)) {
+                    goToPage(i)
+                    formStateContainer.clearNextClicked()
+                    break
+                }
+            }
         }
     }
 
@@ -69,35 +72,40 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
 
     return (
         <div className="accordion" role="tablist" aria-multiselectable="true">
-            {props.definition.children!.map((page, index) => (
-                <div className="card" key={props.path + '_PAGE_' + index}>
-                    {currentPage === index && <div ref={currentPageRef}/>}
-                    <div className="card-header cursor-pointer" onClick={() => goToPage(index)}>
-                        <h3 className="d-inline">{page.attributes.label}</h3>{index < currentPage && <button className="link-button text-muted px-1" onClick={() => goToPage(index)}><u>edit</u></button>}
-                    </div>
-                    {currentPage === index && <div className="card-body m-1">
-                        {page.children && <ChildFormElements childFormElements={page.children as FormElementDef<any>[]} parentPath={props.parentPath}/>}
-                        <div className="row">
-                            <div className="col">
-                                <nav aria-label="Page navigation">
-                                    <ul className="pagination mb-0">
-                                        {!isFirst && <li className="page-item">
-                                            <button className="page-link" onClick={previous}>Previous</button>
-                                        </li>}
-                                        {!isLast && <li className={classNames('page-item', {disabled: disableNext})}>
-                                            <button className="page-link" onClick={next} disabled={disableNext}>Next</button>
-                                        </li>}
-                                    </ul>
-                                </nav>
-                            </div>
-                            {isLast &&
-                            <div className="col">
-                                <button className="btn btn-primary float-right" onClick={submit}>Submit</button>
-                            </div>}
+            {props.definition.children!.map((page, index) => {
+                if (!showIfContainer.shouldShow(props.path, page)) {
+                    return null
+                }
+                return (
+                    <div className="card" key={props.path + '_PAGE_' + index}>
+                        {currentPage === index && <div ref={currentPageRef}/>}
+                        <div className="card-header cursor-pointer" onClick={() => goToPage(index)}>
+                            <h3 className="d-inline">{page.attributes.label}</h3>{index < currentPage && <button className="link-button text-muted px-1" onClick={() => goToPage(index)}><u>edit</u></button>}
                         </div>
-                    </div>}
-                </div>
-            ))}
+                        {currentPage === index && <div className="card-body m-1">
+                            {page.children && <ChildFormElements childFormElements={page.children as FormElementDef<any>[]} parentPath={props.parentPath}/>}
+                            <div className="row">
+                                <div className="col">
+                                    <nav aria-label="Page navigation">
+                                        <ul className="pagination mb-0">
+                                            {!isFirst && <li className="page-item">
+                                                <button className="page-link" onClick={previous}>Previous</button>
+                                            </li>}
+                                            {!isLast && <li className={classNames('page-item', {disabled: disableNext})}>
+                                                <button className="page-link" onClick={next} disabled={disableNext}>Next</button>
+                                            </li>}
+                                        </ul>
+                                    </nav>
+                                </div>
+                                {isLast &&
+                                <div className="col">
+                                    <button className="btn btn-primary float-right" onClick={submit}>Submit</button>
+                                </div>}
+                            </div>
+                        </div>}
+                    </div>
+                )
+            })}
         </div>
     )
 }
