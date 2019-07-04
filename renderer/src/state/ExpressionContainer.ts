@@ -15,11 +15,11 @@ jexl.addTransform('toUpperCase', (val) => val.toUpperCase())
 jexl.addTransform('toLowerCase', (val) => val.toLowerCase())
 
 //Transform as a boolean validation
-jexl.addTransform('isAlpha', (val) => isAlpha(val))
-jexl.addTransform('isAlphanumeric', (val) => isAlphanumeric(val))
-jexl.addTransform('isCurrency', (val) => isCurrency(val))
-jexl.addTransform('isEmail', (val) => isEmail(val))
-jexl.addTransform('isNumeric', (val) => isNumeric(val))
+jexl.addTransform('isAlpha', (val) => val && isAlpha(val))
+jexl.addTransform('isAlphanumeric', (val) => val && isAlphanumeric(val))
+jexl.addTransform('isCurrency', (val) => val && isCurrency(val))
+jexl.addTransform('isEmail', (val) => val && isEmail(val))
+jexl.addTransform('isNumeric', (val) => val && isNumeric(val))
 
 //case-insensitive string equality
 jexl.addBinaryOp('_=', 20, (left, right) => left.toLowerCase() === right.toLowerCase())
@@ -30,7 +30,7 @@ interface ValidationExpression {
 }
 
 function useExpression() {
-    const config = useContainer(ConfigContainer).config
+    const configContainer = useContainer(ConfigContainer)
     const valuesContainer = useContainer(ValuesContainer)
 
 
@@ -40,7 +40,7 @@ function useExpression() {
             formValues: valuesContainer.formValues,
             fieldValue,
             value: fieldValue,
-            config,
+            config: configContainer.config,
             fieldDef
         }
         return jexl.evalSync(expression, context)

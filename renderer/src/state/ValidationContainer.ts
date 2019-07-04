@@ -12,7 +12,7 @@ import {createContainer, useContainer} from './useContainer'
 import {ValuesContainer} from './ValuesContainer'
 
 export const ValidationContainer = createContainer(() => {
-    const config = useContainer(ConfigContainer).config
+    const configContainer = useContainer(ConfigContainer)
     const valuesContainer = useContainer(ValuesContainer)
     const fieldStateContainer = useContainer(FieldStateContainer)
     const formStateContainer = useContainer(FormStateContainer)
@@ -25,6 +25,8 @@ export const ValidationContainer = createContainer(() => {
             setTimeout(() => setNextTick(0), nextTick - Date.now())
         }
     }, [nextTick])
+
+    const config = configContainer.config
 
     const validate = (path: string, fieldDef: FormElementDef<{}>): string | null => {
         if (!fieldDef.validation || fieldDef.validation.length <= 0) {
