@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {createContainer, useContainer} from 'unstated-next'
+import {createContainer, useContainer} from './useContainer'
 import {FormElementDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
 import {isTypeACollection} from '../formElements/formElementTypes'
 import {createPath} from '../util'
@@ -10,7 +10,7 @@ import {FieldStateContainer} from './FieldStateContainer'
 import {FormStateContainer} from './FormStateContainer'
 import {ValuesContainer} from './ValuesContainer'
 
-function useValidation() {
+export const ValidationContainer = createContainer(() => {
     const config = useContainer(ConfigContainer).config
     const valuesContainer = useContainer(ValuesContainer)
     const fieldStateContainer = useContainer(FieldStateContainer)
@@ -69,13 +69,13 @@ function useValidation() {
             return true
         }
         const fieldState = fieldStateContainer.get(path)
-        if (config.showErrors === 'afterFocus' && fieldState.focus) {
+        if (config.showErrors === 'onFocus' && fieldState.focus) {
             return timeHasPassedAndShouldShowError(fieldState.focus)
         }
-        if (config.showErrors === 'afterValueChanged' && fieldState.valueChanged) {
+        if (config.showErrors === 'onValueChanged' && fieldState.valueChanged) {
             return timeHasPassedAndShouldShowError(fieldState.valueChanged)
         }
-        if (config.showErrors === 'afterBlur' && fieldState.blur) {
+        if (config.showErrors === 'onBlur' && fieldState.blur) {
             return timeHasPassedAndShouldShowError(fieldState.blur)
         }
         return false
@@ -119,6 +119,4 @@ function useValidation() {
     }
 
     return {validate, shouldShowErrors, validateAndShouldShow, validateRecursively}
-}
-
-export const ValidationContainer = createContainer(useValidation)
+})

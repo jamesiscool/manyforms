@@ -1,5 +1,5 @@
 import React from 'react'
-import {useContainer} from 'unstated-next'
+import {useContainer} from '../../state/useContainer'
 import {FieldChrome} from '../../display/FieldChrome'
 import {FieldStateContainer} from '../../state/FieldStateContainer'
 import {ValuesContainer} from '../../state/ValuesContainer'

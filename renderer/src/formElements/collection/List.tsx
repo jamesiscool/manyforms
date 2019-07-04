@@ -1,6 +1,6 @@
 import {times} from 'lodash-es'
 import React from 'react'
-import {useContainer} from 'unstated-next'
+import {useContainer} from '../../state/useContainer'
 import {Description} from '../../display/Description'
 import {ValuesContainer} from '../../state/ValuesContainer'
 import {ordinal} from '../../util'

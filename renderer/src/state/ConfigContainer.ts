@@ -1,6 +1,7 @@
-import {createContainer} from 'unstated-next'
+import {createContainer} from './useContainer'
 
-type showErrors = 'immediately' | 'afterFocus' | 'afterValueChanged' | 'afterBlur' | 'nextOrSummit'
+
+type showErrors = 'immediately' | 'onFocus' | 'onValueChanged' | 'onBlur' | 'nextOrSummit'
 
 export interface Config {
     showErrors: showErrors
@@ -9,14 +10,12 @@ export interface Config {
 }
 
 const defaultConfig: Config = {
-    showErrors: 'afterFocus',
-    showErrorsDelay: 1000   ,
+    showErrors: 'onFocus',
+    showErrorsDelay: 500,
     disableNextWhenErrors: false
 }
 
-export const useConfig = (userConfig = {}) => {
+export const ConfigContainer = createContainer((userConfig = {}) => {
     const config = Object.assign(defaultConfig, userConfig)
     return {config}
-}
-
-export const ConfigContainer = createContainer(useConfig)
+})

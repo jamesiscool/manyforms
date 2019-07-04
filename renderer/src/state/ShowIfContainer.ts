@@ -1,8 +1,8 @@
-import {createContainer, useContainer} from 'unstated-next'
+import {createContainer, useContainer} from './useContainer'
 import {FormElementDef} from '../FormDef'
 import {ExpressionContainer} from './ExpressionContainer'
 
-function useShowIf() {
+export const ShowIfContainer = createContainer(() => {
     const expressionContainer = useContainer(ExpressionContainer)
 
     function shouldShow(path: string, fieldDef: FormElementDef<{}>): boolean {
@@ -13,6 +13,4 @@ function useShowIf() {
     }
 
     return {shouldShow}
-}
-
-export const ShowIfContainer = createContainer(useShowIf)
+})

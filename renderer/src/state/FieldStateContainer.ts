@@ -1,6 +1,6 @@
 import produce from 'immer'
 import {useState} from 'react'
-import {createContainer} from 'unstated-next'
+import {createContainer} from './useContainer'
 
 type Events = 'focus' | 'valueChanged' | 'blur'
 
@@ -8,7 +8,7 @@ type FieldState = {
     [Event in Events]: number //Date.now() when field first got focused
 }
 
-export function useFieldState() {
+export const FieldStateContainer = createContainer(() => {
     const [fieldStates, setFieldStates] = useState<{ [path: string]: FieldState }>({})
     const get = (path: string) => fieldStates[path] || {}
     const setEventNow = (path: string, event: Events) => {
@@ -27,6 +27,4 @@ export function useFieldState() {
     const blur = (path: string) => setEventNow(path, 'blur')
 
     return {fieldStates, get, focus, valueChanged, blur}
-}
-
-export const FieldStateContainer = createContainer(useFieldState)
+})

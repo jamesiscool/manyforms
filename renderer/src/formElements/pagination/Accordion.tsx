@@ -1,9 +1,10 @@
 import classNames from 'classnames'
 import React, {useRef, useState} from 'react'
-import {useContainer} from 'unstated-next'
 import {FormElementDef} from '../../FormDef'
 import {ConfigContainer} from '../../state/ConfigContainer'
 import {FormStateContainer} from '../../state/FormStateContainer'
+import {ShowIfContainer} from '../../state/ShowIfContainer'
+import {useContainer} from '../../state/useContainer'
 import {ValidationContainer} from '../../state/ValidationContainer'
 import {ChildFormElements} from '../ChildFormElements'
 import {FormElementProps} from '../FormElementProps'
@@ -15,6 +16,7 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     const config = useContainer(ConfigContainer).config
     const validationContainer = useContainer(ValidationContainer)
     const formStateContainer = useContainer(FormStateContainer)
+    const showIfContainer = useContainer(ShowIfContainer)
 
     const currentPageRef = useRef<HTMLDivElement>(null)
     const [currentPage, setCurrentPage] = useState<number>(0)

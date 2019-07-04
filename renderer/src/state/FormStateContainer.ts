@@ -1,6 +1,6 @@
 import produce from 'immer'
 import {useState} from 'react'
-import {createContainer} from 'unstated-next'
+import {createContainer} from './useContainer'
 
 type FormState = {
     nextClicked?: number
@@ -8,7 +8,7 @@ type FormState = {
     nextOrSubmitClicked?: number //Date.now() when field first got focused
 }
 
-export function useFormState() {
+export const FormStateContainer = createContainer(() => {
     const [formState, setFormState] = useState<FormState>({})
 
     const nextClicked = () => {
@@ -45,6 +45,4 @@ export function useFormState() {
     }
 
     return {formState, nextClicked, clearNextClicked, submitClicked, nextOrSubmit}
-}
-
-export const FormStateContainer = createContainer(useFormState)
+})
