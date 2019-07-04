@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react'
-import {createContainer, useContainer} from './useContainer'
 import {FormElementDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
 import {isTypeACollection} from '../formElements/formElementTypes'
 import {createPath} from '../util'
@@ -8,6 +7,8 @@ import {ConfigContainer} from './ConfigContainer'
 import {ExpressionContainer} from './ExpressionContainer'
 import {FieldStateContainer} from './FieldStateContainer'
 import {FormStateContainer} from './FormStateContainer'
+import {ShowIfContainer} from './ShowIfContainer'
+import {createContainer, useContainer} from './useContainer'
 import {ValuesContainer} from './ValuesContainer'
 
 export const ValidationContainer = createContainer(() => {
@@ -16,6 +17,7 @@ export const ValidationContainer = createContainer(() => {
     const fieldStateContainer = useContainer(FieldStateContainer)
     const formStateContainer = useContainer(FormStateContainer)
     const expressionContainer = useContainer(ExpressionContainer)
+    const showIfContainer = useContainer(ShowIfContainer)
 
     const [nextTick, setNextTick] = useState<number>(0)
     useEffect(() => {
@@ -92,8 +94,8 @@ export const ValidationContainer = createContainer(() => {
         }
     }
 
-    const validateRecursively = (path: string, fieldDef?: FormElementDef<{}>): boolean => {
-        if (!fieldDef) {
+    const hasErrorsRecursively = (path: string, fieldDef?: FormElementDef<{}>): boolean => {
+        if (!fieldDef || !showIfContainer.shouldShow(path, fieldDef)) {
             return false
         }
         if (validate(path, fieldDef) != null) {
@@ -102,21 +104,24 @@ export const ValidationContainer = createContainer(() => {
         if (fieldDef.children) {
             return fieldDef.children.some((childFieldDef) => {
                 const childPath = createPath(path, childFieldDef.fieldId)
+                if (!showIfContainer.shouldShow(childPath, childFieldDef)) {
+                    return false
+                }
                 if (isTypeACollection(childFieldDef.type)) {
                     const size = valuesContainer.getCollectionSize(childPath)
                     for (let index = 0; index < size; index++) {
-                        if (validateRecursively(childPath + '[' + index + ']', childFieldDef)) {
+                        if (hasErrorsRecursively(childPath + '[' + index + ']', childFieldDef)) {
                             return true
                         }
                     }
                     return false
                 } else {
-                    return validateRecursively(childPath, childFieldDef)
+                    return hasErrorsRecursively(childPath, childFieldDef)
                 }
             })
         }
         return false
     }
 
-    return {validate, shouldShowErrors, validateAndShouldShow, validateRecursively}
+    return {validate, shouldShowErrors, validateAndShouldShow, hasErrorsRecursively}
 })

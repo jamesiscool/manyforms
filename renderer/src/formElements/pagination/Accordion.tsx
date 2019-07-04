@@ -26,8 +26,8 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     }
     const isFirst = currentPage === 0
     const isLast = currentPage === (props.definition.children!.length - 1)
-    const currentPageHasErrors = validationContainer.validateRecursively(props.path, props.definition.children[currentPage])
-    const disableNext = config.disableNextWhenErrors && currentPageHasErrors
+    const currentPageHasErrors = () => validationContainer.hasErrorsRecursively(props.path, props.definition.children![currentPage])
+    const disableNext = config.disableNextWhenErrors && currentPageHasErrors()
 
     const goToPage = (newIndex: number) => {
         setCurrentPage(newIndex)
@@ -37,13 +37,21 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     }
 
     const previous = () => {
-        goToPage(currentPage - 1)
-        formStateContainer.clearNextClicked()
-
+        let numberOfPagesToGoBack = null
+        for (let i = currentPage - 1; i >= 0 && numberOfPagesToGoBack == null; i--) {
+            const page = props.definition.children && props.definition.children[i]
+            if (page && showIfContainer.shouldShow(props.path, page)) {
+                numberOfPagesToGoBack = i
+            }
+        }
+        if (numberOfPagesToGoBack) {
+            goToPage(currentPage - numberOfPagesToGoBack)
+            formStateContainer.clearNextClicked()
+        }
     }
 
     const next = () => {
-        if (currentPageHasErrors) {
+        if (currentPageHasErrors()) {
             formStateContainer.nextClicked()
         } else {
             formStateContainer.clearNextClicked()
@@ -52,7 +60,7 @@ export const Accordion = (props: FormElementProps<AccordionAttributes>) => {
     }
 
     const submit = () => {
-        if (currentPageHasErrors) {
+        if (currentPageHasErrors()) {
             formStateContainer.submitClicked()
         } else {
             console.log('Submit')
