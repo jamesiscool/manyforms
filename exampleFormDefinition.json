@@ -7,6 +7,15 @@
         {
           "type": "page",
           "attributes": {
+            "label": "0. This page shouldn't be shown"
+          },
+          "showIf": [
+            "false"
+          ]
+        },
+        {
+          "type": "page",
+          "attributes": {
             "label": "1. Your loan details"
           },
           "children": [
