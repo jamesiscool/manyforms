@@ -5,6 +5,7 @@ import {ConfigContainer} from './state/ConfigContainer'
 import {ExpressionContainer} from './state/ExpressionContainer'
 import {FieldStateContainer} from './state/FieldStateContainer'
 import {FormStateContainer} from './state/FormStateContainer'
+import {PaginationContainer} from './state/PaginationContainer'
 import {ShowIfContainer} from './state/ShowIfContainer'
 import {ValidationContainer} from './state/ValidationContainer'
 import {ValuesContainer} from './state/ValuesContainer'
@@ -22,7 +23,9 @@ export const Form = (props: FormProps) =>
                         <ExpressionContainer.Provider>
                             <ShowIfContainer.Provider>
                                 <ValidationContainer.Provider>
-                                    <ChildFormElements childFormElements={props.formDef.elements} parentPath=""/>
+                                    <PaginationContainer.Provider>
+                                        <ChildFormElements childFormElements={props.formDef.elements} parentPath=""/>
+                                    </PaginationContainer.Provider>
                                 </ValidationContainer.Provider>
                             </ShowIfContainer.Provider>
                         </ExpressionContainer.Provider>
