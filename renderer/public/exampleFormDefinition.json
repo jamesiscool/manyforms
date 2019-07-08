@@ -1,8 +1,10 @@
 {
   "elements": [
     {
-      "type": "accordion",
-      "attributes": {},
+      "type": "tabs",
+      "attributes": {
+        "pill": false
+      },
       "children": [
         {
           "type": "page",
@@ -16,7 +18,7 @@
         {
           "type": "page",
           "attributes": {
-            "label": "1. Your loan details"
+            "label": "Your loan details"
           },
           "children": [
             {
@@ -149,7 +151,7 @@
         {
           "type": "page",
           "attributes": {
-            "label": "2. Tell us about yourself"
+            "label": "Tell us about yourself"
           },
           "showIf": [
             "formValues.howManyPeopleApplying == 1"
@@ -382,7 +384,7 @@
         {
           "type": "page",
           "attributes": {
-            "label": "3. Tell us about your employment"
+            "label": "Tell us about your employment"
           },
           "showIf": [
             "formValues.howManyPeopleApplying == 2"
@@ -446,7 +448,7 @@
         {
           "type": "page",
           "attributes": {
-            "label": "4. Tell us about what you earn"
+            "label": "Tell us about what you earn"
           },
           "children": [
             {
@@ -555,7 +557,7 @@
         {
           "type": "page",
           "attributes": {
-            "label": "5. Tell us about what you own"
+            "label": "Tell us about what you own"
           },
           "children": [
             {

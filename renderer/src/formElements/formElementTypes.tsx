@@ -6,6 +6,7 @@ import {TextInput} from './input/TextInput'
 import {Heading} from './output/Heading'
 import {Paragraph} from './output/Paragraph'
 import {Accordion} from './pagination/Accordion'
+import {Tabs} from './pagination/Tabs'
 
 interface FormElementTypesMap {
     [type: string]: React.ReactNode
@@ -18,6 +19,7 @@ export const formElementNonCollectionTypes: FormElementTypesMap = {
     'heading': Heading,
     'paragraph': Paragraph,
     'buttonGroup': ButtonGroup,
+    'tabs': Tabs
 }
 
 export const formElementCollectionTypes: FormElementTypesMap = {
