@@ -13,9 +13,9 @@ export const ValuesContainer = createContainer((initialState = {}) => {
         const nextFormValues = produce(formValues, draftFormValues => {
             set(draftFormValues, path, value)
         })
-        //console.log('formValues:', JSON.stringify(nextFormValues, null, 2))
         setFormValues(nextFormValues)
         fieldStateContainer.valueChanged(path)
+        //console.log('formValues:', JSON.stringify(nextFormValues, null, 2))
     }
 
     function getValue(path: string): string {

@@ -39,24 +39,25 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
                             return null
                         }
                         const key = props.path + '_PAGE_' + index
-                        /* eslint-disable jsx-a11y/anchor-is-valid */
+                        //The bootstrap btn-link doesn't style the same as a link with a href when used as nav-link
+                        /* eslint-disable jsx-a11y/anchor-is-valid, no-script-url */
                         if (index < paginationContainer.currentPageIndex) {
                             return <li className="nav-item" key={key}>
-                                <a className="nav-link" href="#" onClick={() => paginationContainer.setCurrentPageIndex(index)}>{page.attributes.label}</a>
+                                <a className="nav-link" href="javascript:void(0)" onClick={() => paginationContainer.setCurrentPageIndex(index)}>{page.attributes.label}</a>
                             </li>
 
                         }
+                        /* eslint-enable no-script-url, jsx-a11y/anchor-is-valid */
                         if (index === paginationContainer.currentPageIndex) {
                             return <li className="nav-item" key={key}>
-                                <a className={classNames('nav-link active', {'text-dark': !props.definition.attributes.pill})} href="#">{page.attributes.label}</a>
+                                <button className="nav-link active">{page.attributes.label}</button>
                             </li>
                         }
                         if (index > paginationContainer.currentPageIndex) {
                             return <li className="nav-item" key={key}>
-                                <a className="nav-link disabled" href="#" tabIndex={-1} aria-disabled="true">{page.attributes.label}</a>
+                                <button className="nav-link disabled" tabIndex={-1} aria-disabled="true">{page.attributes.label}</button>
                             </li>
                         }
-                        /* eslint-enable jsx-a11y/anchor-is-valid */
                         return null
                     })}
                 </ul>

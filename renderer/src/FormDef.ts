@@ -3,6 +3,7 @@ import {Config} from './state/ConfigContainer'
 export default interface FormDef {
     elements: FormElementDef<{}>[]
     config?: Config
+    referenceData?: ReferenceDataDef
 }
 
 export interface FormElementDef<Attributes> {
@@ -30,5 +31,17 @@ export interface ValidationExpresionDef {
     name: string,
     expression: string,
     message?: string
+}
+
+export interface ReferenceDataDef {
+    inline?: {
+        [name: string]: any
+    }
+    http?: {
+        name: string,
+        url: string,
+        method?: 'get' | 'GET' | 'post' | 'POST',
+        baseURL?: string
+    }[]
 }
 
