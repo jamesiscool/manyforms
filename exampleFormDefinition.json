@@ -145,6 +145,14 @@
                 ],
                 "description": "Select what most of the money will be used for."
               }
+            },
+            {
+              "fieldId": "country",
+              "type": "dropdown",
+              "attributes": {
+                "label": "What country were you born in",
+                "referenceDataOptions": "countryCodes"
+              }
             }
           ]
         },
