@@ -31,7 +31,7 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
     }
 
     return (
-        <div className="card">
+        <div className="card rounded-0">
             <div className="card-header">
                 <ul className={'nav ' + (props.definition.attributes.pill ? 'nav-pills card-header-pills' : 'nav-tabs card-header-tabs')}>
                     {props.definition.children!.map((page, index) => {
@@ -63,23 +63,25 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
                 </ul>
             </div>
             <div className="card-body">
-                <ChildFormElements childFormElements={props.definition.children[paginationContainer.currentPageIndex].children as FormElementDef<any>[]} parentPath={props.parentPath}/>
-                <div className="row">
-                    <div className="col">
-                        <nav aria-label="Page navigation">
-                            <ul className="pagination mb-0">
-                                {!paginationContainer.currentIsFirst && <li className="page-item">
-                                    <button className="page-link" onClick={paginationContainer.previousClicked}>Previous</button>
-                                </li>}
-                                {!paginationContainer.currentIsLast && <li className={classNames('page-item', {disabled: paginationContainer.disableNext})}>
-                                    <button className="page-link" onClick={paginationContainer.nextClicked} disabled={paginationContainer.disableNext}>Next</button>
-                                </li>}
-                            </ul>
-                        </nav>
+                <div className="container">
+                    <ChildFormElements childFormElements={props.definition.children[paginationContainer.currentPageIndex].children as FormElementDef<any>[]} parentPath={props.parentPath}/>
+                    <div className="row">
+                        <div className="col">
+                            <nav aria-label="Page navigation">
+                                <ul className="pagination mb-0">
+                                    {!paginationContainer.currentIsFirst && <li className="page-item">
+                                        <button className="page-link" onClick={paginationContainer.previousClicked}>Previous</button>
+                                    </li>}
+                                    {!paginationContainer.currentIsLast && <li className={classNames('page-item', {disabled: paginationContainer.disableNext})}>
+                                        <button className="page-link" onClick={paginationContainer.nextClicked} disabled={paginationContainer.disableNext}>Next</button>
+                                    </li>}
+                                </ul>
+                            </nav>
+                        </div>
+                        {paginationContainer.currentIsLast && <div className="col">
+                            <button className="btn btn-primary float-right" onClick={paginationContainer.submitClicked}>Submit</button>
+                        </div>}
                     </div>
-                    {paginationContainer.currentIsLast && <div className="col">
-                        <button className="btn btn-primary float-right" onClick={paginationContainer.submitClicked}>Submit</button>
-                    </div>}
                 </div>
             </div>
         </div>)

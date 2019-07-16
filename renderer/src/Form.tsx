@@ -15,7 +15,7 @@ export interface FormProps {
     formDef: FormDef
 }
 
-export const Form: React.FC<FormProps> = (props) => (<div className="p-2 container">
+export const Form: React.FC<FormProps> = (props) => (<div className="">
     <ConfigContainer.Provider initialState={props.formDef.config}>
         <ReferenceDataContainer.Provider initialState={props.formDef.referenceData}>
             <FormStateContainer.Provider>
