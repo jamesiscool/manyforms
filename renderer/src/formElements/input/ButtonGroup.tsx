@@ -27,7 +27,7 @@ export const ButtonGroup = (props: FormElementProps<ButtonGroupAttributes>) => {
                 <div className="btn-group btn-group-toggle">
                     {props.definition.attributes.options.map((option, index) => (
                         <label
-                            className={'btn btn-outline-secondary' + (value === option ? ' active' : '') + (focus === index ? ' focus' : '')}
+                            className={'btn btn-outline-primary' + (value === option ? ' active' : '') + (focus === index ? ' focus' : '')}
                             key={props.path + '_OPTION_' + option}
                             onFocus={() => setFocus(index)}
                             onBlur={() => setFocus(null)}

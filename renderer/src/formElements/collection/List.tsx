@@ -32,6 +32,6 @@ export const List = (props: FormElementProps<IterationAttributes>) => {
                     </div>
                 </div>
             )}
-            <button className="btn btn-secondary d-inline" onClick={() => formValuesContainer.addToCollection(props.path)}>Add</button>
+            <button className="btn btn-primary d-inline" onClick={() => formValuesContainer.addToCollection(props.path)}>Add</button>
         </div>)
 }
