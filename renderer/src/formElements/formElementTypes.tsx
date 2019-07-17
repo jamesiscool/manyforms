@@ -9,34 +9,34 @@ import {Accordion} from './pagination/Accordion'
 import {Tabs} from './pagination/Tabs'
 
 interface FormElementTypesMap {
-    [type: string]: React.ReactNode
+	[type: string]: React.ReactNode
 }
 
 export const formElementNonCollectionTypes: FormElementTypesMap = {
-    'accordion': Accordion,
-    'dropdown': Dropdown,
-    'textInput': TextInput,
-    'heading': Heading,
-    'paragraph': Paragraph,
-    'buttonGroup': ButtonGroup,
-    'tabs': Tabs
+	'accordion': Accordion,
+	'dropdown': Dropdown,
+	'textInput': TextInput,
+	'heading': Heading,
+	'paragraph': Paragraph,
+	'buttonGroup': ButtonGroup,
+	'tabs': Tabs
 }
 
 export const formElementCollectionTypes: FormElementTypesMap = {
-    'list': List
+	'list': List
 }
 
 export const formElementTypes: FormElementTypesMap = {...formElementNonCollectionTypes, ...formElementCollectionTypes}
 
 export function lookupElement(type: string): React.ReactNode {
-    const foundType = formElementTypes[type]
-    if (!foundType) {
-        console.warn('Could not find form element type:' + type)
-        return () => <div>Could not find form element type {type}.</div>
-    }
-    return foundType
+	const foundType = formElementTypes[type]
+	if (!foundType) {
+		console.warn('Could not find form element type:' + type)
+		return () => <div>Could not find form element type {type}.</div>
+	}
+	return foundType
 }
 
 export function isTypeACollection(type: string): boolean {
-    return formElementCollectionTypes.hasOwnProperty(type)
+	return formElementCollectionTypes.hasOwnProperty(type)
 }

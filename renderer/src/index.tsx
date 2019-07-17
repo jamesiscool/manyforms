@@ -7,13 +7,13 @@ import FormDef from './FormDef'
 import './index.css'
 
 axios.get<FormDef>('exampleFormDefinition.json')
-    .then(function (response) {
-        ReactDOM.render(
-            <Form formDef={response.data}/>,
-            document.getElementById('form')
-        )
-    })
-    .catch(function (error) {
-        console.error(error)
-        throw new Error(error)
-    })
+	.then(function (response) {
+		ReactDOM.render(
+			<Form formDef={response.data}/>,
+			document.getElementById('form')
+		)
+	})
+	.catch(function (error) {
+		console.error(error)
+		throw new Error(error)
+	})

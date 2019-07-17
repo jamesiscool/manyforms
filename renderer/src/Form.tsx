@@ -12,27 +12,27 @@ import {ValidationContainer} from './state/ValidationContainer'
 import {ValuesContainer} from './state/ValuesContainer'
 
 export interface FormProps {
-    formDef: FormDef
+	formDef: FormDef
 }
 
 export const Form: React.FC<FormProps> = (props) => (<div className="">
-    <ConfigContainer.Provider initialState={props.formDef.config}>
-        <ReferenceDataContainer.Provider initialState={props.formDef.referenceData}>
-            <FormStateContainer.Provider>
-                <FieldStateContainer.Provider>
-                    <ValuesContainer.Provider>
-                        <ExpressionContainer.Provider>
-                            <ShowIfContainer.Provider>
-                                <ValidationContainer.Provider>
-                                    <PaginationContainer.Provider>
-                                        <ChildFormElements childFormElements={props.formDef.elements} parentPath=""/>
-                                    </PaginationContainer.Provider>
-                                </ValidationContainer.Provider>
-                            </ShowIfContainer.Provider>
-                        </ExpressionContainer.Provider>
-                    </ValuesContainer.Provider>
-                </FieldStateContainer.Provider>
-            </FormStateContainer.Provider>
-        </ReferenceDataContainer.Provider>
-    </ConfigContainer.Provider>
+	<ConfigContainer.Provider initialState={props.formDef.config}>
+		<ReferenceDataContainer.Provider initialState={props.formDef.referenceData}>
+			<FormStateContainer.Provider>
+				<FieldStateContainer.Provider>
+					<ValuesContainer.Provider>
+						<ExpressionContainer.Provider>
+							<ShowIfContainer.Provider>
+								<ValidationContainer.Provider>
+									<PaginationContainer.Provider>
+										<ChildFormElements childFormElements={props.formDef.elements} parentPath=""/>
+									</PaginationContainer.Provider>
+								</ValidationContainer.Provider>
+							</ShowIfContainer.Provider>
+						</ExpressionContainer.Provider>
+					</ValuesContainer.Provider>
+				</FieldStateContainer.Provider>
+			</FormStateContainer.Provider>
+		</ReferenceDataContainer.Provider>
+	</ConfigContainer.Provider>
 </div>)

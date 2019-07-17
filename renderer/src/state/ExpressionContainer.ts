@@ -25,48 +25,48 @@ jexl.addTransform('isNumeric', (val) => val && isNumeric(val))
 jexl.addBinaryOp('_=', 20, (left, right) => left.toLowerCase() === right.toLowerCase())
 
 interface ValidationExpression {
-    validate: (path: string, fieldDef: FormElementDef<{}>, expression: string) => boolean,
-    defaultMessage: string
+	validate: (path: string, fieldDef: FormElementDef<{}>, expression: string) => boolean,
+	defaultMessage: string
 }
 
 function useExpression() {
-    const configContainer = useContainer(ConfigContainer)
-    const valuesContainer = useContainer(ValuesContainer)
+	const configContainer = useContainer(ConfigContainer)
+	const valuesContainer = useContainer(ValuesContainer)
 
 
-    const evaluate = <T>(path: string, fieldDef: FormElementDef<{}>, expression: string): T => {
-        const fieldValue = valuesContainer.getValue(path)
-        const context = {
-            formValues: valuesContainer.formValues,
-            fieldValue,
-            value: fieldValue,
-            config: configContainer.config,
-            fieldDef
-        }
-        return jexl.evalSync(expression, context)
-    }
+	const evaluate = <T>(path: string, fieldDef: FormElementDef<{}>, expression: string): T => {
+		const fieldValue = valuesContainer.getValue(path)
+		const context = {
+			formValues: valuesContainer.formValues,
+			fieldValue,
+			value: fieldValue,
+			config: configContainer.config,
+			fieldDef
+		}
+		return jexl.evalSync(expression, context)
+	}
 
-    const expressionValidations: { [name: string]: ValidationExpression } = {
-        validIf: {
-            validate: (path: string, fieldDef: FormElementDef<{}>, expression: string) => evaluate(path, fieldDef, expression),
-            defaultMessage: 'This field is invalid' // The form editor should make the user enter message as this does not give the user any information about why the field is invalid
-        },
-        invalidIf: {
-            validate: (path: string, fieldDef: FormElementDef<{}>, expression: string) => !evaluate(path, fieldDef, expression),
-            defaultMessage: 'This field is invalid' // As with validIf form editor should make the user enter message as this does not give the user any information about why the field is invalid
-        },
-        requiredIf: {
-            validate: (path: string, fieldDef: FormElementDef<{}>, expression: string) => {
-                if (evaluate(path, fieldDef, expression)) {
-                    return validationRuleMap.required.validate(valuesContainer.getValue(path))
-                }
-                return true
-            },
-            defaultMessage: validationRuleMap.required.defaultMessage
-        }
-    }
+	const expressionValidations: { [name: string]: ValidationExpression } = {
+		validIf: {
+			validate: (path: string, fieldDef: FormElementDef<{}>, expression: string) => evaluate(path, fieldDef, expression),
+			defaultMessage: 'This field is invalid' // The form editor should make the user enter message as this does not give the user any information about why the field is invalid
+		},
+		invalidIf: {
+			validate: (path: string, fieldDef: FormElementDef<{}>, expression: string) => !evaluate(path, fieldDef, expression),
+			defaultMessage: 'This field is invalid' // As with validIf form editor should make the user enter message as this does not give the user any information about why the field is invalid
+		},
+		requiredIf: {
+			validate: (path: string, fieldDef: FormElementDef<{}>, expression: string) => {
+				if (evaluate(path, fieldDef, expression)) {
+					return validationRuleMap.required.validate(valuesContainer.getValue(path))
+				}
+				return true
+			},
+			defaultMessage: validationRuleMap.required.defaultMessage
+		}
+	}
 
-    return {evaluate, expressionValidations}
+	return {evaluate, expressionValidations}
 }
 
 export const ExpressionContainer = createContainer(useExpression)

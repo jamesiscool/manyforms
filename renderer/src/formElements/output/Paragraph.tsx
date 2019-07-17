@@ -3,7 +3,7 @@ import {FormElementProps} from '../FormElementProps'
 
 
 interface ParagraphAttributes {
-    text: string
+	text: string
 }
 
 export const Paragraph = (props: FormElementProps<ParagraphAttributes>) => <p>{props.definition.attributes.text}</p>
