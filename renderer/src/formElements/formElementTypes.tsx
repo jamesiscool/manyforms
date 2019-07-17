@@ -26,7 +26,7 @@ export const formElementCollectionTypes: FormElementTypesMap = {
     'list': List
 }
 
-export const formElementTypes: FormElementTypesMap = Object.assign(formElementNonCollectionTypes, formElementCollectionTypes)
+export const formElementTypes: FormElementTypesMap = {...formElementNonCollectionTypes, ...formElementCollectionTypes}
 
 export function lookupElement(type: string): React.ReactNode {
     const foundType = formElementTypes[type]

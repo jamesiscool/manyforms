@@ -16,6 +16,6 @@ const defaultConfig: Config = {
 }
 
 export const ConfigContainer = createContainer((userConfig = {}) => {
-    const config = Object.assign(defaultConfig, userConfig)
+    const config = {...defaultConfig, ...userConfig}
     return {config}
 })
