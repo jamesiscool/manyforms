@@ -1,1604 +1,1604 @@
 {
-  "elements": [
-    {
-      "type": "tabs",
-      "attributes": {
-        "pill": false
-      },
-      "children": [
-        {
-          "type": "page",
-          "attributes": {
-            "label": "0. This page shouldn't be shown"
-          },
-          "showIf": [
-            "false"
-          ]
-        },
-        {
-          "type": "page",
-          "attributes": {
-            "label": "Your loan details"
-          },
-          "children": [
-            {
-              "fieldId": "howManyPeopleApplying",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "How many people are applying?",
-                "options": [
-                  "1",
-                  "2"
-                ]
-              },
-              "validation": [
-                "required"
-              ]
-            },
-            {
-              "fieldId": "areYouAnExistingCustomer",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Are you an existing customer?",
-                "options": [
-                  "Yes",
-                  "No"
-                ]
-              }
-            },
-            {
-              "fieldId": "nabId",
-              "type": "textInput",
-              "attributes": {
-                "label": "What is your NAB ID?",
-                "description": "This will help us identify you. It's an 8-10 digit number found on the back of your NAB card above the black strip. It’s also the number you use to login to internet banking."
-              },
-              "validation": [
-                "required",
-                "numeric",
-                {
-                  "name": "validIf",
-                  "expression": "formValues.howManyPeopleApplying != 1 || value > 4",
-                  "message": "If 1 personal is applying this must greater then 4"
-                }
-              ],
-              "showIf": [
-                "formValues.howManyPeopleApplying == 2 && formValues.areYouAnExistingCustomer _= 'no'"
-              ]
-            },
-            {
-              "fieldId": "loanAmount",
-              "type": "textInput",
-              "attributes": {
-                "label": "How much would you like to borrow?",
-                "description": "The minimum loan amount is $5000. You can borrow up to $55000. Don't include spaces or other punctuation."
-              },
-              "validation": [
-                "required",
-                "currency"
-              ]
-            },
-            {
-              "fieldId": "rateType",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Would you like a Fixed or Variable interest rate?",
-                "info": "A fixed rate means your loan's interest rate and repayments will stay the same for the loan term. Redraw won't be available. A variable rate means your loan's interest rate and repayments could move up or down.",
-                "options": [
-                  "Variable",
-                  "Fixed"
-                ]
-              }
-            },
-            {
-              "fieldId": "loanTerm",
-              "type": "dropdown",
-              "attributes": {
-                "label": "What loan term would you like?",
-                "options": [
-                  "1 years",
-                  "2 years",
-                  "3 years",
-                  "4 years",
-                  "5 years",
-                  "6 years",
-                  "7 years"
-                ],
-                "description": "A shorter term means higher repayments (as they're spread over less years). A longer term means lower repayments, but more interest paid by the end of the loan term."
-              }
-            },
-            {
-              "fieldId": "repaymentFrequency",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "How often would you like to make repayments?",
-                "options": [
-                  "Weekly",
-                  "Fortnightly",
-                  "Monthly"
-                ]
-              }
-            },
-            {
-              "fieldId": "loanPurpose",
-              "type": "dropdown",
-              "attributes": {
-                "label": "What's the main purpose for this loan?",
-                "options": [
-                  "New car",
-                  "Used car",
-                  "Debt consolidation",
-                  "House hold / Personal goods",
-                  "Refinance NAB debts",
-                  "Travel / Holidays",
-                  "Boat / Caravan / Trailer",
-                  "Motorcycle / Scooter",
-                  "Shares / Other assets",
-                  "Renovations / Alteration",
-                  "Engagement / Wedding / Funeral",
-                  "Education",
-                  "Medical / Dental",
-                  "Multiple reasons",
-                  "Business purpose or expense",
-                  "House / land Purchase",
-                  "Other"
-                ],
-                "description": "Select what most of the money will be used for."
-              }
-            },
-            {
-              "fieldId": "country",
-              "type": "dropdown",
-              "attributes": {
-                "label": "What country were you born in",
-                "referenceDataOptions": "countryCodes"
-              }
-            }
-          ]
-        },
-        {
-          "type": "page",
-          "attributes": {
-            "label": "Tell us about yourself"
-          },
-          "showIf": [
-            "formValues.howManyPeopleApplying == 1"
-          ],
-          "children": [
-            {
-              "type": "heading",
-              "attributes": {
-                "level": 4,
-                "text": "Personal details"
-              }
-            },
-            {
-              "fieldId": "title",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Title",
-                "options": [
-                  "Mr",
-                  "Ms",
-                  "Mrs",
-                  "Miss",
-                  "Dr"
-                ]
-              }
-            },
-            {
-              "fieldId": "firstName",
-              "type": "textInput",
-              "attributes": {
-                "label": "First Name"
-              }
-            },
-            {
-              "fieldId": "middleName",
-              "type": "textInput",
-              "attributes": {
-                "label": "Middle Name"
-              }
-            },
-            {
-              "fieldId": "lastName",
-              "type": "textInput",
-              "attributes": {
-                "label": "Last Name"
-              }
-            },
-            {
-              "fieldId": "dob",
-              "type": "textInput",
-              "attributes": {
-                "label": "Date of birth",
-                "description": "Enter as DD/MM/YYYY (eg. 1st January 1980 would be 01/01/1980)"
-              }
-            },
-            {
-              "fieldId": "maritalStatus",
-              "type": "dropdown",
-              "attributes": {
-                "label": "Marital status",
-                "options": [
-                  "Single",
-                  "Married",
-                  "Defacto",
-                  "Separated",
-                  "Divorced",
-                  "Widowed"
-                ]
-              }
-            },
-            {
-              "fieldId": "numberOfFinancialDependants",
-              "type": "dropdown",
-              "attributes": {
-                "label": "Number of financial dependants",
-                "info": "A financial dependant is someone who you support financially. This can include children (of any age), grandparents, foster children, etc.",
-                "options": [
-                  "0",
-                  "1",
-                  "2",
-                  "3",
-                  "4",
-                  "5",
-                  "6",
-                  "7",
-                  "8",
-                  "9+"
-                ]
-              }
-            },
-            {
-              "fieldId": "driversLicenceNumber",
-              "type": "textInput",
-              "attributes": {
-                "label": "Driver's licence number",
-                "description": "We'll use this to identify you when we complete a credit check."
-              }
-            },
-            {
-              "fieldId": "driversLicenceState",
-              "type": "dropdown",
-              "attributes": {
-                "label": "State of issue",
-                "options": [
-                  "ACT",
-                  "NSW",
-                  "NT",
-                  "QLD",
-                  "SA",
-                  "TAS",
-                  "VIC",
-                  "WA"
-                ]
-              }
-            },
-            {
-              "fieldId": "australianResidentForTaxPurposes",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Are you an Australian resident for tax purposes?",
-                "options": [
-                  "Yes",
-                  "No"
-                ]
-              }
-            },
-            {
-              "fieldId": "usResidentForTaxPurposes",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Are you a US citizen or US resident for tax purposes?",
-                "options": [
-                  "Yes",
-                  "No"
-                ],
-                "info": "NAB is required to identify certain U.S. persons in order to meet account information reporting requirements under local and international laws."
-              }
-            },
-            {
-              "fieldId": "otherCountryResidentForTaxPurposes",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Are you a resident of any other country for tax purposes?",
-                "options": [
-                  "Yes",
-                  "No"
-                ]
-              }
-            },
-            {
-              "type": "heading",
-              "attributes": {
-                "level": 4,
-                "text": "Where do you live?"
-              }
-            },
-            {
-              "fieldId": "residentialStatus",
-              "type": "dropdown",
-              "attributes": {
-                "label": "Residential Status",
-                "options": [
-                  "Renting",
-                  "Home owner (no mortgage)",
-                  "Home owner (with mortgage)",
-                  "Living with parent / relative",
-                  "Boarding",
-                  "Employer supplied"
-                ]
-              }
-            },
-            {
-              "fieldId": "residentialAddress",
-              "type": "textInput",
-              "attributes": {
-                "label": "Residential address",
-                "description": "This can not be a P.O. Box"
-              }
-            },
-            {
-              "fieldId": "dateMoveToResidentialAddress",
-              "type": "textInput",
-              "attributes": {
-                "label": "When did you move to this address?",
-                "description": "If you’re unsure about the exact date just select the 1st of the month."
-              }
-            },
-            {
-              "fieldId": "residentialAddressIsPostalAddress",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Is your postal address the same as your residential address?",
-                "options": [
-                  "Yes",
-                  "No"
-                ]
-              }
-            },
-            {
-              "type": "heading",
-              "attributes": {
-                "level": 4,
-                "text": "Your contact details"
-              }
-            },
-            {
-              "fieldId": "mobileNumber",
-              "type": "textInput",
-              "attributes": {
-                "label": "Mobile number",
-                "description": "We may send you a SMS to let you know the outcome of your application and next steps."
-              }
-            },
-            {
-              "fieldId": "emailAddress",
-              "type": "textInput",
-              "attributes": {
-                "label": "Email address",
-                "description": "We may send you an email to let you know the outcome of your application and next steps."
-              },
-              "validation": [
-                {
-                  "name": "email",
-                  "message": "You must enter a valid email"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "page",
-          "attributes": {
-            "label": "Tell us about your employment"
-          },
-          "showIf": [
-            "formValues.howManyPeopleApplying == 2"
-          ],
-          "children": [
-            {
-              "fieldId": "employment",
-              "type": "list",
-              "attributes": {
-                "label": "Jobs",
-                "itemLabel": "Job"
-              },
-              "children": [
-                {
-                  "fieldId": "status",
-                  "type": "dropdown",
-                  "attributes": {
-                    "label": "What is your employment status?",
-                    "options": [
-                      "Full time",
-                      "Part time",
-                      "Casual",
-                      "Self-employed",
-                      "Contractor",
-                      "Retired",
-                      "Home Duties",
-                      "Student",
-                      "Unemployed"
-                    ]
-                  }
-                },
-                {
-                  "fieldId": "employerName",
-                  "type": "textInput",
-                  "attributes": {
-                    "label": "Employer's name"
-                  },
-                  "validation": [
-                    "required"
-                  ]
-                },
-                {
-                  "fieldId": "jobTitle",
-                  "type": "textInput",
-                  "attributes": {
-                    "label": "What's your job title?"
-                  }
-                },
-                {
-                  "fieldId": "startDate",
-                  "type": "textInput",
-                  "attributes": {
-                    "label": "When did you start working here?",
-                    "description": "If you’re unsure about the actual date just put the 1st of the month"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "page",
-          "attributes": {
-            "label": "Tell us about what you earn"
-          },
-          "children": [
-            {
-              "fieldId": "income",
-              "type": "list",
-              "attributes": {
-                "label": "Income",
-                "itemLabel": "Income"
-              },
-              "children": [
-                {
-                  "fieldId": "status",
-                  "type": "dropdown",
-                  "attributes": {
-                    "label": "Income type",
-                    "description": "Including all of your sources of income will help to ensure your application outcome is accurate.",
-                    "info": "Dividends, Managed Funds, or Superannuation: Include income from shares, managed investments, superannuation, interest bearing deposits or other income with at least two direct credits as investment income. Commission, Overtime payments: Include income from commissions, overtime payments that have been paid to you for more than six months. Bonus: Include income from bonus payments earned for the most recent two financial years. This must be income paid as a salary plus the bonus payments.",
-                    "options": [
-                      "Salary",
-                      "Family allowance",
-                      "Pensions",
-                      "All Department of Veteran Affairs income",
-                      "Rental income",
-                      "Self-employed income",
-                      "Superannuation income",
-                      "Dividend income",
-                      "Overtime",
-                      "Commission",
-                      "Child support",
-                      "Bonus"
-                    ]
-                  }
-                },
-                {
-                  "fieldId": "frequency",
-                  "type": "dropdown",
-                  "attributes": {
-                    "label": "Frequency of income",
-                    "options": [
-                      "Weekly",
-                      "Fortnightly",
-                      "Pensions",
-                      "Monthly",
-                      "Quarterly",
-                      "Half yearly",
-                      "Yearly"
-                    ]
-                  }
-                },
-                {
-                  "fieldId": "incomeGross",
-                  "type": "textInput",
-                  "attributes": {
-                    "label": "Before tax (Gross)"
-                  }
-                },
-                {
-                  "fieldId": "incomeNet",
-                  "type": "textInput",
-                  "attributes": {
-                    "label": "After tax (Net)"
-                  }
-                }
-              ]
-            },
-            {
-              "fieldId": "foreseeFinancialChanges",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Do you foresee any major changes to your employment, income and/or expenses over the next 12 months that will make it difficult for you to meet your financial commitments?",
-                "description": "For example if you know of anything likely to happen in the next 12 months that will make it harder for you to meet your financial commitments (eg. make your loan and/or credit card repayments) answer \"Yes\".",
-                "info": "For example changing from full time to part time employment; changing jobs (resulting in your income reducing); taking a 12 month break from your job; your existing loan repayments will be increasing by a large amount (due to the ending of a honeymoon interest rate period)",
-                "options": [
-                  "Yes",
-                  "No"
-                ]
-              }
-            },
-            {
-              "fieldId": "pastFinancialDifficulties",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Have you had any difficulties in making your loan repayments in the last 2 years?",
-                "description": "For example are you currently behind in your repayments on an existing loan?",
-                "info": "If you've missed, or had problems making, any loan or credit card payments in the past two years answer \"Yes\". If you answer \"Yes\" we'll ask you for more information - for example the loan provider, type of loan, amounts you missed, when and why it happened, and whether the problem has been resolved or ongoing.",
-                "options": [
-                  "Yes",
-                  "No"
-                ]
-              }
-            },
-            {
-              "fieldId": "pastFinancialJudgments",
-              "type": "buttonGroup",
-              "attributes": {
-                "label": "Have you ever had, or are there any judgments, attachments or legal proceedings against you relating to financial matters?",
-                "info": "You need to let us know about any time that your financial situation has led to a legal judgment being made against you, an attachment (eg. a judgment which transferred property of yours to another person who you were in debt to), legal proceedings being taken against you. An example of the sort of situation we're asking about bankruptcy. If you answer \"yes\" we'll ask you for more details.",
-                "options": [
-                  "Yes",
-                  "No"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "type": "page",
-          "attributes": {
-            "label": "Tell us about what you own"
-          },
-          "children": [
-            {
-              "fieldId": "property",
-              "type": "list",
-              "attributes": {
-                "label": "Properties",
-                "itemLabel": "Property"
-              },
-              "children": [
-                {
-                  "fieldId": "type",
-                  "type": "dropdown",
-                  "attributes": {
-                    "label": "What type of property is this?",
-                    "options": [
-                      "Residential property",
-                      "Investment property"
-                    ]
-                  }
-                },
-                {
-                  "fieldId": "estimatedValue",
-                  "type": "textInput",
-                  "attributes": {
-                    "label": "What's the estimated value?"
-                  },
-                  "validation": [
-                    "required"
-                  ]
-                },
-                {
-                  "fieldId": "ownership",
-                  "type": "buttonGroup",
-                  "attributes": {
-                    "label": "Is this property solely or jointly owned?",
-                    "options": [
-                      "Solely owned",
-                      "Jointly owned"
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "referenceData": {
-    "inline": {
-      "countryCodes": [
-        {
-          "label": "Afghanistan",
-          "value": "AF"
-        },
-        {
-          "label": "Åland Islands",
-          "value": "AX"
-        },
-        {
-          "label": "Albania",
-          "value": "AL"
-        },
-        {
-          "label": "Algeria",
-          "value": "DZ"
-        },
-        {
-          "label": "American Samoa",
-          "value": "AS"
-        },
-        {
-          "label": "AndorrA",
-          "value": "AD"
-        },
-        {
-          "label": "Angola",
-          "value": "AO"
-        },
-        {
-          "label": "Anguilla",
-          "value": "AI"
-        },
-        {
-          "label": "Antarctica",
-          "value": "AQ"
-        },
-        {
-          "label": "Antigua and Barbuda",
-          "value": "AG"
-        },
-        {
-          "label": "Argentina",
-          "value": "AR"
-        },
-        {
-          "label": "Armenia",
-          "value": "AM"
-        },
-        {
-          "label": "Aruba",
-          "value": "AW"
-        },
-        {
-          "label": "Australia",
-          "value": "AU"
-        },
-        {
-          "label": "Austria",
-          "value": "AT"
-        },
-        {
-          "label": "Azerbaijan",
-          "value": "AZ"
-        },
-        {
-          "label": "Bahamas",
-          "value": "BS"
-        },
-        {
-          "label": "Bahrain",
-          "value": "BH"
-        },
-        {
-          "label": "Bangladesh",
-          "value": "BD"
-        },
-        {
-          "label": "Barbados",
-          "value": "BB"
-        },
-        {
-          "label": "Belarus",
-          "value": "BY"
-        },
-        {
-          "label": "Belgium",
-          "value": "BE"
-        },
-        {
-          "label": "Belize",
-          "value": "BZ"
-        },
-        {
-          "label": "Benin",
-          "value": "BJ"
-        },
-        {
-          "label": "Bermuda",
-          "value": "BM"
-        },
-        {
-          "label": "Bhutan",
-          "value": "BT"
-        },
-        {
-          "label": "Bolivia",
-          "value": "BO"
-        },
-        {
-          "label": "Bosnia and Herzegovina",
-          "value": "BA"
-        },
-        {
-          "label": "Botswana",
-          "value": "BW"
-        },
-        {
-          "label": "Bouvet Island",
-          "value": "BV"
-        },
-        {
-          "label": "Brazil",
-          "value": "BR"
-        },
-        {
-          "label": "British Indian Ocean Territory",
-          "value": "IO"
-        },
-        {
-          "label": "Brunei Darussalam",
-          "value": "BN"
-        },
-        {
-          "label": "Bulgaria",
-          "value": "BG"
-        },
-        {
-          "label": "Burkina Faso",
-          "value": "BF"
-        },
-        {
-          "label": "Burundi",
-          "value": "BI"
-        },
-        {
-          "label": "Cambodia",
-          "value": "KH"
-        },
-        {
-          "label": "Cameroon",
-          "value": "CM"
-        },
-        {
-          "label": "Canada",
-          "value": "CA"
-        },
-        {
-          "label": "Cape Verde",
-          "value": "CV"
-        },
-        {
-          "label": "Cayman Islands",
-          "value": "KY"
-        },
-        {
-          "label": "Central African Republic",
-          "value": "CF"
-        },
-        {
-          "label": "Chad",
-          "value": "TD"
-        },
-        {
-          "label": "Chile",
-          "value": "CL"
-        },
-        {
-          "label": "China",
-          "value": "CN"
-        },
-        {
-          "label": "Christmas Island",
-          "value": "CX"
-        },
-        {
-          "label": "Cocos (Keeling) Islands",
-          "value": "CC"
-        },
-        {
-          "label": "Colombia",
-          "value": "CO"
-        },
-        {
-          "label": "Comoros",
-          "value": "KM"
-        },
-        {
-          "label": "Congo",
-          "value": "CG"
-        },
-        {
-          "label": "Congo, Democratic Republic",
-          "value": "CD"
-        },
-        {
-          "label": "Cook Islands",
-          "value": "CK"
-        },
-        {
-          "label": "Costa Rica",
-          "value": "CR"
-        },
-        {
-          "label": "Cote D\"Ivoire",
-          "value": "CI"
-        },
-        {
-          "label": "Croatia",
-          "value": "HR"
-        },
-        {
-          "label": "Cuba",
-          "value": "CU"
-        },
-        {
-          "label": "Cyprus",
-          "value": "CY"
-        },
-        {
-          "label": "Czech Republic",
-          "value": "CZ"
-        },
-        {
-          "label": "Denmark",
-          "value": "DK"
-        },
-        {
-          "label": "Djibouti",
-          "value": "DJ"
-        },
-        {
-          "label": "Dominica",
-          "value": "DM"
-        },
-        {
-          "label": "Dominican Republic",
-          "value": "DO"
-        },
-        {
-          "label": "Ecuador",
-          "value": "EC"
-        },
-        {
-          "label": "Egypt",
-          "value": "EG"
-        },
-        {
-          "label": "El Salvador",
-          "value": "SV"
-        },
-        {
-          "label": "Equatorial Guinea",
-          "value": "GQ"
-        },
-        {
-          "label": "Eritrea",
-          "value": "ER"
-        },
-        {
-          "label": "Estonia",
-          "value": "EE"
-        },
-        {
-          "label": "Ethiopia",
-          "value": "ET"
-        },
-        {
-          "label": "Falkland Islands (Malvinas)",
-          "value": "FK"
-        },
-        {
-          "label": "Faroe Islands",
-          "value": "FO"
-        },
-        {
-          "label": "Fiji",
-          "value": "FJ"
-        },
-        {
-          "label": "Finland",
-          "value": "FI"
-        },
-        {
-          "label": "France",
-          "value": "FR"
-        },
-        {
-          "label": "French Guiana",
-          "value": "GF"
-        },
-        {
-          "label": "French Polynesia",
-          "value": "PF"
-        },
-        {
-          "label": "French Southern Territories",
-          "value": "TF"
-        },
-        {
-          "label": "Gabon",
-          "value": "GA"
-        },
-        {
-          "label": "Gambia",
-          "value": "GM"
-        },
-        {
-          "label": "Georgia",
-          "value": "GE"
-        },
-        {
-          "label": "Germany",
-          "value": "DE"
-        },
-        {
-          "label": "Ghana",
-          "value": "GH"
-        },
-        {
-          "label": "Gibraltar",
-          "value": "GI"
-        },
-        {
-          "label": "Greece",
-          "value": "GR"
-        },
-        {
-          "label": "Greenland",
-          "value": "GL"
-        },
-        {
-          "label": "Grenada",
-          "value": "GD"
-        },
-        {
-          "label": "Guadeloupe",
-          "value": "GP"
-        },
-        {
-          "label": "Guam",
-          "value": "GU"
-        },
-        {
-          "label": "Guatemala",
-          "value": "GT"
-        },
-        {
-          "label": "Guernsey",
-          "value": "GG"
-        },
-        {
-          "label": "Guinea",
-          "value": "GN"
-        },
-        {
-          "label": "Guinea-Bissau",
-          "value": "GW"
-        },
-        {
-          "label": "Guyana",
-          "value": "GY"
-        },
-        {
-          "label": "Haiti",
-          "value": "HT"
-        },
-        {
-          "label": "Heard Island and Mcdonald Islands",
-          "value": "HM"
-        },
-        {
-          "label": "Holy See (Vatican City State)",
-          "value": "VA"
-        },
-        {
-          "label": "Honduras",
-          "value": "HN"
-        },
-        {
-          "label": "Hong Kong",
-          "value": "HK"
-        },
-        {
-          "label": "Hungary",
-          "value": "HU"
-        },
-        {
-          "label": "Iceland",
-          "value": "IS"
-        },
-        {
-          "label": "India",
-          "value": "IN"
-        },
-        {
-          "label": "Indonesia",
-          "value": "ID"
-        },
-        {
-          "label": "Iran",
-          "value": "IR"
-        },
-        {
-          "label": "Iraq",
-          "value": "IQ"
-        },
-        {
-          "label": "Ireland",
-          "value": "IE"
-        },
-        {
-          "label": "Isle of Man",
-          "value": "IM"
-        },
-        {
-          "label": "Israel",
-          "value": "IL"
-        },
-        {
-          "label": "Italy",
-          "value": "IT"
-        },
-        {
-          "label": "Jamaica",
-          "value": "JM"
-        },
-        {
-          "label": "Japan",
-          "value": "JP"
-        },
-        {
-          "label": "Jersey",
-          "value": "JE"
-        },
-        {
-          "label": "Jordan",
-          "value": "JO"
-        },
-        {
-          "label": "Kazakhstan",
-          "value": "KZ"
-        },
-        {
-          "label": "Kenya",
-          "value": "KE"
-        },
-        {
-          "label": "Kiribati",
-          "value": "KI"
-        },
-        {
-          "label": "Korea (North)",
-          "value": "KP"
-        },
-        {
-          "label": "Korea (South)",
-          "value": "KR"
-        },
-        {
-          "label": "Kosovo",
-          "value": "XK"
-        },
-        {
-          "label": "Kuwait",
-          "value": "KW"
-        },
-        {
-          "label": "Kyrgyzstan",
-          "value": "KG"
-        },
-        {
-          "label": "Laos",
-          "value": "LA"
-        },
-        {
-          "label": "Latvia",
-          "value": "LV"
-        },
-        {
-          "label": "Lebanon",
-          "value": "LB"
-        },
-        {
-          "label": "Lesotho",
-          "value": "LS"
-        },
-        {
-          "label": "Liberia",
-          "value": "LR"
-        },
-        {
-          "label": "Libyan Arab Jamahiriya",
-          "value": "LY"
-        },
-        {
-          "label": "Liechtenstein",
-          "value": "LI"
-        },
-        {
-          "label": "Lithuania",
-          "value": "LT"
-        },
-        {
-          "label": "Luxembourg",
-          "value": "LU"
-        },
-        {
-          "label": "Macao",
-          "value": "MO"
-        },
-        {
-          "label": "Macedonia",
-          "value": "MK"
-        },
-        {
-          "label": "Madagascar",
-          "value": "MG"
-        },
-        {
-          "label": "Malawi",
-          "value": "MW"
-        },
-        {
-          "label": "Malaysia",
-          "value": "MY"
-        },
-        {
-          "label": "Maldives",
-          "value": "MV"
-        },
-        {
-          "label": "Mali",
-          "value": "ML"
-        },
-        {
-          "label": "Malta",
-          "value": "MT"
-        },
-        {
-          "label": "Marshall Islands",
-          "value": "MH"
-        },
-        {
-          "label": "Martinique",
-          "value": "MQ"
-        },
-        {
-          "label": "Mauritania",
-          "value": "MR"
-        },
-        {
-          "label": "Mauritius",
-          "value": "MU"
-        },
-        {
-          "label": "Mayotte",
-          "value": "YT"
-        },
-        {
-          "label": "Mexico",
-          "value": "MX"
-        },
-        {
-          "label": "Micronesia",
-          "value": "FM"
-        },
-        {
-          "label": "Moldova",
-          "value": "MD"
-        },
-        {
-          "label": "Monaco",
-          "value": "MC"
-        },
-        {
-          "label": "Mongolia",
-          "value": "MN"
-        },
-        {
-          "label": "Montserrat",
-          "value": "MS"
-        },
-        {
-          "label": "Morocco",
-          "value": "MA"
-        },
-        {
-          "label": "Mozambique",
-          "value": "MZ"
-        },
-        {
-          "label": "Myanmar",
-          "value": "MM"
-        },
-        {
-          "label": "Namibia",
-          "value": "NA"
-        },
-        {
-          "label": "Nauru",
-          "value": "NR"
-        },
-        {
-          "label": "Nepal",
-          "value": "NP"
-        },
-        {
-          "label": "Netherlands",
-          "value": "NL"
-        },
-        {
-          "label": "Netherlands Antilles",
-          "value": "AN"
-        },
-        {
-          "label": "New Caledonia",
-          "value": "NC"
-        },
-        {
-          "label": "New Zealand",
-          "value": "NZ"
-        },
-        {
-          "label": "Nicaragua",
-          "value": "NI"
-        },
-        {
-          "label": "Niger",
-          "value": "NE"
-        },
-        {
-          "label": "Nigeria",
-          "value": "NG"
-        },
-        {
-          "label": "Niue",
-          "value": "NU"
-        },
-        {
-          "label": "Norfolk Island",
-          "value": "NF"
-        },
-        {
-          "label": "Northern Mariana Islands",
-          "value": "MP"
-        },
-        {
-          "label": "Norway",
-          "value": "NO"
-        },
-        {
-          "label": "Oman",
-          "value": "OM"
-        },
-        {
-          "label": "Pakistan",
-          "value": "PK"
-        },
-        {
-          "label": "Palau",
-          "value": "PW"
-        },
-        {
-          "label": "Palestinian Territory, Occupied",
-          "value": "PS"
-        },
-        {
-          "label": "Panama",
-          "value": "PA"
-        },
-        {
-          "label": "Papua New Guinea",
-          "value": "PG"
-        },
-        {
-          "label": "Paraguay",
-          "value": "PY"
-        },
-        {
-          "label": "Peru",
-          "value": "PE"
-        },
-        {
-          "label": "Philippines",
-          "value": "PH"
-        },
-        {
-          "label": "Pitcairn",
-          "value": "PN"
-        },
-        {
-          "label": "Poland",
-          "value": "PL"
-        },
-        {
-          "label": "Portugal",
-          "value": "PT"
-        },
-        {
-          "label": "Puerto Rico",
-          "value": "PR"
-        },
-        {
-          "label": "Qatar",
-          "value": "QA"
-        },
-        {
-          "label": "Reunion",
-          "value": "RE"
-        },
-        {
-          "label": "Romania",
-          "value": "RO"
-        },
-        {
-          "label": "Russian Federation",
-          "value": "RU"
-        },
-        {
-          "label": "Rwanda",
-          "value": "RW"
-        },
-        {
-          "label": "Saint Helena",
-          "value": "SH"
-        },
-        {
-          "label": "Saint Kitts and Nevis",
-          "value": "KN"
-        },
-        {
-          "label": "Saint Lucia",
-          "value": "LC"
-        },
-        {
-          "label": "Saint Pierre and Miquelon",
-          "value": "PM"
-        },
-        {
-          "label": "Saint Vincent and the Grenadines",
-          "value": "VC"
-        },
-        {
-          "label": "Samoa",
-          "value": "WS"
-        },
-        {
-          "label": "San Marino",
-          "value": "SM"
-        },
-        {
-          "label": "Sao Tome and Principe",
-          "value": "ST"
-        },
-        {
-          "label": "Saudi Arabia",
-          "value": "SA"
-        },
-        {
-          "label": "Senegal",
-          "value": "SN"
-        },
-        {
-          "label": "Serbia",
-          "value": "RS"
-        },
-        {
-          "label": "Montenegro",
-          "value": "ME"
-        },
-        {
-          "label": "Seychelles",
-          "value": "SC"
-        },
-        {
-          "label": "Sierra Leone",
-          "value": "SL"
-        },
-        {
-          "label": "Singapore",
-          "value": "SG"
-        },
-        {
-          "label": "Slovakia",
-          "value": "SK"
-        },
-        {
-          "label": "Slovenia",
-          "value": "SI"
-        },
-        {
-          "label": "Solomon Islands",
-          "value": "SB"
-        },
-        {
-          "label": "Somalia",
-          "value": "SO"
-        },
-        {
-          "label": "South Africa",
-          "value": "ZA"
-        },
-        {
-          "label": "South Georgia and the South Sandwich Islands",
-          "value": "GS"
-        },
-        {
-          "label": "Spain",
-          "value": "ES"
-        },
-        {
-          "label": "Sri Lanka",
-          "value": "LK"
-        },
-        {
-          "label": "Sudan",
-          "value": "SD"
-        },
-        {
-          "label": "Surilabel",
-          "value": "SR"
-        },
-        {
-          "label": "Svalbard and Jan Mayen",
-          "value": "SJ"
-        },
-        {
-          "label": "Swaziland",
-          "value": "SZ"
-        },
-        {
-          "label": "Sweden",
-          "value": "SE"
-        },
-        {
-          "label": "Switzerland",
-          "value": "CH"
-        },
-        {
-          "label": "Syrian Arab Republic",
-          "value": "SY"
-        },
-        {
-          "label": "Taiwan, Province of China",
-          "value": "TW"
-        },
-        {
-          "label": "Tajikistan",
-          "value": "TJ"
-        },
-        {
-          "label": "Tanzania",
-          "value": "TZ"
-        },
-        {
-          "label": "Thailand",
-          "value": "TH"
-        },
-        {
-          "label": "Timor-Leste",
-          "value": "TL"
-        },
-        {
-          "label": "Togo",
-          "value": "TG"
-        },
-        {
-          "label": "Tokelau",
-          "value": "TK"
-        },
-        {
-          "label": "Tonga",
-          "value": "TO"
-        },
-        {
-          "label": "Trinidad and Tobago",
-          "value": "TT"
-        },
-        {
-          "label": "Tunisia",
-          "value": "TN"
-        },
-        {
-          "label": "Turkey",
-          "value": "TR"
-        },
-        {
-          "label": "Turkmenistan",
-          "value": "TM"
-        },
-        {
-          "label": "Turks and Caicos Islands",
-          "value": "TC"
-        },
-        {
-          "label": "Tuvalu",
-          "value": "TV"
-        },
-        {
-          "label": "Uganda",
-          "value": "UG"
-        },
-        {
-          "label": "Ukraine",
-          "value": "UA"
-        },
-        {
-          "label": "United Arab Emirates",
-          "value": "AE"
-        },
-        {
-          "label": "United Kingdom",
-          "value": "GB"
-        },
-        {
-          "label": "United States",
-          "value": "US"
-        },
-        {
-          "label": "United States Minor Outlying Islands",
-          "value": "UM"
-        },
-        {
-          "label": "Uruguay",
-          "value": "UY"
-        },
-        {
-          "label": "Uzbekistan",
-          "value": "UZ"
-        },
-        {
-          "label": "Vanuatu",
-          "value": "VU"
-        },
-        {
-          "label": "Venezuela",
-          "value": "VE"
-        },
-        {
-          "label": "Viet Nam",
-          "value": "VN"
-        },
-        {
-          "label": "Virgin Islands, British",
-          "value": "VG"
-        },
-        {
-          "label": "Virgin Islands, U.S.",
-          "value": "VI"
-        },
-        {
-          "label": "Wallis and Futuna",
-          "value": "WF"
-        },
-        {
-          "label": "Western Sahara",
-          "value": "EH"
-        },
-        {
-          "label": "Yemen",
-          "value": "YE"
-        },
-        {
-          "label": "Zambia",
-          "value": "ZM"
-        },
-        {
-          "label": "Zimbabwe",
-          "value": "ZW"
-        }
-      ]
-    }
-  }
+	"elements": [
+		{
+			"type": "tabs",
+			"attributes": {
+				"pill": false
+			},
+			"children": [
+				{
+					"type": "page",
+					"attributes": {
+						"label": "0. This page shouldn't be shown"
+					},
+					"showIf": [
+						"false"
+					]
+				},
+				{
+					"type": "page",
+					"attributes": {
+						"label": "Your loan details"
+					},
+					"children": [
+						{
+							"fieldId": "howManyPeopleApplying",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "How many people are applying?",
+								"options": [
+									"1",
+									"2"
+								]
+							},
+							"validation": [
+								"required"
+							]
+						},
+						{
+							"fieldId": "areYouAnExistingCustomer",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Are you an existing customer?",
+								"options": [
+									"Yes",
+									"No"
+								]
+							}
+						},
+						{
+							"fieldId": "nabId",
+							"type": "textInput",
+							"attributes": {
+								"label": "What is your NAB ID?",
+								"description": "This will help us identify you. It's an 8-10 digit number found on the back of your NAB card above the black strip. It’s also the number you use to login to internet banking."
+							},
+							"validation": [
+								"required",
+								"numeric",
+								{
+									"name": "validIf",
+									"expression": "formValues.howManyPeopleApplying != 1 || value > 4",
+									"message": "If 1 personal is applying this must greater then 4"
+								}
+							],
+							"showIf": [
+								"formValues.howManyPeopleApplying == 2 && formValues.areYouAnExistingCustomer _= 'no'"
+							]
+						},
+						{
+							"fieldId": "loanAmount",
+							"type": "textInput",
+							"attributes": {
+								"label": "How much would you like to borrow?",
+								"description": "The minimum loan amount is $5000. You can borrow up to $55000. Don't include spaces or other punctuation."
+							},
+							"validation": [
+								"required",
+								"currency"
+							]
+						},
+						{
+							"fieldId": "rateType",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Would you like a Fixed or Variable interest rate?",
+								"info": "A fixed rate means your loan's interest rate and repayments will stay the same for the loan term. Redraw won't be available. A variable rate means your loan's interest rate and repayments could move up or down.",
+								"options": [
+									"Variable",
+									"Fixed"
+								]
+							}
+						},
+						{
+							"fieldId": "loanTerm",
+							"type": "dropdown",
+							"attributes": {
+								"label": "What loan term would you like?",
+								"options": [
+									"1 years",
+									"2 years",
+									"3 years",
+									"4 years",
+									"5 years",
+									"6 years",
+									"7 years"
+								],
+								"description": "A shorter term means higher repayments (as they're spread over less years). A longer term means lower repayments, but more interest paid by the end of the loan term."
+							}
+						},
+						{
+							"fieldId": "repaymentFrequency",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "How often would you like to make repayments?",
+								"options": [
+									"Weekly",
+									"Fortnightly",
+									"Monthly"
+								]
+							}
+						},
+						{
+							"fieldId": "loanPurpose",
+							"type": "dropdown",
+							"attributes": {
+								"label": "What's the main purpose for this loan?",
+								"options": [
+									"New car",
+									"Used car",
+									"Debt consolidation",
+									"House hold / Personal goods",
+									"Refinance NAB debts",
+									"Travel / Holidays",
+									"Boat / Caravan / Trailer",
+									"Motorcycle / Scooter",
+									"Shares / Other assets",
+									"Renovations / Alteration",
+									"Engagement / Wedding / Funeral",
+									"Education",
+									"Medical / Dental",
+									"Multiple reasons",
+									"Business purpose or expense",
+									"House / land Purchase",
+									"Other"
+								],
+								"description": "Select what most of the money will be used for."
+							}
+						},
+						{
+							"fieldId": "country",
+							"type": "dropdown",
+							"attributes": {
+								"label": "What country were you born in",
+								"referenceDataOptions": "countryCodes"
+							}
+						}
+					]
+				},
+				{
+					"type": "page",
+					"attributes": {
+						"label": "Tell us about yourself"
+					},
+					"showIf": [
+						"formValues.howManyPeopleApplying == 1"
+					],
+					"children": [
+						{
+							"type": "heading",
+							"attributes": {
+								"level": 4,
+								"text": "Personal details"
+							}
+						},
+						{
+							"fieldId": "title",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Title",
+								"options": [
+									"Mr",
+									"Ms",
+									"Mrs",
+									"Miss",
+									"Dr"
+								]
+							}
+						},
+						{
+							"fieldId": "firstName",
+							"type": "textInput",
+							"attributes": {
+								"label": "First Name"
+							}
+						},
+						{
+							"fieldId": "middleName",
+							"type": "textInput",
+							"attributes": {
+								"label": "Middle Name"
+							}
+						},
+						{
+							"fieldId": "lastName",
+							"type": "textInput",
+							"attributes": {
+								"label": "Last Name"
+							}
+						},
+						{
+							"fieldId": "dob",
+							"type": "textInput",
+							"attributes": {
+								"label": "Date of birth",
+								"description": "Enter as DD/MM/YYYY (eg. 1st January 1980 would be 01/01/1980)"
+							}
+						},
+						{
+							"fieldId": "maritalStatus",
+							"type": "dropdown",
+							"attributes": {
+								"label": "Marital status",
+								"options": [
+									"Single",
+									"Married",
+									"Defacto",
+									"Separated",
+									"Divorced",
+									"Widowed"
+								]
+							}
+						},
+						{
+							"fieldId": "numberOfFinancialDependants",
+							"type": "dropdown",
+							"attributes": {
+								"label": "Number of financial dependants",
+								"info": "A financial dependant is someone who you support financially. This can include children (of any age), grandparents, foster children, etc.",
+								"options": [
+									"0",
+									"1",
+									"2",
+									"3",
+									"4",
+									"5",
+									"6",
+									"7",
+									"8",
+									"9+"
+								]
+							}
+						},
+						{
+							"fieldId": "driversLicenceNumber",
+							"type": "textInput",
+							"attributes": {
+								"label": "Driver's licence number",
+								"description": "We'll use this to identify you when we complete a credit check."
+							}
+						},
+						{
+							"fieldId": "driversLicenceState",
+							"type": "dropdown",
+							"attributes": {
+								"label": "State of issue",
+								"options": [
+									"ACT",
+									"NSW",
+									"NT",
+									"QLD",
+									"SA",
+									"TAS",
+									"VIC",
+									"WA"
+								]
+							}
+						},
+						{
+							"fieldId": "australianResidentForTaxPurposes",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Are you an Australian resident for tax purposes?",
+								"options": [
+									"Yes",
+									"No"
+								]
+							}
+						},
+						{
+							"fieldId": "usResidentForTaxPurposes",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Are you a US citizen or US resident for tax purposes?",
+								"options": [
+									"Yes",
+									"No"
+								],
+								"info": "NAB is required to identify certain U.S. persons in order to meet account information reporting requirements under local and international laws."
+							}
+						},
+						{
+							"fieldId": "otherCountryResidentForTaxPurposes",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Are you a resident of any other country for tax purposes?",
+								"options": [
+									"Yes",
+									"No"
+								]
+							}
+						},
+						{
+							"type": "heading",
+							"attributes": {
+								"level": 4,
+								"text": "Where do you live?"
+							}
+						},
+						{
+							"fieldId": "residentialStatus",
+							"type": "dropdown",
+							"attributes": {
+								"label": "Residential Status",
+								"options": [
+									"Renting",
+									"Home owner (no mortgage)",
+									"Home owner (with mortgage)",
+									"Living with parent / relative",
+									"Boarding",
+									"Employer supplied"
+								]
+							}
+						},
+						{
+							"fieldId": "residentialAddress",
+							"type": "textInput",
+							"attributes": {
+								"label": "Residential address",
+								"description": "This can not be a P.O. Box"
+							}
+						},
+						{
+							"fieldId": "dateMoveToResidentialAddress",
+							"type": "textInput",
+							"attributes": {
+								"label": "When did you move to this address?",
+								"description": "If you’re unsure about the exact date just select the 1st of the month."
+							}
+						},
+						{
+							"fieldId": "residentialAddressIsPostalAddress",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Is your postal address the same as your residential address?",
+								"options": [
+									"Yes",
+									"No"
+								]
+							}
+						},
+						{
+							"type": "heading",
+							"attributes": {
+								"level": 4,
+								"text": "Your contact details"
+							}
+						},
+						{
+							"fieldId": "mobileNumber",
+							"type": "textInput",
+							"attributes": {
+								"label": "Mobile number",
+								"description": "We may send you a SMS to let you know the outcome of your application and next steps."
+							}
+						},
+						{
+							"fieldId": "emailAddress",
+							"type": "textInput",
+							"attributes": {
+								"label": "Email address",
+								"description": "We may send you an email to let you know the outcome of your application and next steps."
+							},
+							"validation": [
+								{
+									"name": "email",
+									"message": "You must enter a valid email"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "page",
+					"attributes": {
+						"label": "Tell us about your employment"
+					},
+					"showIf": [
+						"formValues.howManyPeopleApplying == 2"
+					],
+					"children": [
+						{
+							"fieldId": "employment",
+							"type": "list",
+							"attributes": {
+								"label": "Jobs",
+								"itemLabel": "Job"
+							},
+							"children": [
+								{
+									"fieldId": "status",
+									"type": "dropdown",
+									"attributes": {
+										"label": "What is your employment status?",
+										"options": [
+											"Full time",
+											"Part time",
+											"Casual",
+											"Self-employed",
+											"Contractor",
+											"Retired",
+											"Home Duties",
+											"Student",
+											"Unemployed"
+										]
+									}
+								},
+								{
+									"fieldId": "employerName",
+									"type": "textInput",
+									"attributes": {
+										"label": "Employer's name"
+									},
+									"validation": [
+										"required"
+									]
+								},
+								{
+									"fieldId": "jobTitle",
+									"type": "textInput",
+									"attributes": {
+										"label": "What's your job title?"
+									}
+								},
+								{
+									"fieldId": "startDate",
+									"type": "textInput",
+									"attributes": {
+										"label": "When did you start working here?",
+										"description": "If you’re unsure about the actual date just put the 1st of the month"
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "page",
+					"attributes": {
+						"label": "Tell us about what you earn"
+					},
+					"children": [
+						{
+							"fieldId": "income",
+							"type": "list",
+							"attributes": {
+								"label": "Income",
+								"itemLabel": "Income"
+							},
+							"children": [
+								{
+									"fieldId": "status",
+									"type": "dropdown",
+									"attributes": {
+										"label": "Income type",
+										"description": "Including all of your sources of income will help to ensure your application outcome is accurate.",
+										"info": "Dividends, Managed Funds, or Superannuation: Include income from shares, managed investments, superannuation, interest bearing deposits or other income with at least two direct credits as investment income. Commission, Overtime payments: Include income from commissions, overtime payments that have been paid to you for more than six months. Bonus: Include income from bonus payments earned for the most recent two financial years. This must be income paid as a salary plus the bonus payments.",
+										"options": [
+											"Salary",
+											"Family allowance",
+											"Pensions",
+											"All Department of Veteran Affairs income",
+											"Rental income",
+											"Self-employed income",
+											"Superannuation income",
+											"Dividend income",
+											"Overtime",
+											"Commission",
+											"Child support",
+											"Bonus"
+										]
+									}
+								},
+								{
+									"fieldId": "frequency",
+									"type": "dropdown",
+									"attributes": {
+										"label": "Frequency of income",
+										"options": [
+											"Weekly",
+											"Fortnightly",
+											"Pensions",
+											"Monthly",
+											"Quarterly",
+											"Half yearly",
+											"Yearly"
+										]
+									}
+								},
+								{
+									"fieldId": "incomeGross",
+									"type": "textInput",
+									"attributes": {
+										"label": "Before tax (Gross)"
+									}
+								},
+								{
+									"fieldId": "incomeNet",
+									"type": "textInput",
+									"attributes": {
+										"label": "After tax (Net)"
+									}
+								}
+							]
+						},
+						{
+							"fieldId": "foreseeFinancialChanges",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Do you foresee any major changes to your employment, income and/or expenses over the next 12 months that will make it difficult for you to meet your financial commitments?",
+								"description": "For example if you know of anything likely to happen in the next 12 months that will make it harder for you to meet your financial commitments (eg. make your loan and/or credit card repayments) answer \"Yes\".",
+								"info": "For example changing from full time to part time employment; changing jobs (resulting in your income reducing); taking a 12 month break from your job; your existing loan repayments will be increasing by a large amount (due to the ending of a honeymoon interest rate period)",
+								"options": [
+									"Yes",
+									"No"
+								]
+							}
+						},
+						{
+							"fieldId": "pastFinancialDifficulties",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Have you had any difficulties in making your loan repayments in the last 2 years?",
+								"description": "For example are you currently behind in your repayments on an existing loan?",
+								"info": "If you've missed, or had problems making, any loan or credit card payments in the past two years answer \"Yes\". If you answer \"Yes\" we'll ask you for more information - for example the loan provider, type of loan, amounts you missed, when and why it happened, and whether the problem has been resolved or ongoing.",
+								"options": [
+									"Yes",
+									"No"
+								]
+							}
+						},
+						{
+							"fieldId": "pastFinancialJudgments",
+							"type": "buttonGroup",
+							"attributes": {
+								"label": "Have you ever had, or are there any judgments, attachments or legal proceedings against you relating to financial matters?",
+								"info": "You need to let us know about any time that your financial situation has led to a legal judgment being made against you, an attachment (eg. a judgment which transferred property of yours to another person who you were in debt to), legal proceedings being taken against you. An example of the sort of situation we're asking about bankruptcy. If you answer \"yes\" we'll ask you for more details.",
+								"options": [
+									"Yes",
+									"No"
+								]
+							}
+						}
+					]
+				},
+				{
+					"type": "page",
+					"attributes": {
+						"label": "Tell us about what you own"
+					},
+					"children": [
+						{
+							"fieldId": "property",
+							"type": "list",
+							"attributes": {
+								"label": "Properties",
+								"itemLabel": "Property"
+							},
+							"children": [
+								{
+									"fieldId": "type",
+									"type": "dropdown",
+									"attributes": {
+										"label": "What type of property is this?",
+										"options": [
+											"Residential property",
+											"Investment property"
+										]
+									}
+								},
+								{
+									"fieldId": "estimatedValue",
+									"type": "textInput",
+									"attributes": {
+										"label": "What's the estimated value?"
+									},
+									"validation": [
+										"required"
+									]
+								},
+								{
+									"fieldId": "ownership",
+									"type": "buttonGroup",
+									"attributes": {
+										"label": "Is this property solely or jointly owned?",
+										"options": [
+											"Solely owned",
+											"Jointly owned"
+										]
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"referenceData": {
+		"inline": {
+			"countryCodes": [
+				{
+					"label": "Afghanistan",
+					"value": "AF"
+				},
+				{
+					"label": "Åland Islands",
+					"value": "AX"
+				},
+				{
+					"label": "Albania",
+					"value": "AL"
+				},
+				{
+					"label": "Algeria",
+					"value": "DZ"
+				},
+				{
+					"label": "American Samoa",
+					"value": "AS"
+				},
+				{
+					"label": "AndorrA",
+					"value": "AD"
+				},
+				{
+					"label": "Angola",
+					"value": "AO"
+				},
+				{
+					"label": "Anguilla",
+					"value": "AI"
+				},
+				{
+					"label": "Antarctica",
+					"value": "AQ"
+				},
+				{
+					"label": "Antigua and Barbuda",
+					"value": "AG"
+				},
+				{
+					"label": "Argentina",
+					"value": "AR"
+				},
+				{
+					"label": "Armenia",
+					"value": "AM"
+				},
+				{
+					"label": "Aruba",
+					"value": "AW"
+				},
+				{
+					"label": "Australia",
+					"value": "AU"
+				},
+				{
+					"label": "Austria",
+					"value": "AT"
+				},
+				{
+					"label": "Azerbaijan",
+					"value": "AZ"
+				},
+				{
+					"label": "Bahamas",
+					"value": "BS"
+				},
+				{
+					"label": "Bahrain",
+					"value": "BH"
+				},
+				{
+					"label": "Bangladesh",
+					"value": "BD"
+				},
+				{
+					"label": "Barbados",
+					"value": "BB"
+				},
+				{
+					"label": "Belarus",
+					"value": "BY"
+				},
+				{
+					"label": "Belgium",
+					"value": "BE"
+				},
+				{
+					"label": "Belize",
+					"value": "BZ"
+				},
+				{
+					"label": "Benin",
+					"value": "BJ"
+				},
+				{
+					"label": "Bermuda",
+					"value": "BM"
+				},
+				{
+					"label": "Bhutan",
+					"value": "BT"
+				},
+				{
+					"label": "Bolivia",
+					"value": "BO"
+				},
+				{
+					"label": "Bosnia and Herzegovina",
+					"value": "BA"
+				},
+				{
+					"label": "Botswana",
+					"value": "BW"
+				},
+				{
+					"label": "Bouvet Island",
+					"value": "BV"
+				},
+				{
+					"label": "Brazil",
+					"value": "BR"
+				},
+				{
+					"label": "British Indian Ocean Territory",
+					"value": "IO"
+				},
+				{
+					"label": "Brunei Darussalam",
+					"value": "BN"
+				},
+				{
+					"label": "Bulgaria",
+					"value": "BG"
+				},
+				{
+					"label": "Burkina Faso",
+					"value": "BF"
+				},
+				{
+					"label": "Burundi",
+					"value": "BI"
+				},
+				{
+					"label": "Cambodia",
+					"value": "KH"
+				},
+				{
+					"label": "Cameroon",
+					"value": "CM"
+				},
+				{
+					"label": "Canada",
+					"value": "CA"
+				},
+				{
+					"label": "Cape Verde",
+					"value": "CV"
+				},
+				{
+					"label": "Cayman Islands",
+					"value": "KY"
+				},
+				{
+					"label": "Central African Republic",
+					"value": "CF"
+				},
+				{
+					"label": "Chad",
+					"value": "TD"
+				},
+				{
+					"label": "Chile",
+					"value": "CL"
+				},
+				{
+					"label": "China",
+					"value": "CN"
+				},
+				{
+					"label": "Christmas Island",
+					"value": "CX"
+				},
+				{
+					"label": "Cocos (Keeling) Islands",
+					"value": "CC"
+				},
+				{
+					"label": "Colombia",
+					"value": "CO"
+				},
+				{
+					"label": "Comoros",
+					"value": "KM"
+				},
+				{
+					"label": "Congo",
+					"value": "CG"
+				},
+				{
+					"label": "Congo, Democratic Republic",
+					"value": "CD"
+				},
+				{
+					"label": "Cook Islands",
+					"value": "CK"
+				},
+				{
+					"label": "Costa Rica",
+					"value": "CR"
+				},
+				{
+					"label": "Cote D\"Ivoire",
+					"value": "CI"
+				},
+				{
+					"label": "Croatia",
+					"value": "HR"
+				},
+				{
+					"label": "Cuba",
+					"value": "CU"
+				},
+				{
+					"label": "Cyprus",
+					"value": "CY"
+				},
+				{
+					"label": "Czech Republic",
+					"value": "CZ"
+				},
+				{
+					"label": "Denmark",
+					"value": "DK"
+				},
+				{
+					"label": "Djibouti",
+					"value": "DJ"
+				},
+				{
+					"label": "Dominica",
+					"value": "DM"
+				},
+				{
+					"label": "Dominican Republic",
+					"value": "DO"
+				},
+				{
+					"label": "Ecuador",
+					"value": "EC"
+				},
+				{
+					"label": "Egypt",
+					"value": "EG"
+				},
+				{
+					"label": "El Salvador",
+					"value": "SV"
+				},
+				{
+					"label": "Equatorial Guinea",
+					"value": "GQ"
+				},
+				{
+					"label": "Eritrea",
+					"value": "ER"
+				},
+				{
+					"label": "Estonia",
+					"value": "EE"
+				},
+				{
+					"label": "Ethiopia",
+					"value": "ET"
+				},
+				{
+					"label": "Falkland Islands (Malvinas)",
+					"value": "FK"
+				},
+				{
+					"label": "Faroe Islands",
+					"value": "FO"
+				},
+				{
+					"label": "Fiji",
+					"value": "FJ"
+				},
+				{
+					"label": "Finland",
+					"value": "FI"
+				},
+				{
+					"label": "France",
+					"value": "FR"
+				},
+				{
+					"label": "French Guiana",
+					"value": "GF"
+				},
+				{
+					"label": "French Polynesia",
+					"value": "PF"
+				},
+				{
+					"label": "French Southern Territories",
+					"value": "TF"
+				},
+				{
+					"label": "Gabon",
+					"value": "GA"
+				},
+				{
+					"label": "Gambia",
+					"value": "GM"
+				},
+				{
+					"label": "Georgia",
+					"value": "GE"
+				},
+				{
+					"label": "Germany",
+					"value": "DE"
+				},
+				{
+					"label": "Ghana",
+					"value": "GH"
+				},
+				{
+					"label": "Gibraltar",
+					"value": "GI"
+				},
+				{
+					"label": "Greece",
+					"value": "GR"
+				},
+				{
+					"label": "Greenland",
+					"value": "GL"
+				},
+				{
+					"label": "Grenada",
+					"value": "GD"
+				},
+				{
+					"label": "Guadeloupe",
+					"value": "GP"
+				},
+				{
+					"label": "Guam",
+					"value": "GU"
+				},
+				{
+					"label": "Guatemala",
+					"value": "GT"
+				},
+				{
+					"label": "Guernsey",
+					"value": "GG"
+				},
+				{
+					"label": "Guinea",
+					"value": "GN"
+				},
+				{
+					"label": "Guinea-Bissau",
+					"value": "GW"
+				},
+				{
+					"label": "Guyana",
+					"value": "GY"
+				},
+				{
+					"label": "Haiti",
+					"value": "HT"
+				},
+				{
+					"label": "Heard Island and Mcdonald Islands",
+					"value": "HM"
+				},
+				{
+					"label": "Holy See (Vatican City State)",
+					"value": "VA"
+				},
+				{
+					"label": "Honduras",
+					"value": "HN"
+				},
+				{
+					"label": "Hong Kong",
+					"value": "HK"
+				},
+				{
+					"label": "Hungary",
+					"value": "HU"
+				},
+				{
+					"label": "Iceland",
+					"value": "IS"
+				},
+				{
+					"label": "India",
+					"value": "IN"
+				},
+				{
+					"label": "Indonesia",
+					"value": "ID"
+				},
+				{
+					"label": "Iran",
+					"value": "IR"
+				},
+				{
+					"label": "Iraq",
+					"value": "IQ"
+				},
+				{
+					"label": "Ireland",
+					"value": "IE"
+				},
+				{
+					"label": "Isle of Man",
+					"value": "IM"
+				},
+				{
+					"label": "Israel",
+					"value": "IL"
+				},
+				{
+					"label": "Italy",
+					"value": "IT"
+				},
+				{
+					"label": "Jamaica",
+					"value": "JM"
+				},
+				{
+					"label": "Japan",
+					"value": "JP"
+				},
+				{
+					"label": "Jersey",
+					"value": "JE"
+				},
+				{
+					"label": "Jordan",
+					"value": "JO"
+				},
+				{
+					"label": "Kazakhstan",
+					"value": "KZ"
+				},
+				{
+					"label": "Kenya",
+					"value": "KE"
+				},
+				{
+					"label": "Kiribati",
+					"value": "KI"
+				},
+				{
+					"label": "Korea (North)",
+					"value": "KP"
+				},
+				{
+					"label": "Korea (South)",
+					"value": "KR"
+				},
+				{
+					"label": "Kosovo",
+					"value": "XK"
+				},
+				{
+					"label": "Kuwait",
+					"value": "KW"
+				},
+				{
+					"label": "Kyrgyzstan",
+					"value": "KG"
+				},
+				{
+					"label": "Laos",
+					"value": "LA"
+				},
+				{
+					"label": "Latvia",
+					"value": "LV"
+				},
+				{
+					"label": "Lebanon",
+					"value": "LB"
+				},
+				{
+					"label": "Lesotho",
+					"value": "LS"
+				},
+				{
+					"label": "Liberia",
+					"value": "LR"
+				},
+				{
+					"label": "Libyan Arab Jamahiriya",
+					"value": "LY"
+				},
+				{
+					"label": "Liechtenstein",
+					"value": "LI"
+				},
+				{
+					"label": "Lithuania",
+					"value": "LT"
+				},
+				{
+					"label": "Luxembourg",
+					"value": "LU"
+				},
+				{
+					"label": "Macao",
+					"value": "MO"
+				},
+				{
+					"label": "Macedonia",
+					"value": "MK"
+				},
+				{
+					"label": "Madagascar",
+					"value": "MG"
+				},
+				{
+					"label": "Malawi",
+					"value": "MW"
+				},
+				{
+					"label": "Malaysia",
+					"value": "MY"
+				},
+				{
+					"label": "Maldives",
+					"value": "MV"
+				},
+				{
+					"label": "Mali",
+					"value": "ML"
+				},
+				{
+					"label": "Malta",
+					"value": "MT"
+				},
+				{
+					"label": "Marshall Islands",
+					"value": "MH"
+				},
+				{
+					"label": "Martinique",
+					"value": "MQ"
+				},
+				{
+					"label": "Mauritania",
+					"value": "MR"
+				},
+				{
+					"label": "Mauritius",
+					"value": "MU"
+				},
+				{
+					"label": "Mayotte",
+					"value": "YT"
+				},
+				{
+					"label": "Mexico",
+					"value": "MX"
+				},
+				{
+					"label": "Micronesia",
+					"value": "FM"
+				},
+				{
+					"label": "Moldova",
+					"value": "MD"
+				},
+				{
+					"label": "Monaco",
+					"value": "MC"
+				},
+				{
+					"label": "Mongolia",
+					"value": "MN"
+				},
+				{
+					"label": "Montserrat",
+					"value": "MS"
+				},
+				{
+					"label": "Morocco",
+					"value": "MA"
+				},
+				{
+					"label": "Mozambique",
+					"value": "MZ"
+				},
+				{
+					"label": "Myanmar",
+					"value": "MM"
+				},
+				{
+					"label": "Namibia",
+					"value": "NA"
+				},
+				{
+					"label": "Nauru",
+					"value": "NR"
+				},
+				{
+					"label": "Nepal",
+					"value": "NP"
+				},
+				{
+					"label": "Netherlands",
+					"value": "NL"
+				},
+				{
+					"label": "Netherlands Antilles",
+					"value": "AN"
+				},
+				{
+					"label": "New Caledonia",
+					"value": "NC"
+				},
+				{
+					"label": "New Zealand",
+					"value": "NZ"
+				},
+				{
+					"label": "Nicaragua",
+					"value": "NI"
+				},
+				{
+					"label": "Niger",
+					"value": "NE"
+				},
+				{
+					"label": "Nigeria",
+					"value": "NG"
+				},
+				{
+					"label": "Niue",
+					"value": "NU"
+				},
+				{
+					"label": "Norfolk Island",
+					"value": "NF"
+				},
+				{
+					"label": "Northern Mariana Islands",
+					"value": "MP"
+				},
+				{
+					"label": "Norway",
+					"value": "NO"
+				},
+				{
+					"label": "Oman",
+					"value": "OM"
+				},
+				{
+					"label": "Pakistan",
+					"value": "PK"
+				},
+				{
+					"label": "Palau",
+					"value": "PW"
+				},
+				{
+					"label": "Palestinian Territory, Occupied",
+					"value": "PS"
+				},
+				{
+					"label": "Panama",
+					"value": "PA"
+				},
+				{
+					"label": "Papua New Guinea",
+					"value": "PG"
+				},
+				{
+					"label": "Paraguay",
+					"value": "PY"
+				},
+				{
+					"label": "Peru",
+					"value": "PE"
+				},
+				{
+					"label": "Philippines",
+					"value": "PH"
+				},
+				{
+					"label": "Pitcairn",
+					"value": "PN"
+				},
+				{
+					"label": "Poland",
+					"value": "PL"
+				},
+				{
+					"label": "Portugal",
+					"value": "PT"
+				},
+				{
+					"label": "Puerto Rico",
+					"value": "PR"
+				},
+				{
+					"label": "Qatar",
+					"value": "QA"
+				},
+				{
+					"label": "Reunion",
+					"value": "RE"
+				},
+				{
+					"label": "Romania",
+					"value": "RO"
+				},
+				{
+					"label": "Russian Federation",
+					"value": "RU"
+				},
+				{
+					"label": "Rwanda",
+					"value": "RW"
+				},
+				{
+					"label": "Saint Helena",
+					"value": "SH"
+				},
+				{
+					"label": "Saint Kitts and Nevis",
+					"value": "KN"
+				},
+				{
+					"label": "Saint Lucia",
+					"value": "LC"
+				},
+				{
+					"label": "Saint Pierre and Miquelon",
+					"value": "PM"
+				},
+				{
+					"label": "Saint Vincent and the Grenadines",
+					"value": "VC"
+				},
+				{
+					"label": "Samoa",
+					"value": "WS"
+				},
+				{
+					"label": "San Marino",
+					"value": "SM"
+				},
+				{
+					"label": "Sao Tome and Principe",
+					"value": "ST"
+				},
+				{
+					"label": "Saudi Arabia",
+					"value": "SA"
+				},
+				{
+					"label": "Senegal",
+					"value": "SN"
+				},
+				{
+					"label": "Serbia",
+					"value": "RS"
+				},
+				{
+					"label": "Montenegro",
+					"value": "ME"
+				},
+				{
+					"label": "Seychelles",
+					"value": "SC"
+				},
+				{
+					"label": "Sierra Leone",
+					"value": "SL"
+				},
+				{
+					"label": "Singapore",
+					"value": "SG"
+				},
+				{
+					"label": "Slovakia",
+					"value": "SK"
+				},
+				{
+					"label": "Slovenia",
+					"value": "SI"
+				},
+				{
+					"label": "Solomon Islands",
+					"value": "SB"
+				},
+				{
+					"label": "Somalia",
+					"value": "SO"
+				},
+				{
+					"label": "South Africa",
+					"value": "ZA"
+				},
+				{
+					"label": "South Georgia and the South Sandwich Islands",
+					"value": "GS"
+				},
+				{
+					"label": "Spain",
+					"value": "ES"
+				},
+				{
+					"label": "Sri Lanka",
+					"value": "LK"
+				},
+				{
+					"label": "Sudan",
+					"value": "SD"
+				},
+				{
+					"label": "Surilabel",
+					"value": "SR"
+				},
+				{
+					"label": "Svalbard and Jan Mayen",
+					"value": "SJ"
+				},
+				{
+					"label": "Swaziland",
+					"value": "SZ"
+				},
+				{
+					"label": "Sweden",
+					"value": "SE"
+				},
+				{
+					"label": "Switzerland",
+					"value": "CH"
+				},
+				{
+					"label": "Syrian Arab Republic",
+					"value": "SY"
+				},
+				{
+					"label": "Taiwan, Province of China",
+					"value": "TW"
+				},
+				{
+					"label": "Tajikistan",
+					"value": "TJ"
+				},
+				{
+					"label": "Tanzania",
+					"value": "TZ"
+				},
+				{
+					"label": "Thailand",
+					"value": "TH"
+				},
+				{
+					"label": "Timor-Leste",
+					"value": "TL"
+				},
+				{
+					"label": "Togo",
+					"value": "TG"
+				},
+				{
+					"label": "Tokelau",
+					"value": "TK"
+				},
+				{
+					"label": "Tonga",
+					"value": "TO"
+				},
+				{
+					"label": "Trinidad and Tobago",
+					"value": "TT"
+				},
+				{
+					"label": "Tunisia",
+					"value": "TN"
+				},
+				{
+					"label": "Turkey",
+					"value": "TR"
+				},
+				{
+					"label": "Turkmenistan",
+					"value": "TM"
+				},
+				{
+					"label": "Turks and Caicos Islands",
+					"value": "TC"
+				},
+				{
+					"label": "Tuvalu",
+					"value": "TV"
+				},
+				{
+					"label": "Uganda",
+					"value": "UG"
+				},
+				{
+					"label": "Ukraine",
+					"value": "UA"
+				},
+				{
+					"label": "United Arab Emirates",
+					"value": "AE"
+				},
+				{
+					"label": "United Kingdom",
+					"value": "GB"
+				},
+				{
+					"label": "United States",
+					"value": "US"
+				},
+				{
+					"label": "United States Minor Outlying Islands",
+					"value": "UM"
+				},
+				{
+					"label": "Uruguay",
+					"value": "UY"
+				},
+				{
+					"label": "Uzbekistan",
+					"value": "UZ"
+				},
+				{
+					"label": "Vanuatu",
+					"value": "VU"
+				},
+				{
+					"label": "Venezuela",
+					"value": "VE"
+				},
+				{
+					"label": "Viet Nam",
+					"value": "VN"
+				},
+				{
+					"label": "Virgin Islands, British",
+					"value": "VG"
+				},
+				{
+					"label": "Virgin Islands, U.S.",
+					"value": "VI"
+				},
+				{
+					"label": "Wallis and Futuna",
+					"value": "WF"
+				},
+				{
+					"label": "Western Sahara",
+					"value": "EH"
+				},
+				{
+					"label": "Yemen",
+					"value": "YE"
+				},
+				{
+					"label": "Zambia",
+					"value": "ZM"
+				},
+				{
+					"label": "Zimbabwe",
+					"value": "ZW"
+				}
+			]
+		}
+	}
 }
