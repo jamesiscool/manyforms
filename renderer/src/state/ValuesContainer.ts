@@ -15,7 +15,7 @@ export const ValuesContainer = createContainer((initialState = {}) => {
 		})
 		setFormValues(nextFormValues)
 		fieldStateContainer.valueChanged(path)
-		//console.log('formValues:', JSON.stringify(nextFormValues, null, 2))
+		console.log('formValues:', JSON.stringify(nextFormValues, null, 2))
 	}
 
 	function getValue(path: string): string {

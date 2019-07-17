@@ -6,7 +6,7 @@ import {Form} from './Form'
 import FormDef from './FormDef'
 import './index.css'
 
-axios.get<FormDef>('exampleFormDefinition.json')
+axios.get<FormDef>('api/formDefinitions/exampleFormDefinition.json')
 	.then(function (response) {
 		ReactDOM.render(
 			<Form formDef={response.data}/>,
