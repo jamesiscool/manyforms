@@ -6,6 +6,8 @@ import {createContainer} from './useContainer'
 
 export const ReferenceDataContainer = createContainer((referenceDataDef: ReferenceDataDef = {}) => {
 	const [referenceData, setReferenceData] = useState<{ [name: string]: any }>(referenceDataDef.inline || {})
+
+	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
 		referenceDataDef.http!.forEach(httpReferenceDataDef => {
 			axios(httpReferenceDataDef)
@@ -14,13 +16,13 @@ export const ReferenceDataContainer = createContainer((referenceDataDef: Referen
 				})
 		})
 	}, [referenceDataDef])
+	/* eslint-enable react-hooks/exhaustive-deps */
 
 	const set = (name: string, data: any) => {
 		setReferenceData(produce(referenceData, draftReferenceData => {
 			draftReferenceData[name] = data
 		}))
 	}
-
 
 	return {referenceData, set}
 })
