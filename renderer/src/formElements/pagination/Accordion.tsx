@@ -13,12 +13,9 @@ export const Accordion = (props: FormElementProps<void>) => {
 
 	const currentPageRef = useRef<HTMLDivElement>(null)
 
-
-	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
 		props.definition.children && paginationContainer.setUp(props.path, props.definition.children)
-	}, [])
-	/* eslint-enable react-hooks/exhaustive-deps */
+	}, [props.definition.children,props.path, paginationContainer ])
 
 	if (!props.definition.children) {
 		return null
