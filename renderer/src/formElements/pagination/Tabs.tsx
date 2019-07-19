@@ -16,10 +16,12 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 	const showIfContainer = useContainer(ShowIfContainer)
 	const paginationContainer = useContainer(PaginationContainer)
 
+	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
 		console.log('props.path', props.path)
 		props.definition.children && paginationContainer.setUp(props.path, props.definition.children)
-	}, [props.definition.children, props.path, paginationContainer])
+	}, [])
+	/* eslint-enable react-hooks/exhaustive-deps */
 
 	if (!props.definition.children) {
 		return null
