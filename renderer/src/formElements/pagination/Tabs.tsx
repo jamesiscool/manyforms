@@ -16,11 +16,9 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 	const showIfContainer = useContainer(ShowIfContainer)
 	const paginationContainer = useContainer(PaginationContainer)
 
-	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
 		props.definition.children && paginationContainer.setUp(props.path, props.definition.children)
-	}, [])
-	/* eslint-enable react-hooks/exhaustive-deps */
+	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 	if (!props.definition.children) {
 		return null
@@ -45,7 +43,6 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 							return <li className="nav-item" key={key}>
 								<a className="nav-link" href="javascript:void(0)" onClick={() => paginationContainer.setCurrentPageIndex(index)}>{page.attributes.label}</a>
 							</li>
-
 						}
 						/* eslint-enable no-script-url, jsx-a11y/anchor-is-valid */
 						if (index === paginationContainer.currentPageIndex) {
