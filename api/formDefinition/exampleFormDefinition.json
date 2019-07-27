@@ -157,7 +157,7 @@
 						},
 						{
 							"fieldId": "country",
-							"type": "suggest",
+							"type": "autocomplete",
 							"attributes": {
 								"label": "What country were you born in",
 								"referenceDataOptions": "countryCodes"
