@@ -149,6 +149,15 @@
 						{
 							"fieldId": "country",
 							"type": "dropdown",
+							"hidden": true,
+							"attributes": {
+								"label": "What country were you born in",
+								"referenceDataOptions": "countryCodes"
+							}
+						},
+						{
+							"fieldId": "country",
+							"type": "autocomplete",
 							"attributes": {
 								"label": "What country were you born in",
 								"referenceDataOptions": "countryCodes"
