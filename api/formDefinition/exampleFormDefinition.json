@@ -149,7 +149,7 @@
 						{
 							"fieldId": "country",
 							"type": "dropdown",
-							"hidden": true,
+							"showIf": ["false"],
 							"attributes": {
 								"label": "What country were you born in",
 								"referenceDataOptions": "countryCodes"
