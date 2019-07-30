@@ -1,5 +1,6 @@
 import React from 'react'
 import {List} from './collection/List'
+import {Autocomplete} from './input/Autocomplete'
 import {ButtonGroup} from './input/ButtonGroup'
 import {Dropdown} from './input/Dropdown'
 import {TextInput} from './input/TextInput'
@@ -19,7 +20,8 @@ export const formElementNonCollectionTypes: FormElementTypesMap = {
 	'heading': Heading,
 	'paragraph': Paragraph,
 	'buttonGroup': ButtonGroup,
-	'tabs': Tabs
+	'tabs': Tabs,
+	'autocomplete': Autocomplete
 }
 
 export const formElementCollectionTypes: FormElementTypesMap = {
@@ -32,7 +34,7 @@ export function lookupElement(type: string): React.ReactNode {
 	const foundType = formElementTypes[type]
 	if (!foundType) {
 		console.warn('Could not find form element type:' + type)
-		return () => <div>Could not find form element type {type}.</div>
+		return () => <div>Could not find form element type <code>{type}</code>.</div>
 	}
 	return foundType
 }

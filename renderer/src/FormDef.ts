@@ -13,6 +13,7 @@ export interface FormElementDef<Attributes> {
 	children?: Array<FormElementDef<any>>
 	validation?: Array<string | ValidationConstraintDef>
 	showIf?: string[]
+	hidden: boolean
 }
 
 export type ValidationConstraintDef = ValidationRuleDef | ValidationExpresionDef

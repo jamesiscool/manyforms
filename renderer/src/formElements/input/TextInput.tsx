@@ -19,7 +19,7 @@ export const TextInput = (props: FormElementProps<TextInputAttributes>) => {
 		<input
 			type="text"
 			className="form-control"
-			id={props.definition.fieldId}
+			id={props.path}
 			aria-describedby={props.path + '_description'}
 			value={formValuesContainer.getValue(props.path) || ''}
 			onChange={event => formValuesContainer.setValue(props.path, event.currentTarget.value)}

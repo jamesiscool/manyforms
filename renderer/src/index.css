@@ -25,3 +25,7 @@
 .disabled {
     cursor: not-allowed;
 }
+
+.popper{
+    z-index: 900;
+}
