@@ -45,6 +45,17 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 		}
 	})
 
+	useEffect(() => {
+		inputContainerRef.current!.scrollIntoView()
+		//suggestionsContainerRef.current!.scrollIntoView()
+		/*		if(suggestionsContainerRef && suggestionsContainerRef.current) {
+					console.log('suggestionsContainerRef.current.getBoundingClientRect().top', suggestionsContainerRef.current.getBoundingClientRect().top)
+					console.log('suggestionsContainerRef.current.getBoundingClientRect().bottom', suggestionsContainerRef.current.getBoundingClientRect().bottom)
+					suggestionsContainerRef.current.scrollIntoView()
+					//window.scroll({top: suggestionsContainerRef.current.getBoundingClientRect().top - 100})
+				}*/
+	}, [suggestions])
+
 	const handlePotentialOutsideClick = (event: Event) => {
 		if (inputContainerRef && !inputContainerRef.current!.contains(event.target as Node)
 			&& suggestionsContainerRef && !suggestionsContainerRef.current!.contains(event.target as Node)) {
@@ -70,7 +81,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 		setTimeout(() => {
 			const newTarget = document.activeElement
 			if (!inputContainerRef.current!.contains(newTarget) && !suggestionsContainerRef.current!.contains(newTarget)) {
-			setSuggestions([])
+				setSuggestions([])
 			}
 		}, 1)// Have to wait 1 ms so that document.activeElement is not body
 	}
@@ -81,17 +92,14 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 		}
 	}
 	const handleInputKeyDown = (event: KeyboardEvent) => {
-
-		console.log('event.keyCode', event.keyCode)
-		console.log('cursor:', cursor)
-		console.log('cursor > 0 && cursor < suggestions.length:', cursor > 0 && cursor < suggestions.length)
-
-		if (event.keyCode === 38 && cursor > 0) {
+		if (event.keyCode === 38 && cursor > 0) { // up
 			setCursor(cursor - 1)
-		} else if (event.keyCode === 40 && cursor < suggestions.length - 1) {
+		} else if (event.keyCode === 40 && cursor < suggestions.length - 1) { // down
 			setCursor(cursor + 1)
-		} else if (event.keyCode === 13 && cursor >= 0 && cursor < suggestions.length) {
+		} else if (event.keyCode === 13 && cursor >= 0 && cursor < suggestions.length) { // enter
 			selectOption(suggestions[cursor])
+		} else if (event.keyCode === 27) { // esc
+			setSuggestions([])
 		}
 	}
 
