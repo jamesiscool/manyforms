@@ -47,13 +47,6 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 
 	useEffect(() => {
 		inputContainerRef.current!.scrollIntoView()
-		//suggestionsContainerRef.current!.scrollIntoView()
-		/*		if(suggestionsContainerRef && suggestionsContainerRef.current) {
-					console.log('suggestionsContainerRef.current.getBoundingClientRect().top', suggestionsContainerRef.current.getBoundingClientRect().top)
-					console.log('suggestionsContainerRef.current.getBoundingClientRect().bottom', suggestionsContainerRef.current.getBoundingClientRect().bottom)
-					suggestionsContainerRef.current.scrollIntoView()
-					//window.scroll({top: suggestionsContainerRef.current.getBoundingClientRect().top - 100})
-				}*/
 	}, [suggestions])
 
 	const handlePotentialOutsideClick = (event: Event) => {
