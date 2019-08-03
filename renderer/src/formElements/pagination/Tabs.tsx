@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import {FormElementDef} from '../../FormDef'
 import {PaginationContainer} from '../../state/PaginationContainer'
 import {ShowIfContainer} from '../../state/ShowIfContainer'
@@ -15,10 +15,17 @@ interface TabAttributes {
 export const Tabs = (props: FormElementProps<TabAttributes>) => {
 	const showIfContainer = useContainer(ShowIfContainer)
 	const paginationContainer = useContainer(PaginationContainer)
+	const tabsRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		props.definition.children && paginationContainer.setUp(props.path, props.definition.children)
 	}, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+	useEffect(() => {
+		if (tabsRef && tabsRef.current && tabsRef.current.getBoundingClientRect().top < 0) {
+			tabsRef.current.scrollIntoView()
+		}
+	}, [paginationContainer.currentPageIndex])
 
 	if (!props.definition.children) {
 		return null
@@ -30,7 +37,7 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 
 	return (
 		<div className="card rounded-0">
-			<div className="card-header">
+			<div className="card-header" ref={tabsRef}>
 				<ul className={'nav ' + (props.definition.attributes.pill ? 'nav-pills card-header-pills' : 'nav-tabs card-header-tabs')}>
 					{props.definition.children!.map((page, index) => {
 						if (!showIfContainer.shouldShow(props.path, page)) {
