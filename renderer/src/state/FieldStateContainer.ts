@@ -2,22 +2,42 @@ import produce from 'immer'
 import {useState} from 'react'
 import {createContainer} from './useContainer'
 
-type Events = 'focus' | 'valueChanged' | 'blur'
-
-type FieldState = {
-	[Event in Events]: number //Date.now() when field first got focused
+interface FieldStates {
+	[path: string]: FieldState
 }
 
+interface FieldState {
+	selectedLabel?: string,
+	eventTimes: EventTimes
+}
+
+type EventTimes = {
+	[Event in Events]: number; //Date.now() when event first happened on the field
+}
+type Events = 'focus' | 'valueChanged' | 'blur'
+
 export const FieldStateContainer = createContainer(() => {
-	const [fieldStates, setFieldStates] = useState<{ [path: string]: FieldState }>({})
-	const get = (path: string) => fieldStates[path] || {}
-	const setEventNow = (path: string, event: Events) => {
-		const nextFieldStates = produce(fieldStates, draftFieldStates => {
-				const fieldState = draftFieldStates[path] || {}
-				if (!fieldState[event]) {
-					fieldState[event] = Date.now()
-				}
+	const [fieldStates, setFieldStates] = useState<FieldStates>({})
+
+	const get = (path: string): FieldState => fieldStates[path] || {eventTimes: {}}
+
+	const selectedLabel = (path: string, label: string) => {
+		const nextFieldStates = produce<FieldStates>(fieldStates, draftFieldStates => {
+				const fieldState: FieldState = draftFieldStates[path] || {}
+				fieldState.selectedLabel = label
 				draftFieldStates[path] = fieldState
+			}
+		)
+		setFieldStates(nextFieldStates)
+	}
+
+	const setEventNow = (path: string, event: Events) => {
+		const nextFieldStates = produce<FieldStates>(fieldStates, draftFieldStates => {
+				const draftFieldState = draftFieldStates[path] || {eventTimes: {}}
+				if (!draftFieldState.eventTimes[event]) {
+					draftFieldState.eventTimes[event] = Date.now()
+				}
+				draftFieldStates[path] = draftFieldState
 			}
 		)
 		setFieldStates(nextFieldStates)
@@ -26,5 +46,5 @@ export const FieldStateContainer = createContainer(() => {
 	const valueChanged = (path: string) => setEventNow(path, 'valueChanged')
 	const blur = (path: string) => setEventNow(path, 'blur')
 
-	return {fieldStates, get, focus, valueChanged, blur}
+	return {get, selectedLabel, focus, valueChanged, blur}
 })

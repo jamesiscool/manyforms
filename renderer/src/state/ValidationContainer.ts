@@ -72,15 +72,15 @@ export const ValidationContainer = createContainer(() => {
 		if (formStateContainer.nextOrSubmit() || config.showErrors === 'immediately') {
 			return true
 		}
-		const fieldState = fieldStateContainer.get(path)
-		if (config.showErrors === 'onFocus' && fieldState.focus) {
-			return timeHasPassedAndShouldShowError(fieldState.focus)
+		const eventTimes = fieldStateContainer.get(path).eventTimes || {}
+		if (config.showErrors === 'onFocus' && eventTimes.focus) {
+			return timeHasPassedAndShouldShowError(eventTimes.focus)
 		}
-		if (config.showErrors === 'onValueChanged' && fieldState.valueChanged) {
-			return timeHasPassedAndShouldShowError(fieldState.valueChanged)
+		if (config.showErrors === 'onValueChanged' && eventTimes.valueChanged) {
+			return timeHasPassedAndShouldShowError(eventTimes.valueChanged)
 		}
-		if (config.showErrors === 'onBlur' && fieldState.blur) {
-			return timeHasPassedAndShouldShowError(fieldState.blur)
+		if (config.showErrors === 'onBlur' && eventTimes.blur) {
+			return timeHasPassedAndShouldShowError(eventTimes.blur)
 		}
 		return false
 	}

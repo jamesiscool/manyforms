@@ -18,23 +18,27 @@ export interface AutocompleteAttributes {
 	valueKey?: string
 }
 
+const defaultAutocompleteAttributes = {
+	options: [],
+	multiple: false,
+	labelKey: 'label',
+	valueKey: 'value'
+}
+
 export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) => {
+	const attributes = {...defaultAutocompleteAttributes, ...props.definition.attributes}
 	const referenceDataContainer = useContainer(ReferenceDataContainer)
 	const valuesContainer = useContainer(ValuesContainer)
 	const fieldStateContainer = useContainer(FieldStateContainer)
 	const [suggestions, setSuggestions] = useState<any[]>([])
-	const [inputValue, setInputValue] = useState<string>()
+	const [inputValue, setInputValue] = useState<string>(fieldStateContainer.get(props.path).selectedLabel || '')
 	const [cursor, setCursor] = useState<number>(-1)
-	//const [selectedValue, setSelectedValue] = useState<string>(valuesContainer.getValue(props.path))
+
 	const inputContainerRef = useRef<HTMLDivElement>(null)
 	const suggestionsContainerRef = useRef<HTMLDivElement>(null)
 
-	const attributesOptions = props.definition.attributes.options || []
-	const referenceDataOptions = (props.definition.attributes.referenceDataOptions && referenceDataContainer.referenceData[props.definition.attributes.referenceDataOptions]) || []
-	const staticOptions = attributesOptions.concat(referenceDataOptions)
-
-	const valueKey = props.definition.attributes.valueKey || 'value'
-	const labelKey = props.definition.attributes.valueKey || 'label'
+	const referenceDataOptions = (attributes.referenceDataOptions && referenceDataContainer.referenceData[attributes.referenceDataOptions]) || []
+	const staticOptions = attributes.options.concat(referenceDataOptions)
 
 	useEffect(() => {
 		document.body.addEventListener('touchend', handlePotentialOutsideClick!)
@@ -46,7 +50,9 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 	})
 
 	useEffect(() => {
-		inputContainerRef.current!.scrollIntoView()
+		if (suggestions && suggestions.length > 0) {
+			inputContainerRef.current!.scrollIntoView()
+		}
 	}, [suggestions])
 
 	const handlePotentialOutsideClick = (event: Event) => {
@@ -60,8 +66,8 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 		setCursor(-1)
 		const inputValue = changedValue.trim().toLowerCase()
 		const matchingInlineOptions = staticOptions.filter(option => {
-			const value = option[valueKey] as string
-			const label = option[labelKey] as string
+			const value = option[attributes.valueKey] as string
+			const label = option[attributes.labelKey] as string
 			return value.toLowerCase().includes(inputValue) || label.toLowerCase().includes(inputValue)
 		})
 		setSuggestions(matchingInlineOptions)
@@ -97,8 +103,9 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 	}
 
 	const selectOption = (option: any) => {
-		valuesContainer.setValue(props.path, option[valueKey])
-		setInputValue(option[labelKey])
+		valuesContainer.setValue(props.path, option[attributes.valueKey])
+		fieldStateContainer.selectedLabel(props.path, option[attributes.labelKey])
+		setInputValue(option[attributes.labelKey])
 		setSuggestions([])
 		setCursor(-1)
 	}
@@ -127,8 +134,8 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 						<div ref={ref} style={style} className="popper" data-placement={placement}>
 							{suggestions && suggestions.length > 0 && <div className="dropdown-menu show">
 								{suggestions.map((suggestion, index) => {
-									const value = suggestion[props.definition.attributes.valueKey || 'value']
-									const label = suggestion[props.definition.attributes.labelKey || 'label']
+									const value = suggestion[attributes.valueKey]
+									const label = suggestion[attributes.labelKey]
 									return <button className={'dropdown-item' + (cursor === index ? ' active' : '')} key={value + label} onClick={() => handleSelectionClicked(suggestion)}>{label}</button>
 								})}
 							</div>}
