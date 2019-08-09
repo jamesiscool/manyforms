@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/manyforms/static/css/main.8a0bcfdc.chunk.css",
-    "main.js": "/manyforms/static/js/main.e51b211e.chunk.js",
-    "main.js.map": "/manyforms/static/js/main.e51b211e.chunk.js.map",
+    "main.js": "/manyforms/static/js/main.67562fdb.chunk.js",
+    "main.js.map": "/manyforms/static/js/main.67562fdb.chunk.js.map",
     "runtime~main.js": "/manyforms/static/js/runtime~main.6791df81.js",
     "runtime~main.js.map": "/manyforms/static/js/runtime~main.6791df81.js.map",
-    "static/js/2.8a365e74.chunk.js": "/manyforms/static/js/2.8a365e74.chunk.js",
-    "static/js/2.8a365e74.chunk.js.map": "/manyforms/static/js/2.8a365e74.chunk.js.map",
+    "static/js/2.57bfadf6.chunk.js": "/manyforms/static/js/2.57bfadf6.chunk.js",
+    "static/js/2.57bfadf6.chunk.js.map": "/manyforms/static/js/2.57bfadf6.chunk.js.map",
     "index.html": "/manyforms/index.html",
-    "precache-manifest.d35276b3bafa62616240abe117eef563.js": "/manyforms/precache-manifest.d35276b3bafa62616240abe117eef563.js",
+    "precache-manifest.82fb136698179a88c2c13c3b1ba98f1c.js": "/manyforms/precache-manifest.82fb136698179a88c2c13c3b1ba98f1c.js",
     "service-worker.js": "/manyforms/service-worker.js",
     "static/css/main.8a0bcfdc.chunk.css.map": "/manyforms/static/css/main.8a0bcfdc.chunk.css.map"
   }
