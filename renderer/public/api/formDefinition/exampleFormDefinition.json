@@ -22,6 +22,18 @@
 					},
 					"children": [
 						{
+							"fieldId": "address",
+							"type": "autocomplete",
+							"attributes": {
+								"label": "What's your address",
+								"labelKey": "formattedAddress",
+								"valueKey": "id",
+								"http": {
+									"url": "http://localhost:3001/address?q="
+								}
+							}
+						},
+						{
 							"fieldId": "howManyPeopleApplying",
 							"type": "buttonGroup",
 							"attributes": {

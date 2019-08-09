@@ -1,10 +1,9 @@
 import React, {KeyboardEvent, useEffect, useRef, useState} from 'react'
 import {Manager, Popper, Reference} from 'react-popper'
 import {FieldChrome} from '../../display/FieldChrome'
+import {useSuggestion} from '../../hooks/useSuggestion'
 import {FieldStateContainer} from '../../state/FieldStateContainer'
-import {ReferenceDataContainer} from '../../state/ReferenceDataContainer'
 import {useContainer} from '../../state/useContainer'
-import {ValuesContainer} from '../../state/ValuesContainer'
 import {FormElementProps} from '../FormElementProps'
 
 export interface AutocompleteAttributes {
@@ -16,6 +15,7 @@ export interface AutocompleteAttributes {
 	multiple?: boolean
 	labelKey?: string
 	valueKey?: string
+	http?: { url?: string }
 }
 
 const defaultAutocompleteAttributes = {
@@ -27,18 +27,20 @@ const defaultAutocompleteAttributes = {
 
 export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) => {
 	const attributes = {...defaultAutocompleteAttributes, ...props.definition.attributes}
-	const referenceDataContainer = useContainer(ReferenceDataContainer)
-	const valuesContainer = useContainer(ValuesContainer)
 	const fieldStateContainer = useContainer(FieldStateContainer)
-	const [suggestions, setSuggestions] = useState<any[]>([])
-	const [inputValue, setInputValue] = useState<string>(fieldStateContainer.get(props.path).selectedLabel || '')
 	const [cursor, setCursor] = useState<number>(-1)
+
+	const {inputValue, inputChanged, suggestions, showSuggestions, clear, selectOption} = useSuggestion(props.path, attributes)
+
 
 	const inputContainerRef = useRef<HTMLDivElement>(null)
 	const suggestionsContainerRef = useRef<HTMLDivElement>(null)
 
-	const referenceDataOptions = (attributes.referenceDataOptions && referenceDataContainer.referenceData[attributes.referenceDataOptions]) || []
-	const staticOptions = attributes.options.concat(referenceDataOptions)
+	useEffect(() => {
+		if (showSuggestions && suggestions && suggestions.length > 0) {
+			inputContainerRef.current!.scrollIntoView()
+		}
+	}, [showSuggestions, suggestions])
 
 	useEffect(() => {
 		document.body.addEventListener('touchend', handlePotentialOutsideClick!)
@@ -49,38 +51,26 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 		}
 	})
 
-	useEffect(() => {
-		if (suggestions && suggestions.length > 0) {
-			inputContainerRef.current!.scrollIntoView()
-		}
-	}, [suggestions])
-
 	const handlePotentialOutsideClick = (event: Event) => {
 		if (inputContainerRef && !inputContainerRef.current!.contains(event.target as Node)
 			&& suggestionsContainerRef && !suggestionsContainerRef.current!.contains(event.target as Node)) {
-			setSuggestions([])
+			clear()
 		}
 	}
 	const handleInputChange = (changedValue: string) => {
-		setInputValue(changedValue)
+		inputChanged(changedValue)
 		setCursor(-1)
-		const inputValue = changedValue.trim().toLowerCase()
-		const matchingInlineOptions = staticOptions.filter(option => {
-			const value = option[attributes.valueKey] as string
-			const label = option[attributes.labelKey] as string
-			return value.toLowerCase().includes(inputValue) || label.toLowerCase().includes(inputValue)
-		})
-		setSuggestions(matchingInlineOptions)
 	}
 	const handleSelectionClicked = (option: any) => {
 		selectOption(option)
+		setCursor(-1)
 	}
 	const handleBlur = () => {
 		fieldStateContainer.blur(props.path)
 		setTimeout(() => {
 			const newTarget = document.activeElement
 			if (!inputContainerRef.current!.contains(newTarget) && !suggestionsContainerRef.current!.contains(newTarget)) {
-				setSuggestions([])
+				clear()
 			}
 		}, 1)// Have to wait 1 ms so that document.activeElement is not body
 	}
@@ -98,17 +88,10 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 		} else if (event.keyCode === 13 && cursor >= 0 && cursor < suggestions.length) { // enter
 			selectOption(suggestions[cursor])
 		} else if (event.keyCode === 27) { // esc
-			setSuggestions([])
+			clear()
 		}
 	}
 
-	const selectOption = (option: any) => {
-		valuesContainer.setValue(props.path, option[attributes.valueKey])
-		fieldStateContainer.selectedLabel(props.path, option[attributes.labelKey])
-		setInputValue(option[attributes.labelKey])
-		setSuggestions([])
-		setCursor(-1)
-	}
 
 	return <FieldChrome path={props.path} def={props.definition}>
 		<Manager>
@@ -132,7 +115,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 				{({ref, style, placement}) => (
 					<div ref={suggestionsContainerRef}>
 						<div ref={ref} style={style} className="popper" data-placement={placement}>
-							{suggestions && suggestions.length > 0 && <div className="dropdown-menu show">
+							{showSuggestions && suggestions && suggestions.length > 0 && <div className="dropdown-menu show">
 								{suggestions.map((suggestion, index) => {
 									const value = suggestion[attributes.valueKey]
 									const label = suggestion[attributes.labelKey]
