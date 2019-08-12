@@ -1,3 +1,4 @@
+import Octicon, {Search} from '@primer/octicons-react'
 import React, {KeyboardEvent, useEffect, useRef, useState} from 'react'
 import {Manager, Popper, Reference} from 'react-popper'
 import {FieldChrome} from '../../display/FieldChrome'
@@ -16,22 +17,25 @@ export interface AutocompleteAttributes {
 	labelKey?: string
 	valueKey?: string
 	http?: { url?: string }
+	postfixSearchIcon?: boolean
+
 }
 
 const defaultAutocompleteAttributes = {
 	options: [],
 	multiple: false,
 	labelKey: 'label',
-	valueKey: 'value'
+	valueKey: 'value',
+	postfixSearchIcon: true
 }
 
 export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) => {
 	const attributes = {...defaultAutocompleteAttributes, ...props.definition.attributes}
+
 	const fieldStateContainer = useContainer(FieldStateContainer)
 	const [cursor, setCursor] = useState<number>(-1)
 
 	const {inputValue, inputChanged, suggestions, showSuggestions, clear, selectOption} = useSuggestion(props.path, attributes)
-
 
 	const inputContainerRef = useRef<HTMLDivElement>(null)
 	const suggestionsContainerRef = useRef<HTMLDivElement>(null)
@@ -96,7 +100,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 	return <FieldChrome path={props.path} def={props.definition}>
 		<Manager>
 			<Reference>
-				{({ref}) => (<div ref={inputContainerRef}>
+				{({ref}) => (<div ref={inputContainerRef} className="input-group">
 						<input
 							ref={ref}
 							type="text"
@@ -108,7 +112,13 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 							onKeyDown={handleInputKeyDown}
 							onFocus={handleFocus}
 							onBlur={handleBlur}
-						/></div>
+						/>
+						{attributes.postfixSearchIcon && <div className="input-group-append" onClick={() => inputChanged(inputValue)}>
+							<span className="input-group-text">
+								<Octicon icon={Search} size='small'/>
+							</span>
+						</div>}
+					</div>
 				)}
 			</Reference>
 			<Popper placement="bottom-start">

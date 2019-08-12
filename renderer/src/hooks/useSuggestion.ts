@@ -39,9 +39,9 @@ export function useSuggestion(path: string, attributes: SuggestAttributes) {
 		if (lowerInputValue !== lowerSelectedLabel && lowerInputValue.length > 0) {
 
 			const referenceDataOptions = (attributes.referenceDataOptions && referenceDataContainer.referenceData[attributes.referenceDataOptions]) || []
-			const staticOptions = attributes.options!.concat(referenceDataOptions)
+			const inlineOptions = attributes.options!.concat(referenceDataOptions)
 
-			const matchingInlineOptions = staticOptions.filter(option => {
+			const matchingInlineOptions = inlineOptions.filter(option => {
 				return JSON.stringify(option).toLowerCase().includes(lowerInputValue)
 			})
 
