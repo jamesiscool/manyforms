@@ -2,3 +2,5 @@
 *.iml
 renderer/build
 renderer/node_modules
+stack
+wget

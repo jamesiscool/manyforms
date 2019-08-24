@@ -1,4 +1,4 @@
-import {Config} from './state/ConfigContainer'
+import {Config} from './hooks/useConfig'
 
 export default interface FormDef {
 	elements: FormElementDef<{}>[]

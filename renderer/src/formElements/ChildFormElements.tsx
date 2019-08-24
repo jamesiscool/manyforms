@@ -1,7 +1,6 @@
 import React from 'react'
 import {FormElementDef} from '../FormDef'
-import {ShowIfContainer} from '../state/ShowIfContainer'
-import {useContainer} from '../state/useContainer'
+import {useShowIf} from '../hooks/useShowIf'
 import {createPath} from '../util'
 import {lookupElement} from './formElementTypes'
 
@@ -11,12 +10,12 @@ interface ChildFormElementsProps {
 }
 
 export const ChildFormElements = (props: ChildFormElementsProps) => {
-	const showIfContainer = useContainer(ShowIfContainer)
+	const {shouldShow} = useShowIf()
 	return (
 		<div>
 			{props.childFormElements.map((elementDef, index) => {
 				const path = createPath(props.parentPath, elementDef.fieldId)
-				if (!showIfContainer.shouldShow(path, elementDef)) {
+				if (!shouldShow(path, elementDef)) {
 					return null
 				}
 				const Child: any = lookupElement(elementDef.type)

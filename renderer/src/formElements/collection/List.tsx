@@ -1,8 +1,7 @@
 import {times} from 'lodash-es'
 import React from 'react'
 import {Description} from '../../display/Description'
-import {useContainer} from '../../state/useContainer'
-import {ValuesContainer} from '../../state/ValuesContainer'
+import {useValues} from '../../hooks/useValues'
 import {ordinal} from '../../util'
 import {ChildFormElements} from '../ChildFormElements'
 import {FormElementProps} from '../FormElementProps'
@@ -15,15 +14,15 @@ export interface IterationAttributes {
 }
 
 export const List = (props: FormElementProps<IterationAttributes>) => {
-	const formValuesContainer = useContainer(ValuesContainer)
+	const {getCollectionSize, addToCollection, deleteFromCollection} = useValues()
 	return (
 		<div className="form-group">
 			<span className="h4 align-middle mr-2">{props.definition.attributes.label}</span>
 			{props.definition.attributes.description && <Description path={props.path} text={props.definition.attributes.description}/>}
-			{times(formValuesContainer.getCollectionSize(props.path), (index: number) =>
+			{times(getCollectionSize(props.path), (index: number) =>
 				<div className={'card border-bottom mb-3' + (index === 0 ? ' mt-2' : '')} key={props.path + '_COLLECTION_' + index}>
 					<h5 className="card-header">{ordinal(index + 1)} {props.definition.attributes.itemLabel}
-						<button className="close text-dark" onClick={() => formValuesContainer.deleteFromCollection(props.path, index)}>
+						<button className="close text-dark" onClick={() => deleteFromCollection(props.path, index)}>
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</h5>
@@ -32,6 +31,6 @@ export const List = (props: FormElementProps<IterationAttributes>) => {
 					</div>
 				</div>
 			)}
-			<button className="btn btn-primary d-inline" onClick={() => formValuesContainer.addToCollection(props.path)}>Add</button>
+			<button className="btn btn-primary d-inline" onClick={() => addToCollection(props.path)}>Add</button>
 		</div>)
 }

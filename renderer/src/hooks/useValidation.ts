@@ -2,22 +2,21 @@ import {useEffect, useState} from 'react'
 import {FormElementDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
 import {isTypeACollection} from '../formElements/formElementTypes'
 import {createPath} from '../util'
-import {validationRuleMap} from '../validation/ValidationRule'
-import {ConfigContainer} from './ConfigContainer'
-import {ExpressionContainer} from './ExpressionContainer'
-import {FieldStateContainer} from './FieldStateContainer'
-import {FormStateContainer} from './FormStateContainer'
-import {ShowIfContainer} from './ShowIfContainer'
-import {createContainer, useContainer} from './useContainer'
-import {ValuesContainer} from './ValuesContainer'
+import {useValidationExpressions} from '../validation/ValidationExpressions'
+import {validationRules} from '../validation/ValidationRules'
+import {useConfig} from './useConfig'
+import {useFieldState} from './useFieldState'
+import {useFormState} from './useFormState'
+import {useShowIf} from './useShowIf'
+import {useValues} from './useValues'
 
-export const ValidationContainer = createContainer(() => {
-	const configContainer = useContainer(ConfigContainer)
-	const valuesContainer = useContainer(ValuesContainer)
-	const fieldStateContainer = useContainer(FieldStateContainer)
-	const formStateContainer = useContainer(FormStateContainer)
-	const expressionContainer = useContainer(ExpressionContainer)
-	const showIfContainer = useContainer(ShowIfContainer)
+export const useValidation = () => {
+	const config = useConfig().config
+	const {getValue, getCollectionSize} = useValues()
+	const {getFieldState} = useFieldState()
+	const {nextOrSubmit} = useFormState()
+	const {shouldShow} = useShowIf()
+	const validationExpressions = useValidationExpressions()
 
 	const [nextTick, setNextTick] = useState<number>(0)
 	useEffect(() => {
@@ -25,8 +24,6 @@ export const ValidationContainer = createContainer(() => {
 			setTimeout(() => setNextTick(0), nextTick - Date.now())
 		}
 	}, [nextTick])
-
-	const config = configContainer.config
 
 	const validate = (path: string, fieldDef: FormElementDef<{}>): string | null => {
 		if (!fieldDef.validation || fieldDef.validation.length <= 0) {
@@ -42,23 +39,23 @@ export const ValidationContainer = createContainer(() => {
 
 	function validateConstraint(constraint: ValidationConstraintDef | string, path: string, fieldDef: FormElementDef<{}>): string | null {
 		if (typeof constraint === 'string') {
-			const fieldValue = valuesContainer.getValue(path) || ''
-			const validationRule = validationRuleMap[constraint]
+			const fieldValue = getValue(path) || ''
+			const validationRule = validationRules[constraint]
 			if (!validationRule.validate(fieldValue)) {
 				return validationRule.defaultMessage
 			}
 			return null
 		} else if (!isValidationExpresionDef(constraint)) {
-			const fieldValue = valuesContainer.getValue(path) || ''
-			const validationRule = validationRuleMap[constraint.name]
+			const fieldValue = getValue(path) || ''
+			const validationRule = validationRules[constraint.name]
 			if (!validationRule.validate(fieldValue)) {
 				return constraint.message || validationRule.defaultMessage
 			}
 			return null
 		} else {
-			const expressionValidation = expressionContainer.expressionValidations[constraint.name]
-			if (!expressionValidation.validate(path, fieldDef, constraint.expression)) {
-				return constraint.message || expressionValidation.defaultMessage
+			const validationExpression = validationExpressions[constraint.name]
+			if (!validationExpression.validate(path, fieldDef, constraint.expression)) {
+				return constraint.message || validationExpression.defaultMessage
 			}
 			return null
 		}
@@ -69,10 +66,10 @@ export const ValidationContainer = createContainer(() => {
 	}
 
 	const shouldShowErrors = (path: string, fieldDef: FormElementDef<{}>): boolean => {
-		if (formStateContainer.nextOrSubmit() || config.showErrors === 'immediately') {
+		if (nextOrSubmit() || config.showErrors === 'immediately') {
 			return true
 		}
-		const eventTimes = fieldStateContainer.get(path).eventTimes || {}
+		const eventTimes = getFieldState(path).eventTimes || {}
 		if (config.showErrors === 'onFocus' && eventTimes.focus) {
 			return timeHasPassedAndShouldShowError(eventTimes.focus)
 		}
@@ -97,7 +94,7 @@ export const ValidationContainer = createContainer(() => {
 	}
 
 	const hasErrorsRecursively = (path: string, fieldDef?: FormElementDef<{}>): boolean => {
-		if (!fieldDef || !showIfContainer.shouldShow(path, fieldDef)) {
+		if (!fieldDef || !shouldShow(path, fieldDef)) {
 			return false
 		}
 		if (validate(path, fieldDef) != null) {
@@ -106,11 +103,11 @@ export const ValidationContainer = createContainer(() => {
 		if (fieldDef.children) {
 			return fieldDef.children.some((childFieldDef) => {
 				const childPath = createPath(path, childFieldDef.fieldId)
-				if (!showIfContainer.shouldShow(childPath, childFieldDef)) {
+				if (!shouldShow(childPath, childFieldDef)) {
 					return false
 				}
 				if (isTypeACollection(childFieldDef.type)) {
-					const size = valuesContainer.getCollectionSize(childPath)
+					const size = getCollectionSize(childPath)
 					for (let index = 0; index < size; index++) {
 						if (hasErrorsRecursively(childPath + '[' + index + ']', childFieldDef)) {
 							return true
@@ -125,5 +122,6 @@ export const ValidationContainer = createContainer(() => {
 		return false
 	}
 
+
 	return {validate, shouldShowErrors, validateAndShouldShow, hasErrorsRecursively}
-})
+}

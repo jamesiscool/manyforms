@@ -1,9 +1,8 @@
 import axios from 'axios'
 import {useEffect, useState} from 'react'
-import {FieldStateContainer} from '../state/FieldStateContainer'
-import {ReferenceDataContainer} from '../state/ReferenceDataContainer'
-import {useContainer} from '../state/useContainer'
-import {ValuesContainer} from '../state/ValuesContainer'
+import {useFieldState} from './useFieldState'
+import {useReferenceData} from './useReferenceData'
+import {useValues} from './useValues'
 
 interface SuggestAttributes {
 	options?: any[]
@@ -15,13 +14,15 @@ interface SuggestAttributes {
 }
 
 export function useSuggestion(path: string, attributes: SuggestAttributes) {
-	const referenceDataContainer = useContainer(ReferenceDataContainer)
-	const valuesContainer = useContainer(ValuesContainer)
-	const fieldStateContainer = useContainer(FieldStateContainer)
+	const {referenceData} = useReferenceData()
+	const {setValue} = useValues()
+	const {getFieldState, setSelectedSuggestionLabel} = useFieldState()
+	const fieldState = getFieldState(path)
+
 	const [suggestions, setSuggestions] = useState<any[]>([])
 	const [httpSuggestions, setHttpSuggestions] = useState<any[]>([])
 	const [inlineSuggestions, setInlineSuggestions] = useState<any[]>([])
-	const [inputValue, setInputValue] = useState<string>(fieldStateContainer.get(path).selectedLabel || '')
+	const [inputValue, setInputValue] = useState<string>(fieldState.selectedSuggestionLabel || '')
 	const [showSuggestions, setShowSuggestions] = useState(false)
 
 	useEffect(() => {
@@ -34,11 +35,10 @@ export function useSuggestion(path: string, attributes: SuggestAttributes) {
 		setHttpSuggestions([])
 		setSuggestions([])
 		const lowerInputValue = newInputValue.trim().toLowerCase()
-		const fieldState = fieldStateContainer.get(path)
-		const lowerSelectedLabel = fieldState.selectedLabel && fieldState.selectedLabel.toLowerCase()
+		const lowerSelectedLabel = fieldState.selectedSuggestionLabel && fieldState.selectedSuggestionLabel.toLowerCase()
 		if (lowerInputValue !== lowerSelectedLabel && lowerInputValue.length > 0) {
 
-			const referenceDataOptions = (attributes.referenceDataOptions && referenceDataContainer.referenceData[attributes.referenceDataOptions]) || []
+			const referenceDataOptions = (attributes.referenceDataOptions && referenceData[attributes.referenceDataOptions]) || []
 			const inlineOptions = attributes.options!.concat(referenceDataOptions)
 
 			const matchingInlineOptions = inlineOptions.filter(option => {
@@ -65,16 +65,16 @@ export function useSuggestion(path: string, attributes: SuggestAttributes) {
 	const selectOption = (option: any) => {
 		if (typeof option === 'string') {
 
-			valuesContainer.setValue(path, option)
-			fieldStateContainer.selectedLabel(path, option)
+			setValue(path, option)
+			setSelectedSuggestionLabel(path, option)
 			setInputValue(option)
 
 		} else if (typeof option === 'object') {
 
 			if (attributes.valueKey) {
-				valuesContainer.setValue(path, option[attributes.valueKey])
+				setValue(path, option[attributes.valueKey])
 			}
-			fieldStateContainer.selectedLabel(path, option[attributes.labelKey || 'label'])
+			setSelectedSuggestionLabel(path, option[attributes.labelKey || 'label'])
 			setInputValue(option[attributes.labelKey || 'label'])
 
 		}

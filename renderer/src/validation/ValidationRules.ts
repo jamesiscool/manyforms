@@ -9,7 +9,7 @@ interface ValidationRule {
 	defaultMessage: string
 }
 
-export const validationRuleMap: { [name: string]: ValidationRule } = {
+export const validationRules: { [name: string]: ValidationRule } = {
 	required: {
 		validate: (value: string) => !(value == null || value.length <= 0 || value === ''),
 		defaultMessage: 'This field is required'

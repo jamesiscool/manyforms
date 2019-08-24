@@ -2,9 +2,8 @@ import Octicon, {Search} from '@primer/octicons-react'
 import React, {KeyboardEvent, useEffect, useRef, useState} from 'react'
 import {Manager, Popper, Reference} from 'react-popper'
 import {FieldChrome} from '../../display/FieldChrome'
+import {useFieldState} from '../../hooks/useFieldState'
 import {useSuggestion} from '../../hooks/useSuggestion'
-import {FieldStateContainer} from '../../state/FieldStateContainer'
-import {useContainer} from '../../state/useContainer'
 import {FormElementProps} from '../FormElementProps'
 
 export interface AutocompleteAttributes {
@@ -32,10 +31,9 @@ const defaultAutocompleteAttributes = {
 export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) => {
 	const attributes = {...defaultAutocompleteAttributes, ...props.definition.attributes}
 
-	const fieldStateContainer = useContainer(FieldStateContainer)
-	const [cursor, setCursor] = useState<number>(-1)
-
+	const {focus, blur} = useFieldState()
 	const {inputValue, inputChanged, suggestions, showSuggestions, clear, selectOption} = useSuggestion(props.path, attributes)
+	const [cursor, setCursor] = useState<number>(-1)
 
 	const inputContainerRef = useRef<HTMLDivElement>(null)
 	const suggestionsContainerRef = useRef<HTMLDivElement>(null)
@@ -70,7 +68,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 		setCursor(-1)
 	}
 	const handleBlur = () => {
-		fieldStateContainer.blur(props.path)
+		blur(props.path)
 		setTimeout(() => {
 			const newTarget = document.activeElement
 			if (!inputContainerRef.current!.contains(newTarget) && !suggestionsContainerRef.current!.contains(newTarget)) {
@@ -79,7 +77,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 		}, 1)// Have to wait 1 ms so that document.activeElement is not body
 	}
 	const handleFocus = () => {
-		fieldStateContainer.focus(props.path)
+		focus(props.path)
 		if (inputValue && inputValue.length > 0) {
 			handleInputChange(inputValue)
 		}

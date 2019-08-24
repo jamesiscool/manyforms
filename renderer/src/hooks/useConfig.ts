@@ -1,5 +1,4 @@
-import {createContainer} from './useContainer'
-
+import {useStore} from './useStore'
 
 type showErrors = 'immediately' | 'onFocus' | 'onValueChanged' | 'onBlur' | 'nextOrSummit'
 
@@ -15,7 +14,14 @@ const defaultConfig: Config = {
 	disableNextWhenErrors: false
 }
 
-export const ConfigContainer = createContainer((userConfig = {}) => {
-	const config = {...defaultConfig, ...userConfig}
-	return {config}
-})
+const CONFIG_STORE_KEY = 'config'
+
+export const useConfig = (formDefinitionConfig = {}) => {
+	const {set, get} = useStore()
+	return {
+		config: get(CONFIG_STORE_KEY) || {},
+		setup: (formDefinitionConfig = {}) => {
+			set(CONFIG_STORE_KEY, {...defaultConfig, ...formDefinitionConfig})
+		}
+	}
+}
