@@ -29,3 +29,7 @@
 .popper {
     z-index: 900;
 }
+
+.search-icon {
+    fill: currentcolor;
+}
