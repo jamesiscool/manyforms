@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react'
 import {FormElementDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
 import {isTypeACollection} from '../formElements/formElementTypes'
 import {createPath} from '../util'
@@ -8,6 +7,7 @@ import {useConfig} from './useConfig'
 import {useFieldState} from './useFieldState'
 import {useFormState} from './useFormState'
 import {useShowIf} from './useShowIf'
+import {useUpdate} from './useUpdate'
 import {useValues} from './useValues'
 
 export const useValidation = () => {
@@ -16,14 +16,8 @@ export const useValidation = () => {
 	const {getFieldState} = useFieldState()
 	const {nextOrSubmit} = useFormState()
 	const {shouldShow} = useShowIf()
+	const {updateAt} = useUpdate()
 	const validationExpressions = useValidationExpressions()
-
-	const [nextTick, setNextTick] = useState<number>(0)
-	useEffect(() => {
-		if (nextTick > Date.now()) {
-			setTimeout(() => setNextTick(0), nextTick - Date.now())
-		}
-	}, [nextTick])
 
 	const validate = (path: string, fieldDef: FormElementDef<{}>): string | null => {
 		if (!fieldDef.validation || fieldDef.validation.length <= 0) {
@@ -71,24 +65,24 @@ export const useValidation = () => {
 		}
 		const eventTimes = getFieldState(path).eventTimes || {}
 		if (config.showErrors === 'onFocus' && eventTimes.focus) {
-			return timeHasPassedAndShouldShowError(eventTimes.focus)
+			return timePlusDelayHasPassed(eventTimes.focus)
 		}
 		if (config.showErrors === 'onValueChanged' && eventTimes.valueChanged) {
-			return timeHasPassedAndShouldShowError(eventTimes.valueChanged)
+			return timePlusDelayHasPassed(eventTimes.valueChanged)
 		}
 		if (config.showErrors === 'onBlur' && eventTimes.blur) {
-			return timeHasPassedAndShouldShowError(eventTimes.blur)
+			return timePlusDelayHasPassed(eventTimes.blur)
 		}
 		return false
 	}
 
-	const timeHasPassedAndShouldShowError = (time: number) => {
+	const timePlusDelayHasPassed = (time: number) => {
 		if (!config.showErrorsDelay || config.showErrorsDelay === 0) {
 			return true
 		} else if ((time + config.showErrorsDelay) < Date.now()) {
 			return true
 		} else {
-			setNextTick(time + config.showErrorsDelay)
+			updateAt(time + config.showErrorsDelay)
 			return false
 		}
 	}

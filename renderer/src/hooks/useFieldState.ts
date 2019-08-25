@@ -20,6 +20,14 @@ const FIELD_STATE_STORE_KEY = 'fieldStates'
 export const useFieldState = () => {
 	const {set, get} = useStore()
 
+	const getFieldState = (path: string): FieldState => get(`${FIELD_STATE_STORE_KEY}.${path}`, {eventTimes: {}})
+
+	const eventHappened = (path: string, event: Events) => {
+		if (!getFieldState(path).eventTimes[event]) {
+			set(`${FIELD_STATE_STORE_KEY}.${path}.eventTimes.${event}`, Date.now())
+		}
+	}
+
 	return {
 		getFieldState: (path: string): FieldState => get(`${FIELD_STATE_STORE_KEY}.${path}`, {eventTimes: {}}),
 
@@ -27,8 +35,8 @@ export const useFieldState = () => {
 			set(FIELD_STATE_STORE_KEY + '.' + path + '.selectedSuggestionLabel', label)
 		},
 
-		focus: (path: string) => set(`${FIELD_STATE_STORE_KEY}.${path}.focus`, Date.now()),
-		valueChanged: (path: string) => set(`${FIELD_STATE_STORE_KEY}.${path}.valueChanged`, Date.now()),
-		blur: (path: string) => set(`${FIELD_STATE_STORE_KEY}.${path}.blur`, Date.now()),
+		focus: (path: string) => eventHappened(path, 'focus'),
+		valueChanged: (path: string) => eventHappened(path, 'valueChanged'),
+		blur: (path: string) => eventHappened(path, 'blur'),
 	}
 }

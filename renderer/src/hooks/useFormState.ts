@@ -11,7 +11,7 @@ export const useFormState = () => {
 	const {set, get} = useStore()
 
 	return {
-		fromState: get<FormState>(FORM_STATE_STORE_KEY),
+		formState: get<FormState>(FORM_STATE_STORE_KEY),
 		nextClicked: () => {
 			if (!get(FORM_STATE_STORE_KEY + '.nextClicked')) {
 				set(FORM_STATE_STORE_KEY + '.nextClicked', Date.now())

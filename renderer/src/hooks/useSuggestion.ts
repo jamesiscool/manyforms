@@ -1,21 +1,24 @@
 import axios from 'axios'
 import {useEffect, useState} from 'react'
+import {FormElementDef} from '../FormDef'
 import {useFieldState} from './useFieldState'
 import {useReferenceData} from './useReferenceData'
 import {useValues} from './useValues'
 
-interface SuggestAttributes {
+export interface SuggestAttributes {
 	options?: any[]
 	referenceDataOptions?: string
 	multiple?: boolean
 	labelKey?: string
 	valueKey?: string
+	valueIsWholeOption?: boolean
+	valueExpression?: string
 	http?: { url?: string }
 }
 
-export function useSuggestion(path: string, attributes: SuggestAttributes) {
+export function useSuggestion(path: string, attributes: SuggestAttributes, fieldDef: FormElementDef<{}>) {
 	const {referenceData} = useReferenceData()
-	const {setValue} = useValues()
+	const {setValue, setValueExpression} = useValues()
 	const {getFieldState, setSelectedSuggestionLabel} = useFieldState()
 	const fieldState = getFieldState(path)
 
@@ -64,14 +67,15 @@ export function useSuggestion(path: string, attributes: SuggestAttributes) {
 
 	const selectOption = (option: any) => {
 		if (typeof option === 'string') {
-
 			setValue(path, option)
 			setSelectedSuggestionLabel(path, option)
 			setInputValue(option)
-
 		} else if (typeof option === 'object') {
-
-			if (attributes.valueKey) {
+			if (attributes.valueIsWholeOption) {
+				setValue(path, option)
+			} else if (attributes.valueExpression) {
+				setValueExpression(path, fieldDef, attributes.valueExpression, {option})
+			} else if (attributes.valueKey) {
 				setValue(path, option[attributes.valueKey])
 			}
 			setSelectedSuggestionLabel(path, option[attributes.labelKey || 'label'])

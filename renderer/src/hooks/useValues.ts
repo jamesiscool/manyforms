@@ -11,7 +11,6 @@ export const useValues = () => {
 	const {evaluate} = useExpression()
 
 	const setValue = (path: string, value: any) => {
-		console.log('path:', path)
 		store.set(`${VALUES_STORE_KEY}.${path}`, value)
 		valueChanged(path)
 	}
@@ -32,10 +31,8 @@ export const useValues = () => {
 		getCollectionSize: (path: string) => {
 			return store.getArrayLength(`${VALUES_STORE_KEY}.${path}`)
 		},
-		setValueFromExpression: (path: string, fieldDef: FormElementDef<{}>, expresion: string, extraContext?: any) => {
-			const newValueObject = evaluate(path, fieldDef, expresion, false, extraContext)
-			console.log('setValueFromExpression.newValueObject:', newValueObject, typeof newValueObject)
-			setValue(path, newValueObject)
+		setValueExpression: (path: string, fieldDef: FormElementDef<{}>, expresion: string, extraContext?: any) => {
+			setValue(path, evaluate(path, fieldDef, expresion, false, extraContext))
 		},
 		setUp: (initialValues = {}) => {
 			store.set(VALUES_STORE_KEY, initialValues)

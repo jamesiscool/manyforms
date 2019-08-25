@@ -50,6 +50,7 @@ const useCreateStore = (initialState?: StoreState) => {
 	return {
 		store,
 		set: (path: string, value: any) => {
+			console.log('set:', path, value)
 			dispatch({actionType: 'set', path, value})
 
 		},

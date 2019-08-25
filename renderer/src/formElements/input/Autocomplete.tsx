@@ -2,22 +2,26 @@ import React, {KeyboardEvent, useEffect, useRef, useState} from 'react'
 import {Manager, Popper, Reference} from 'react-popper'
 import {FieldChrome} from '../../display/FieldChrome'
 import {useFieldState} from '../../hooks/useFieldState'
-import {useSuggestion} from '../../hooks/useSuggestion'
+import {SuggestAttributes, useSuggestion} from '../../hooks/useSuggestion'
 import {ReactComponent as Search} from '../../svg/octicons/search.svg'
 import {FormElementProps} from '../FormElementProps'
 
-export interface AutocompleteAttributes {
+export interface AutocompleteAttributes extends SuggestAttributes{
 	label: string
 	description: string
 	info?: string
+	postfixSearchIcon?: boolean
+}
+
+export interface SuggestAttributes {
 	options?: any[]
 	referenceDataOptions?: string
 	multiple?: boolean
 	labelKey?: string
 	valueKey?: string
+	valueIsWholeOption?: boolean
+	valueExpression?: string
 	http?: { url?: string }
-	postfixSearchIcon?: boolean
-
 }
 
 const defaultAutocompleteAttributes = {
@@ -32,7 +36,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 	const attributes = {...defaultAutocompleteAttributes, ...props.definition.attributes}
 
 	const {focus, blur} = useFieldState()
-	const {inputValue, inputChanged, suggestions, showSuggestions, clear, selectOption} = useSuggestion(props.path, attributes)
+	const {inputValue, inputChanged, suggestions, showSuggestions, clear, selectOption} = useSuggestion(props.path, attributes, props.definition)
 	const [cursor, setCursor] = useState<number>(-1)
 
 	const inputContainerRef = useRef<HTMLDivElement>(null)
