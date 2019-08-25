@@ -27,7 +27,19 @@
 							"attributes": {
 								"label": "What's your address",
 								"labelKey": "formattedAddress",
-								"valueKey": "id",
+								"valueIsWholeOption": true,
+								"http": {
+									"url": "http://localhost:3001/address?q="
+								}
+							}
+						},
+						{
+							"fieldId": "addressExpression",
+							"type": "autocomplete",
+							"attributes": {
+								"label": "What's your address",
+								"labelKey": "formattedAddress",
+								"valueExpression": "{zipCode: option.postcode, id: option.id}",
 								"http": {
 									"url": "http://localhost:3001/address?q="
 								}
