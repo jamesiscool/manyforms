@@ -1,9 +1,9 @@
-import Octicon, {Search} from '@primer/octicons-react'
 import React, {KeyboardEvent, useEffect, useRef, useState} from 'react'
 import {Manager, Popper, Reference} from 'react-popper'
 import {FieldChrome} from '../../display/FieldChrome'
 import {useFieldState} from '../../hooks/useFieldState'
 import {useSuggestion} from '../../hooks/useSuggestion'
+import {ReactComponent as Search} from '../../svg/octicons/search.svg'
 import {FormElementProps} from '../FormElementProps'
 
 export interface AutocompleteAttributes {
@@ -113,7 +113,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 						/>
 						{attributes.postfixSearchIcon && <div className="input-group-append" onClick={() => inputChanged(inputValue)}>
 							<span className="input-group-text">
-								<Octicon icon={Search} size='small'/>
+								<Search className="search-icon"/>
 							</span>
 						</div>}
 					</div>
