@@ -26,19 +26,67 @@
 							"type": "autocomplete",
 							"attributes": {
 								"label": "What's your address",
-								"labelKey": "formattedAddress",
+								"description": "Search and select from drop down",
+								"optionLabelKey": "formattedAddress",
 								"valueIsWholeOption": true,
+								"showSwitchToManualEntryLink": true,
+								"switchToManualEntryLinkLabel": "Enter your current residential address manually",
+								"switchToSuggestLinkLabel": "Enter your current residential address using search",
 								"http": {
 									"url": "http://localhost:3001/address?q="
 								}
-							}
+							},
+							"children": [
+								{
+									"fieldId": "apartmentNo",
+									"type": "textInput",
+									"attributes": {
+										"label": "Unit / Apartment No (Optional)"
+									}
+								},
+								{
+									"fieldId": "number",
+									"type": "textInput",
+									"attributes": {
+										"label": "Number"
+									}
+								},
+								{
+									"fieldId": "streetName",
+									"type": "textInput",
+									"attributes": {
+										"label": "Street name"
+									}
+								},
+								{
+									"fieldId": "suburb",
+									"type": "textInput",
+									"attributes": {
+										"label": "Suburb"
+									}
+								},
+								{
+									"fieldId": "state",
+									"type": "textInput",
+									"attributes": {
+										"label": "State"
+									}
+								},
+								{
+									"fieldId": "postCode",
+									"type": "textInput",
+									"attributes": {
+										"label": "Post Code"
+									}
+								}
+							]
 						},
 						{
 							"fieldId": "addressExpression",
 							"type": "autocomplete",
 							"attributes": {
 								"label": "What's your address",
-								"labelKey": "formattedAddress",
+								"optionLabelKey": "formattedAddress",
 								"valueExpression": "{zipCode: option.postcode, id: option.id}",
 								"http": {
 									"url": "http://localhost:3001/address?q="

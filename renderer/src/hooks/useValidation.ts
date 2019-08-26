@@ -63,15 +63,15 @@ export const useValidation = () => {
 		if (nextOrSubmit() || config.showErrors === 'immediately') {
 			return true
 		}
-		const eventTimes = getFieldState(path).eventTimes || {}
-		if (config.showErrors === 'onFocus' && eventTimes.focus) {
-			return timePlusDelayHasPassed(eventTimes.focus)
+		const fieldState = getFieldState(path) || {}
+		if (config.showErrors === 'onFocus' && fieldState.focus) {
+			return timePlusDelayHasPassed(fieldState.focus)
 		}
-		if (config.showErrors === 'onValueChanged' && eventTimes.valueChanged) {
-			return timePlusDelayHasPassed(eventTimes.valueChanged)
+		if (config.showErrors === 'onValueChanged' && fieldState.valueChanged) {
+			return timePlusDelayHasPassed(fieldState.valueChanged)
 		}
-		if (config.showErrors === 'onBlur' && eventTimes.blur) {
-			return timePlusDelayHasPassed(eventTimes.blur)
+		if (config.showErrors === 'onBlur' && fieldState.blur) {
+			return timePlusDelayHasPassed(fieldState.blur)
 		}
 		return false
 	}

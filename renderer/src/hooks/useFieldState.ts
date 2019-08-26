@@ -4,9 +4,9 @@ interface FieldStates {
 	[path: string]: FieldState
 }
 
-interface FieldState {
-	selectedSuggestionLabel?: string,
-	eventTimes: EventTimes
+interface FieldState extends EventTimes{
+	selectedSuggestionLabel?: string
+	showManualEntryForSuggestion?: boolean
 }
 
 type EventTimes = {
@@ -20,19 +20,23 @@ const FIELD_STATE_STORE_KEY = 'fieldStates'
 export const useFieldState = () => {
 	const {set, get} = useStore()
 
-	const getFieldState = (path: string): FieldState => get(`${FIELD_STATE_STORE_KEY}.${path}`, {eventTimes: {}})
+	const getFieldState = (path: string): FieldState => get(`${FIELD_STATE_STORE_KEY}.${path}`, {})
 
 	const eventHappened = (path: string, event: Events) => {
-		if (!getFieldState(path).eventTimes[event]) {
-			set(`${FIELD_STATE_STORE_KEY}.${path}.eventTimes.${event}`, Date.now())
+		if (!getFieldState(path)[event]) {
+			set(`${FIELD_STATE_STORE_KEY}.${path}.${event}`, Date.now())
 		}
 	}
 
 	return {
-		getFieldState: (path: string): FieldState => get(`${FIELD_STATE_STORE_KEY}.${path}`, {eventTimes: {}}),
+		getFieldState: (path: string): FieldState => get(`${FIELD_STATE_STORE_KEY}.${path}`, {}),
 
 		setSelectedSuggestionLabel: (path: string, label: string) => {
 			set(FIELD_STATE_STORE_KEY + '.' + path + '.selectedSuggestionLabel', label)
+		},
+
+		setShowManualEntryForSuggestion: (path: string, showen: boolean) => {
+			set(FIELD_STATE_STORE_KEY + '.' + path + '.showManualEntryForSuggestion', showen)
 		},
 
 		focus: (path: string) => eventHappened(path, 'focus'),
