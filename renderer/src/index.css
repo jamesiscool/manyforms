@@ -1,5 +1,5 @@
 .btn-group {
-    min-width: 100px;
+    min-width: 80px;
 }
 
 .link-button {
@@ -32,4 +32,13 @@
 
 .search-icon {
     fill: currentcolor;
+}
+
+.manual-entry-link {
+    margin-top: -1.8rem;
+}
+
+.btn {
+    padding-top: .3rem;
+    padding-bottom: .3rem;
 }

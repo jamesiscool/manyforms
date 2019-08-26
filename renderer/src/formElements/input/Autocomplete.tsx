@@ -141,7 +141,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 				</Manager>
 			</FieldChrome>
 			{attributes.showSwitchToManualEntryLink &&
-			<button className="btn btn-link pt-0 pl-0 mt-n4" onClick={() => setShowManualEntryForSuggestion(props.path, true)}>{attributes.switchToManualEntryLinkLabel}</button>}
+			<button className="btn btn-link pt-0 pl-0 manual-entry-link" onClick={() => setShowManualEntryForSuggestion(props.path, true)}>{attributes.switchToManualEntryLinkLabel}</button>}
 		</>
 	} else {
 		return <div className="form-group pt-2">

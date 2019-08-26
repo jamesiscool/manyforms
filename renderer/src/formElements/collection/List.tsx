@@ -17,15 +17,15 @@ export const List = (props: FormElementProps<IterationAttributes>) => {
 	const {getCollectionSize, addToCollection, deleteFromCollection} = useValues()
 	return (
 		<div className="form-group">
-			<span className="h4 align-middle mr-2">{props.definition.attributes.label}</span>
+			<span className="h5 align-middle mr-2">{props.definition.attributes.label}</span>
 			{props.definition.attributes.description && <Description path={props.path} text={props.definition.attributes.description}/>}
 			{times(getCollectionSize(props.path), (index: number) =>
 				<div className={'card border-bottom mb-3' + (index === 0 ? ' mt-2' : '')} key={props.path + '_COLLECTION_' + index}>
-					<h5 className="card-header">{ordinal(index + 1)} {props.definition.attributes.itemLabel}
-						<button className="close text-dark" onClick={() => deleteFromCollection(props.path, index)}>
+					<h6 className="card-header">{ordinal(index + 1)} {props.definition.attributes.itemLabel}
+						<button className="close text-dark" onClick={() => deleteFromCollection(props.path, index)} aria-label="close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-					</h5>
+					</h6>
 					<div className="card-body pb-0">
 						{props.definition.children && <ChildFormElements childFormElements={props.definition.children} parentPath={props.path + '[' + index + ']'}/>}
 					</div>
