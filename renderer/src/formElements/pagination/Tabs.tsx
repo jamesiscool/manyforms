@@ -69,7 +69,7 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 			</div>
 			<div className="card-body">
 				<div className="container">
-					<ChildFormElements childFormElements={props.definition.children[pagination.currentPageIndex].children as FormElementDef<any>[]} parentPath={props.parentPath}/>
+					<ChildFormElements childFormElements={props.definition.children[pagination.currentPageIndex].children as FormElementDef[]} parentPath={props.parentPath}/>
 					<div className="row">
 						<div className="col">
 							<nav aria-label="Page navigation">

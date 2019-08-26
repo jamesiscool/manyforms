@@ -4,7 +4,7 @@ import {useExpression} from './useExpression'
 export const useShowIf = () => {
 	const {evaluate} = useExpression()
 	return {
-		shouldShow: (path: string, fieldDef: FormElementDef<{}>): boolean => {
+		shouldShow: (path: string, fieldDef: FormElementDef): boolean => {
 			if (!fieldDef.showIf) {
 				return true
 			}

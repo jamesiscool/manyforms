@@ -28,7 +28,7 @@ export const useExpression = () => {
 	const {store, get} = useStore()
 
 	return {
-		evaluate: <T>(path: string, fieldDef: FormElementDef<{}>, expression: string, includeFieldValue = true, extraContex?: any): T => {
+		evaluate: <T>(path: string, fieldDef: FormElementDef, expression: string, includeFieldValue = true, extraContex?: any): T => {
 			const context = {
 				...store,
 				fieldDef,

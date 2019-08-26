@@ -16,7 +16,7 @@ export interface SuggestAttributes {
 	http?: { url?: string }
 }
 
-export function useSuggestion(path: string, attributes: SuggestAttributes, fieldDef: FormElementDef<{}>) {
+export function useSuggestion(path: string, attributes: SuggestAttributes, fieldDef: FormElementDef) {
 	const {referenceData} = useReferenceData()
 	const {setValue, setValueExpression} = useValues()
 	const {getFieldState, setSelectedSuggestionLabel} = useFieldState()

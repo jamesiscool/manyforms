@@ -31,7 +31,7 @@ export const useValues = () => {
 		getCollectionSize: (path: string) => {
 			return store.getArrayLength(`${VALUES_STORE_KEY}.${path}`)
 		},
-		setValueExpression: (path: string, fieldDef: FormElementDef<{}>, expresion: string, extraContext?: any) => {
+		setValueExpression: (path: string, fieldDef: FormElementDef, expresion: string, extraContext?: any) => {
 			setValue(path, evaluate(path, fieldDef, expresion, false, extraContext))
 		},
 		setUp: (initialValues = {}) => {

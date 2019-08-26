@@ -12,7 +12,7 @@ export const usePagination = () => {
 	const {nextClicked, clearNextClicked, submitClicked} = useFormState()
 	const {shouldShow} = useShowIf()
 	const [path, setPath] = useState<string>('')
-	const [pages, setPages] = useState<FormElementDef<any>[]>([])
+	const [pages, setPages] = useState<FormElementDef[]>([])
 	const [currentPageIndex, setCurrentPageIndex] = useState<number>(-1)
 
 	const firstShownPage = pages.findIndex(page => shouldShow(path, page))
@@ -26,7 +26,7 @@ export const usePagination = () => {
 
 
 	return {
-		setUp: (path: string, setupPages: FormElementDef<any>[]) => {
+		setUp: (path: string, setupPages: FormElementDef[]) => {
 			setPath(path)
 			setPages(setupPages)
 			if (currentPageIndex < 0) {

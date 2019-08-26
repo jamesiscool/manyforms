@@ -4,7 +4,7 @@ import {useShowIf} from '../hooks/useShowIf'
 import {createPath} from '../util'
 import {lookupElement} from './formElementTypes'
 
-export const ChildFormElements: React.FC<{ childFormElements: FormElementDef<any>[], parentPath: string }> = (props) =>
+export const ChildFormElements: React.FC<{ childFormElements: FormElementDef[], parentPath: string }> = (props) =>
 	<div>
 		{props.childFormElements.map((elementDef, index) => {
 			const path = createPath(props.parentPath, elementDef.fieldId)
@@ -12,7 +12,7 @@ export const ChildFormElements: React.FC<{ childFormElements: FormElementDef<any
 		})}
 	</div>
 
-const ChildFormElement: React.FC<{ path: string, parentPath: string, elementDef: FormElementDef<any> }> = (props) => {
+const ChildFormElement: React.FC<{ path: string, parentPath: string, elementDef: FormElementDef }> = (props) => {
 	const {shouldShow} = useShowIf()
 	if (!shouldShow(props.path, props.elementDef)) {
 		return null

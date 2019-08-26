@@ -6,7 +6,8 @@ import {useShowIf} from '../../hooks/useShowIf'
 import {ChildFormElements} from '../ChildFormElements'
 import {FormElementProps} from '../FormElementProps'
 
-export const Accordion = (props: FormElementProps<void>) => {
+
+export const Accordion = (props: FormElementProps) => {
 	const {shouldShow} = useShowIf()
 	const pagination = usePagination()
 	const currentPageRef = useRef<HTMLDivElement>(null)
@@ -49,7 +50,7 @@ export const Accordion = (props: FormElementProps<void>) => {
 						<h3 className="d-inline">{page.attributes.label}</h3>{index < pagination.currentPageIndex && <button className="link-button text-muted px-1" onClick={() => goToPage(index)}><u>edit</u></button>}
 					</div>
 					{pagination.currentPageIndex === index && <div className="card-body m-1">
-						{page.children && <ChildFormElements childFormElements={page.children as FormElementDef<any>[]} parentPath={props.parentPath}/>}
+						{page.children && <ChildFormElements childFormElements={page.children as FormElementDef[]} parentPath={props.parentPath}/>}
 						<div className="row">
 							<div className="col">
 								<nav aria-label="Page navigation">

@@ -1,5 +1,5 @@
 import React from 'react'
-import {FormElementDef} from '../FormDef'
+import {FieldAttributes, FormElementDef} from '../FormDef'
 import {useValidation} from '../hooks/useValidation'
 import {Description} from './Description'
 import {Label} from './Label'
@@ -7,7 +7,7 @@ import {Label} from './Label'
 
 interface FieldChromeProps {
 	path: string
-	def: FormElementDef<any>
+	def: FormElementDef<FieldAttributes>
 }
 
 export const FieldChrome: React.FC<FieldChromeProps> = (props) => {
