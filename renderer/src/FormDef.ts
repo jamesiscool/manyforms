@@ -4,6 +4,7 @@ export default interface FormDef {
 	elements: ElementDef[]
 	config?: Config
 	referenceData?: ReferenceDataDef
+	submit: { url: string }
 }
 
 export interface ElementDef {

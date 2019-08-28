@@ -4,13 +4,16 @@ import {ElementDef} from '../FormDef'
 import {useConfig} from './useConfig'
 import {useFormState} from './useFormState'
 import {useShowIf} from './useShowIf'
+import {useSubmit} from './useSubmit'
 import {useValidation} from './useValidation'
 
 export const usePagination = () => {
-	const config = useConfig().config
+	const {config} = useConfig()
 	const {hasErrorsRecursively} = useValidation()
 	const {nextClicked, clearNextClicked, submitClicked} = useFormState()
 	const {shouldShow} = useShowIf()
+	const {submitting, submit} = useSubmit()
+
 	const [path, setPath] = useState<string>('')
 	const [pages, setPages] = useState<ElementDef[]>([])
 	const [currentPageIndex, setCurrentPageIndex] = useState<number>(-1)
@@ -61,9 +64,9 @@ export const usePagination = () => {
 			if (currentPageHasErrors()) {
 				submitClicked()
 			} else {
-				console.log('Submit')
+				submit()
 			}
 		},
-		currentPageIndex, setCurrentPageIndex, currentIsFirst, currentIsLast, currentPageHasErrors, disableNext
+		currentPageIndex, setCurrentPageIndex, currentIsFirst, currentIsLast, currentPageHasErrors, disableNext, submitting
 	}
 }

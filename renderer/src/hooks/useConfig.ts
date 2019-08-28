@@ -16,11 +16,11 @@ const defaultConfig: Config = {
 
 const CONFIG_STORE_KEY = 'config'
 
-export const useConfig = (formDefinitionConfig = {}) => {
+export const useConfig = (formDefinitionConfig: Partial<Config> = {}) => {
 	const {set, get} = useStore()
 	return {
 		config: get(CONFIG_STORE_KEY) || {},
-		setup: (formDefinitionConfig = {}) => {
+		setupConfig: (formDefinitionConfig = {}) => {
 			set(CONFIG_STORE_KEY, {...defaultConfig, ...formDefinitionConfig})
 		}
 	}

@@ -20,7 +20,7 @@
 							"type": "autocomplete",
 							"label": "What's your address",
 							"description": "Search and select from drop down",
-							"optionLabelKey": "formattedAddress",
+							"labelKey": "formattedAddress",
 							"valueIsWholeOption": true,
 							"showSwitchToManualEntryLink": true,
 							"switchToManualEntryLinkLabel": "Enter your current residential address manually",
@@ -65,7 +65,7 @@
 							"fieldId": "addressExpression",
 							"type": "autocomplete",
 							"label": "What's your address",
-							"optionLabelKey": "formattedAddress",
+							"labelKey": "formattedAddress",
 							"valueExpression": "{zipCode: option.postcode, id: option.id}",
 							"http": {
 								"url": "http://localhost:3001/address?q="
@@ -175,7 +175,7 @@
 								"Medical / Dental",
 								"Multiple reasons",
 								"Business purpose or expense",
-								"House / land Purchase",
+								"House / Land purchase",
 								"Other"
 							],
 							"description": "Select what most of the money will be used for."
@@ -615,5 +615,8 @@
 				"url": "api/referenceData/countryCodes.json"
 			}
 		]
+	},
+	"submit": {
+		"url": "http://localhost:3001/submit"
 	}
 }

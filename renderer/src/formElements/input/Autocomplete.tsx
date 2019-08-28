@@ -20,11 +20,11 @@ export interface AutocompleteDef extends SuggestDef {
 	switchToSuggestLinkLabel?: string
 }
 
-const defDefaults = {
+const defDefaults: Partial<AutocompleteDef> = {
 	options: [],
 	multiple: false,
-	optionLabelKey: 'label',
-	optionValueKey: 'value',
+	labelKey: 'label',
+	valueKey: 'value',
 	postfixSearchIcon: true
 }
 
@@ -129,8 +129,15 @@ export const Autocomplete = (props: FormElementProps<AutocompleteDef>) => {
 								<div ref={ref} style={style} className="popper" data-placement={placement}>
 									{showSuggestions && suggestions && suggestions.length > 0 && <div className="dropdown-menu show">
 										{suggestions.map((suggestion, index) => {
-											const value = suggestion[def.optionValueKey]
-											const label = suggestion[def.optionLabelKey]
+											let value
+											let label
+											if (typeof suggestion === 'string') {
+												value = suggestion
+												label = suggestion
+											} else if (typeof suggestion === 'object') {
+												value = def.valueKey && suggestion[def.valueKey]
+												label = def.labelKey && suggestion[def.labelKey]
+											}
 											return <button className={'dropdown-item' + (cursor === index ? ' active' : '')} key={value + label} onClick={() => handleSelectionClicked(suggestion)}>{label}</button>
 										})}
 									</div>}

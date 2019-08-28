@@ -17,7 +17,7 @@ export const useValues = () => {
 
 
 	return {
-		formValues: store.get(VALUES_STORE_KEY),
+		values: store.get(VALUES_STORE_KEY),
 		setValue,
 		getValue: (path: string): string => {
 			return store.get(`${VALUES_STORE_KEY}.${path}`)

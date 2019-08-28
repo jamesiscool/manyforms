@@ -40,11 +40,11 @@ export function useSuggestion(path: string, def: SuggestDef) {
 		const lowerInputValue = newInputValue.trim().toLowerCase()
 		const lowerSelectedLabel = fieldState.selectedSuggestionLabel && fieldState.selectedSuggestionLabel.toLowerCase()
 		if (lowerInputValue !== lowerSelectedLabel && lowerInputValue.length > 0) {
-
 			const referenceDataOptions = (def.referenceDataOptions && referenceData[def.referenceDataOptions]) || []
-			const inlineOptions = def.options!.concat(referenceDataOptions)
+			const fieldDefOption = def.options || []
+			const inlineOptions = referenceDataOptions.concat(fieldDefOption)
 
-			const matchingInlineOptions = inlineOptions.filter(option => {
+			const matchingInlineOptions = inlineOptions.filter((option: any) => {
 				return JSON.stringify(option).toLowerCase().includes(lowerInputValue)
 			})
 
