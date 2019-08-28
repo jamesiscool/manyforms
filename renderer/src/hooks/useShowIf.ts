@@ -4,11 +4,11 @@ import {useExpression} from './useExpression'
 export const useShowIf = () => {
 	const {evaluate} = useExpression()
 	return {
-		shouldShow: (path: string, fieldDef: ElementDef): boolean => {
-			if (!fieldDef.showIf) {
+		shouldShow: (path: string, def: ElementDef): boolean => {
+			if (!def.showIf) {
 				return true
 			}
-			return fieldDef.showIf.some(expression => evaluate(path, fieldDef, expression))
+			return def.showIf.some(expression => evaluate(path, def, expression))
 		}
 	}
 }

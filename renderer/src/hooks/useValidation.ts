@@ -19,19 +19,19 @@ export const useValidation = () => {
 	const {updateAt} = useUpdate()
 	const validationExpressions = useValidationExpressions()
 
-	const validate = (path: string, fieldDef: FieldDef): string | null => {
-		if (!fieldDef.validation || fieldDef.validation.length <= 0) {
+	const validate = (path: string, def: FieldDef): string | null => {
+		if (!def.validation || def.validation.length <= 0) {
 			return null
 		}
-		return fieldDef.validation.reduce<string | null>((message, constraint): string | null => {
+		return def.validation.reduce<string | null>((message, constraint): string | null => {
 			if (message != null) {
 				return message
 			}
-			return validateConstraint(constraint, path, fieldDef)
+			return validateConstraint(constraint, path, def)
 		}, null)
 	}
 
-	function validateConstraint(constraint: ValidationConstraintDef | string, path: string, fieldDef: ElementDef): string | null {
+	function validateConstraint(constraint: ValidationConstraintDef | string, path: string, def: ElementDef): string | null {
 		if (typeof constraint === 'string') {
 			const fieldValue = getValue(path) || ''
 			const validationRule = validationRules[constraint]
@@ -48,18 +48,18 @@ export const useValidation = () => {
 			return null
 		} else {
 			const validationExpression = validationExpressions[constraint.name]
-			if (!validationExpression.validate(path, fieldDef, constraint.expression)) {
+			if (!validationExpression.validate(path, def, constraint.expression)) {
 				return constraint.message || validationExpression.defaultMessage
 			}
 			return null
 		}
 	}
 
-	const validateAndShouldShow = (path: string, fieldDef: ElementDef): string | null => {
-		return shouldShowErrors(path, fieldDef) ? validate(path, fieldDef) : null
+	const validateAndShouldShow = (path: string, def: ElementDef): string | null => {
+		return shouldShowErrors(path, def) ? validate(path, def) : null
 	}
 
-	const shouldShowErrors = (path: string, fieldDef: ElementDef): boolean => {
+	const shouldShowErrors = (path: string, def: ElementDef): boolean => {
 		if (nextOrSubmit() || config.showErrors === 'immediately') {
 			return true
 		}
@@ -87,15 +87,15 @@ export const useValidation = () => {
 		}
 	}
 
-	const hasErrorsRecursively = (path: string, fieldDef?: ElementDef): boolean => {
-		if (!fieldDef || !shouldShow(path, fieldDef)) {
+	const hasErrorsRecursively = (path: string, def?: ElementDef): boolean => {
+		if (!def || !shouldShow(path, def)) {
 			return false
 		}
-		if (validate(path, fieldDef) != null) {
+		if (validate(path, def) != null) {
 			return true
 		}
-		if (fieldDef.children) {
-			return fieldDef.children.some((childFieldDef) => {
+		if (def.children) {
+			return def.children.some((childFieldDef) => {
 				const childPath = createPath(path, childFieldDef.fieldId)
 				if (!shouldShow(childPath, childFieldDef)) {
 					return false
