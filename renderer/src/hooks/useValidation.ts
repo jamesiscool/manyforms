@@ -1,4 +1,4 @@
-import {FormElementDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
+import {ElementDef, FieldDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
 import {isTypeACollection} from '../formElements/formElementTypes'
 import {createPath} from '../util'
 import {useValidationExpressions} from '../validation/ValidationExpressions'
@@ -19,7 +19,7 @@ export const useValidation = () => {
 	const {updateAt} = useUpdate()
 	const validationExpressions = useValidationExpressions()
 
-	const validate = (path: string, fieldDef: FormElementDef): string | null => {
+	const validate = (path: string, fieldDef: FieldDef): string | null => {
 		if (!fieldDef.validation || fieldDef.validation.length <= 0) {
 			return null
 		}
@@ -31,7 +31,7 @@ export const useValidation = () => {
 		}, null)
 	}
 
-	function validateConstraint(constraint: ValidationConstraintDef | string, path: string, fieldDef: FormElementDef): string | null {
+	function validateConstraint(constraint: ValidationConstraintDef | string, path: string, fieldDef: ElementDef): string | null {
 		if (typeof constraint === 'string') {
 			const fieldValue = getValue(path) || ''
 			const validationRule = validationRules[constraint]
@@ -55,11 +55,11 @@ export const useValidation = () => {
 		}
 	}
 
-	const validateAndShouldShow = (path: string, fieldDef: FormElementDef): string | null => {
+	const validateAndShouldShow = (path: string, fieldDef: ElementDef): string | null => {
 		return shouldShowErrors(path, fieldDef) ? validate(path, fieldDef) : null
 	}
 
-	const shouldShowErrors = (path: string, fieldDef: FormElementDef): boolean => {
+	const shouldShowErrors = (path: string, fieldDef: ElementDef): boolean => {
 		if (nextOrSubmit() || config.showErrors === 'immediately') {
 			return true
 		}
@@ -87,7 +87,7 @@ export const useValidation = () => {
 		}
 	}
 
-	const hasErrorsRecursively = (path: string, fieldDef?: FormElementDef): boolean => {
+	const hasErrorsRecursively = (path: string, fieldDef?: ElementDef): boolean => {
 		if (!fieldDef || !shouldShow(path, fieldDef)) {
 			return false
 		}

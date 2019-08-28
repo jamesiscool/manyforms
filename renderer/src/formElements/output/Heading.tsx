@@ -7,4 +7,4 @@ interface HeadingAttributes {
 }
 
 export const Heading = (props: FormElementProps<HeadingAttributes>) =>
-	React.createElement('h' + props.definition.attributes.level, null, props.definition.attributes.text)
+	React.createElement('h' + props.def.level, null, props.def.text)

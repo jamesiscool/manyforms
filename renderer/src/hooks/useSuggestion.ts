@@ -1,11 +1,11 @@
 import axios from 'axios'
 import {useEffect, useState} from 'react'
-import {FormElementDef} from '../FormDef'
+import {FieldDef} from '../FormDef'
 import {useFieldState} from './useFieldState'
 import {useReferenceData} from './useReferenceData'
 import {useValues} from './useValues'
 
-export interface SuggestAttributes {
+export interface SuggestDef extends FieldDef {
 	options?: any[]
 	referenceDataOptions?: string
 	multiple?: boolean
@@ -16,7 +16,7 @@ export interface SuggestAttributes {
 	http?: { url?: string }
 }
 
-export function useSuggestion(path: string, attributes: SuggestAttributes, fieldDef: FormElementDef) {
+export function useSuggestion(path: string, def: SuggestDef) {
 	const {referenceData} = useReferenceData()
 	const {setValue, setValueExpression} = useValues()
 	const {getFieldState, setSelectedSuggestionLabel} = useFieldState()
@@ -41,8 +41,8 @@ export function useSuggestion(path: string, attributes: SuggestAttributes, field
 		const lowerSelectedLabel = fieldState.selectedSuggestionLabel && fieldState.selectedSuggestionLabel.toLowerCase()
 		if (lowerInputValue !== lowerSelectedLabel && lowerInputValue.length > 0) {
 
-			const referenceDataOptions = (attributes.referenceDataOptions && referenceData[attributes.referenceDataOptions]) || []
-			const inlineOptions = attributes.options!.concat(referenceDataOptions)
+			const referenceDataOptions = (def.referenceDataOptions && referenceData[def.referenceDataOptions]) || []
+			const inlineOptions = def.options!.concat(referenceDataOptions)
 
 			const matchingInlineOptions = inlineOptions.filter(option => {
 				return JSON.stringify(option).toLowerCase().includes(lowerInputValue)
@@ -50,8 +50,8 @@ export function useSuggestion(path: string, attributes: SuggestAttributes, field
 
 			setInlineSuggestions(matchingInlineOptions)
 
-			if (attributes.http && attributes.http.url) {
-				axios.get<any[]>(attributes.http.url + newInputValue)
+			if (def.http && def.http.url) {
+				axios.get<any[]>(def.http.url + newInputValue)
 					.then(function (response) {
 						setHttpSuggestions(response.data)
 					})
@@ -71,15 +71,15 @@ export function useSuggestion(path: string, attributes: SuggestAttributes, field
 			setSelectedSuggestionLabel(path, option)
 			setInputValue(option)
 		} else if (typeof option === 'object') {
-			if (attributes.valueIsWholeOption) {
+			if (def.valueIsWholeOption) {
 				setValue(path, option)
-			} else if (attributes.valueExpression) {
-				setValueExpression(path, fieldDef, attributes.valueExpression, {option})
-			} else if (attributes.valueKey) {
-				setValue(path, option[attributes.valueKey])
+			} else if (def.valueExpression) {
+				setValueExpression(path, def, def.valueExpression, {option})
+			} else if (def.valueKey) {
+				setValue(path, option[def.valueKey])
 			}
-			setSelectedSuggestionLabel(path, option[attributes.labelKey || 'label'])
-			setInputValue(option[attributes.labelKey || 'label'])
+			setSelectedSuggestionLabel(path, option[def.labelKey || 'label'])
+			setInputValue(option[def.labelKey || 'label'])
 
 		}
 		setShowSuggestions(false)

@@ -6,4 +6,4 @@ interface ParagraphAttributes {
 	text: string
 }
 
-export const Paragraph = (props: FormElementProps<ParagraphAttributes>) => <p>{props.definition.attributes.text}</p>
+export const Paragraph = (props: FormElementProps<ParagraphAttributes>) => <p>{props.def.text}</p>

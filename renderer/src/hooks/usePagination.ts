@@ -1,6 +1,6 @@
 import {findLastIndex} from 'lodash-es'
 import {useState} from 'react'
-import {FormElementDef} from '../FormDef'
+import {ElementDef} from '../FormDef'
 import {useConfig} from './useConfig'
 import {useFormState} from './useFormState'
 import {useShowIf} from './useShowIf'
@@ -12,7 +12,7 @@ export const usePagination = () => {
 	const {nextClicked, clearNextClicked, submitClicked} = useFormState()
 	const {shouldShow} = useShowIf()
 	const [path, setPath] = useState<string>('')
-	const [pages, setPages] = useState<FormElementDef[]>([])
+	const [pages, setPages] = useState<ElementDef[]>([])
 	const [currentPageIndex, setCurrentPageIndex] = useState<number>(-1)
 
 	const firstShownPage = pages.findIndex(page => shouldShow(path, page))
@@ -26,7 +26,7 @@ export const usePagination = () => {
 
 
 	return {
-		setUp: (path: string, setupPages: FormElementDef[]) => {
+		setUp: (path: string, setupPages: ElementDef[]) => {
 			setPath(path)
 			setPages(setupPages)
 			if (currentPageIndex < 0) {

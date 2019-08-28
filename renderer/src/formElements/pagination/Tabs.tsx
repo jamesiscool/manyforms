@@ -1,25 +1,25 @@
 import classNames from 'classnames'
 import React, {useEffect, useRef} from 'react'
-import {FormElementDef} from '../../FormDef'
+import {ElementDef} from '../../FormDef'
 import {usePagination} from '../../hooks/usePagination'
 import {useShowIf} from '../../hooks/useShowIf'
 import {ChildFormElements} from '../ChildFormElements'
 import {FormElementProps} from '../FormElementProps'
 
-interface TabAttributes {
+interface TabsDef extends ElementDef {
 	pill?: boolean
 }
 
 
-export const Tabs = (props: FormElementProps<TabAttributes>) => {
+export const Tabs = (props: FormElementProps<TabsDef>) => {
 	const {shouldShow} = useShowIf()
 	const pagination = usePagination()
 	const tabsRef = useRef<HTMLDivElement>(null)
 
 	/* eslint-disable react-hooks/exhaustive-deps */
 	useEffect(() => {
-		props.definition.children && pagination.setUp(props.path, props.definition.children)
-	}, [props.definition.children, props.path])
+		props.def.children && pagination.setUp(props.path, props.def.children)
+	}, [props.def, props.path])
 	/* eslint-enable react-hooks/exhaustive-deps */
 
 	useEffect(() => {
@@ -28,7 +28,7 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 		}
 	}, [pagination.currentPageIndex])
 
-	if (!props.definition.children) {
+	if (!props.def.children) {
 		return null
 	}
 
@@ -39,8 +39,8 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 	return (
 		<div className="card rounded-0">
 			<div className="card-header" ref={tabsRef}>
-				<ul className={'nav ' + (props.definition.attributes.pill ? 'nav-pills card-header-pills' : 'nav-tabs card-header-tabs')}>
-					{props.definition.children!.map((page, index) => {
+				<ul className={'nav ' + (props.def.pill ? 'nav-pills card-header-pills' : 'nav-tabs card-header-tabs')}>
+					{props.def.children!.map((page, index) => {
 						if (!shouldShow(props.path, page)) {
 							return null
 						}
@@ -49,18 +49,18 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 						/* eslint-disable jsx-a11y/anchor-is-valid, no-script-url */
 						if (index < pagination.currentPageIndex) {
 							return <li className="nav-item" key={key}>
-								<a className="nav-link" href="javascript:void(0)" onClick={() => pagination.setCurrentPageIndex(index)}>{page.attributes.label}</a>
+								<a className="nav-link" href="javascript:void(0)" onClick={() => pagination.setCurrentPageIndex(index)}>{page.label}</a>
 							</li>
 						}
 						/* eslint-enable no-script-url, jsx-a11y/anchor-is-valid */
 						if (index === pagination.currentPageIndex) {
 							return <li className="nav-item" key={key}>
-								<button className="nav-link active">{page.attributes.label}</button>
+								<button className="nav-link active">{page.label}</button>
 							</li>
 						}
 						if (index > pagination.currentPageIndex) {
 							return <li className="nav-item" key={key}>
-								<button className="nav-link disabled" tabIndex={-1} aria-disabled="true">{page.attributes.label}</button>
+								<button className="nav-link disabled" tabIndex={-1} aria-disabled="true">{page.label}</button>
 							</li>
 						}
 						return null
@@ -69,7 +69,7 @@ export const Tabs = (props: FormElementProps<TabAttributes>) => {
 			</div>
 			<div className="card-body">
 				<div className="container">
-					<ChildFormElements childFormElements={props.definition.children[pagination.currentPageIndex].children as FormElementDef[]} parentPath={props.parentPath}/>
+					<ChildFormElements childFormElements={props.def.children[pagination.currentPageIndex].children as ElementDef[]} parentPath={props.parentPath}/>
 					<div className="row">
 						<div className="col">
 							<nav aria-label="Page navigation">

@@ -4,7 +4,7 @@ interface FieldStates {
 	[path: string]: FieldState
 }
 
-interface FieldState extends EventTimes{
+interface FieldState extends EventTimes {
 	selectedSuggestionLabel?: string
 	showManualEntryForSuggestion?: boolean
 }

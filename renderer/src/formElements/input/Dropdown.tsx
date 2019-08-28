@@ -1,14 +1,13 @@
 import React from 'react'
 import {FieldChrome} from '../../display/FieldChrome'
+import {FieldDef} from '../../FormDef'
 import {useFieldState} from '../../hooks/useFieldState'
 import {useReferenceData} from '../../hooks/useReferenceData'
 import {useValues} from '../../hooks/useValues'
 import {createKey} from '../../util'
 import {FormElementProps} from '../FormElementProps'
 
-export interface DropdownAttributes {
-	label: string
-	description: string
+export interface DropdownDef extends FieldDef {
 	info?: string
 	options?: string[]
 	referenceDataOptions?: string
@@ -21,21 +20,21 @@ interface Option {
 
 type Data = string | number
 
-export const Dropdown = (props: FormElementProps<DropdownAttributes>) => {
+export const Dropdown = (props: FormElementProps<DropdownDef>) => {
 	const referenceData = useReferenceData().referenceData
 	const {getValue, setValue} = useValues()
 	const {blur, focus} = useFieldState()
-	let options: Array<Option | Data> = props.definition.attributes.options || []
-	if (props.definition.attributes.referenceDataOptions) {
-		options = options.concat(referenceData[props.definition.attributes.referenceDataOptions])
+	let options: Array<Option | Data> = props.def.options || []
+	if (props.def.referenceDataOptions) {
+		options = options.concat(referenceData[props.def.referenceDataOptions])
 	}
-	return <FieldChrome path={props.path} def={props.definition}>
+	return <FieldChrome path={props.path} def={props.def}>
 		<select
 			className="form-control custom-select"
-			id={props.definition.fieldId}
+			id={props.def.fieldId}
 			value={getValue(props.path) || ''}
 			onChange={event => setValue(props.path, event.currentTarget.value)}
-			aria-describedby={props.definition.fieldId + '_description'}
+			aria-describedby={props.def.fieldId + '_description'}
 			onFocus={() => focus(props.path)}
 			onBlur={() => blur(props.path)}
 		>

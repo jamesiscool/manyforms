@@ -1,20 +1,18 @@
 import React from 'react'
 import {FieldChrome} from '../../display/FieldChrome'
+import {FieldDef} from '../../FormDef'
 import {useFieldState} from '../../hooks/useFieldState'
 import {useValues} from '../../hooks/useValues'
 import {FormElementProps} from '../FormElementProps'
 
-interface TextInputAttributes {
-	label: string
-	description: string
-	info?: string
+interface TextInputDef extends FieldDef {
 }
 
-export const TextInput = (props: FormElementProps<TextInputAttributes>) => {
+export const TextInput = (props: FormElementProps<TextInputDef>) => {
 	const {getValue, setValue} = useValues()
 	const {blur, focus} = useFieldState()
 
-	return (<FieldChrome path={props.path} def={props.definition}>
+	return (<FieldChrome path={props.path} def={props.def}>
 		<input
 			type="text"
 			className="form-control"

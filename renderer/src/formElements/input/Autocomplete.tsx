@@ -4,12 +4,12 @@ import {Description} from '../../display/Description'
 import {FieldChrome} from '../../display/FieldChrome'
 import {Label} from '../../display/Label'
 import {useFieldState} from '../../hooks/useFieldState'
-import {SuggestAttributes, useSuggestion} from '../../hooks/useSuggestion'
+import {SuggestDef, useSuggestion} from '../../hooks/useSuggestion'
 import {ReactComponent as Search} from '../../svg/octicons/search.svg'
 import {ChildFormElements} from '../ChildFormElements'
 import {FormElementProps} from '../FormElementProps'
 
-export interface AutocompleteAttributes extends SuggestAttributes {
+export interface AutocompleteDef extends SuggestDef {
 	label: string
 	description: string
 	manualDescription: string
@@ -20,7 +20,7 @@ export interface AutocompleteAttributes extends SuggestAttributes {
 	switchToSuggestLinkLabel?: string
 }
 
-const defaultAutocompleteAttributes = {
+const defDefaults = {
 	options: [],
 	multiple: false,
 	optionLabelKey: 'label',
@@ -28,11 +28,11 @@ const defaultAutocompleteAttributes = {
 	postfixSearchIcon: true
 }
 
-export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) => {
-	const attributes = {...defaultAutocompleteAttributes, ...props.definition.attributes}
+export const Autocomplete = (props: FormElementProps<AutocompleteDef>) => {
+	const def = {...defDefaults, ...props.def}
 
 	const {focus, blur, getFieldState, setShowManualEntryForSuggestion} = useFieldState()
-	const {inputValue, inputChanged, suggestions, showSuggestions, clear, selectOption} = useSuggestion(props.path, attributes, props.definition)
+	const {inputValue, inputChanged, suggestions, showSuggestions, clear, selectOption} = useSuggestion(props.path, props.def)
 	const [cursor, setCursor] = useState<number>(-1)
 
 	const inputContainerRef = useRef<HTMLDivElement>(null)
@@ -99,7 +99,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 
 	if (!showManualEntryForSuggestion) {
 		return <>
-			<FieldChrome path={props.path} def={props.definition}>
+			<FieldChrome path={props.path} def={props.def}>
 				<Manager>
 					<Reference>
 						{({ref}) => (<div ref={inputContainerRef} className="input-group">
@@ -115,7 +115,7 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 									onFocus={handleFocus}
 									onBlur={handleBlur}
 								/>
-								{attributes.postfixSearchIcon && <div className="input-group-append" onClick={() => inputChanged(inputValue)}>
+								{def.postfixSearchIcon && <div className="input-group-append" onClick={() => inputChanged(inputValue)}>
 							<span className="input-group-text">
 								<Search className="search-icon"/>
 							</span>
@@ -129,8 +129,8 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 								<div ref={ref} style={style} className="popper" data-placement={placement}>
 									{showSuggestions && suggestions && suggestions.length > 0 && <div className="dropdown-menu show">
 										{suggestions.map((suggestion, index) => {
-											const value = suggestion[attributes.optionValueKey]
-											const label = suggestion[attributes.optionLabelKey]
+											const value = suggestion[def.optionValueKey]
+											const label = suggestion[def.optionLabelKey]
 											return <button className={'dropdown-item' + (cursor === index ? ' active' : '')} key={value + label} onClick={() => handleSelectionClicked(suggestion)}>{label}</button>
 										})}
 									</div>}
@@ -140,19 +140,19 @@ export const Autocomplete = (props: FormElementProps<AutocompleteAttributes>) =>
 					</Popper>
 				</Manager>
 			</FieldChrome>
-			{attributes.showSwitchToManualEntryLink &&
-			<button className="btn btn-link pt-0 pl-0 manual-entry-link" onClick={() => setShowManualEntryForSuggestion(props.path, true)}>{attributes.switchToManualEntryLinkLabel}</button>}
+			{def.showSwitchToManualEntryLink &&
+			<button className="btn btn-link pt-0 pl-0 manual-entry-link" onClick={() => setShowManualEntryForSuggestion(props.path, true)}>{def.switchToManualEntryLinkLabel}</button>}
 		</>
 	} else {
 		return <div className="form-group pt-2">
-			{props.definition.attributes.label && <Label htmlFor={props.path} text={props.definition.attributes.label}/>}
-			{props.definition.children && <div className="card">
+			{props.def.label && <Label htmlFor={props.path} text={props.def.label}/>}
+			{props.def.children && <div className="card">
 				<div className="card-body">
-					<button className="btn btn-link pt-0 pl-0 pb-1 mt-n1" onClick={() => setShowManualEntryForSuggestion(props.path, false)}>{attributes.switchToSuggestLinkLabel}</button>
-					<ChildFormElements parentPath={props.path} childFormElements={props.definition.children}/>
+					<button className="btn btn-link pt-0 pl-0 pb-1 mt-n1" onClick={() => setShowManualEntryForSuggestion(props.path, false)}>{def.switchToSuggestLinkLabel}</button>
+					<ChildFormElements parentPath={props.path} childFormElements={props.def.children}/>
 				</div>
 			</div>}
-			{props.definition.attributes.manualDescription && <Description path={props.path} text={props.definition.attributes.manualDescription}/>}
+			{props.def.manualDescription && <Description path={props.path} text={props.def.manualDescription}/>}
 		</div>
 	}
 }

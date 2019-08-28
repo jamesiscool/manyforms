@@ -1,10 +1,10 @@
-import {FormElementDef} from '../FormDef'
+import {ElementDef} from '../FormDef'
 import {useExpression} from './useExpression'
 
 export const useShowIf = () => {
 	const {evaluate} = useExpression()
 	return {
-		shouldShow: (path: string, fieldDef: FormElementDef): boolean => {
+		shouldShow: (path: string, fieldDef: ElementDef): boolean => {
 			if (!fieldDef.showIf) {
 				return true
 			}

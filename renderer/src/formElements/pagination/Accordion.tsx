@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import React, {useEffect, useRef} from 'react'
-import {FormElementDef} from '../../FormDef'
+import {ElementDef} from '../../FormDef'
 import {usePagination} from '../../hooks/usePagination'
 import {useShowIf} from '../../hooks/useShowIf'
 import {ChildFormElements} from '../ChildFormElements'
@@ -13,10 +13,10 @@ export const Accordion = (props: FormElementProps) => {
 	const currentPageRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		props.definition.children && pagination.setUp(props.path, props.definition.children)
+		props.def.children && pagination.setUp(props.path, props.def.children)
 	})
 
-	if (!props.definition.children) {
+	if (!props.def.children) {
 		return null
 	}
 
@@ -44,13 +44,13 @@ export const Accordion = (props: FormElementProps) => {
 
 	return (
 		<div className="accordion" role="tablist" aria-multiselectable="true">
-			{props.definition.children!.map((page, index) => shouldShow(props.path, page) && <div className="card" key={props.path + '_PAGE_' + index}>
+			{props.def.children!.map((page, index) => shouldShow(props.path, page) && <div className="card" key={props.path + '_PAGE_' + index}>
 					{pagination.currentPageIndex === index && <div ref={currentPageRef}/>}
 					<div className="card-header cursor-pointer" onClick={() => goToPage(index)}>
-						<h3 className="d-inline">{page.attributes.label}</h3>{index < pagination.currentPageIndex && <button className="link-button text-muted px-1" onClick={() => goToPage(index)}><u>edit</u></button>}
+						<h3 className="d-inline">{page.label}</h3>{index < pagination.currentPageIndex && <button className="link-button text-muted px-1" onClick={() => goToPage(index)}><u>edit</u></button>}
 					</div>
 					{pagination.currentPageIndex === index && <div className="card-body m-1">
-						{page.children && <ChildFormElements childFormElements={page.children as FormElementDef[]} parentPath={props.parentPath}/>}
+						{page.children && <ChildFormElements childFormElements={page.children as ElementDef[]} parentPath={props.parentPath}/>}
 						<div className="row">
 							<div className="col">
 								<nav aria-label="Page navigation">

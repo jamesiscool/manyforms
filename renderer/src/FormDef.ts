@@ -1,24 +1,26 @@
 import {Config} from './hooks/useConfig'
 
 export default interface FormDef {
-	elements: FormElementDef[]
+	elements: ElementDef[]
 	config?: Config
 	referenceData?: ReferenceDataDef
 }
 
-export interface FormElementDef<Attributes = FieldAttributes> {
-	type: string,
-	attributes: Attributes,
+export interface ElementDef {
 	fieldId?: string,
-	children?: Array<FormElementDef>
+	type: string,
+	children?: Array<ElementDef>
+	showIf?: string[]
+	hidden: boolean
+	label?: string
+}
+
+export interface FieldDef extends ElementDef {
 	validation?: Array<string | ValidationConstraintDef>
 	showIf?: string[]
 	hidden: boolean
-}
-
-export interface FieldAttributes {
-	label?: string
 	description?: string
+	info?: string
 }
 
 export type ValidationConstraintDef = ValidationRuleDef | ValidationExpresionDef

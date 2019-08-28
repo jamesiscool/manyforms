@@ -4,7 +4,7 @@ import isAlphanumeric from 'validator/lib/isAlphanumeric'
 import isCurrency from 'validator/lib/isCurrency'
 import isEmail from 'validator/lib/isEmail'
 import isNumeric from 'validator/lib/isNumeric'
-import {FormElementDef} from '../FormDef'
+import {ElementDef} from '../FormDef'
 import {useConfig} from './useConfig'
 import {useStore} from './useStore'
 import {VALUES_STORE_KEY} from './useValues'
@@ -28,7 +28,7 @@ export const useExpression = () => {
 	const {store, get} = useStore()
 
 	return {
-		evaluate: <T>(path: string, fieldDef: FormElementDef, expression: string, includeFieldValue = true, extraContex?: any): T => {
+		evaluate: <T>(path: string, fieldDef: ElementDef, expression: string, includeFieldValue = true, extraContex?: any): T => {
 			const context = {
 				...store,
 				fieldDef,

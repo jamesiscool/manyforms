@@ -1,8 +1,8 @@
-import {FieldAttributes, FormElementDef} from '../FormDef'
+import {ElementDef} from '../FormDef'
 
 
-export interface FormElementProps<Attributes = FieldAttributes> {
-	definition: FormElementDef<Attributes>
+export interface FormElementProps<Def = ElementDef> {
+	def: Def
 	parentPath: string
 	path: string
 }

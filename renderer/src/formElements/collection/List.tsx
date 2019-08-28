@@ -1,33 +1,32 @@
 import {times} from 'lodash-es'
 import React from 'react'
 import {Description} from '../../display/Description'
+import {FieldDef} from '../../FormDef'
 import {useValues} from '../../hooks/useValues'
 import {ordinal} from '../../util'
 import {ChildFormElements} from '../ChildFormElements'
 import {FormElementProps} from '../FormElementProps'
 
 
-export interface IterationAttributes {
-	label: string
+export interface ListDef extends FieldDef {
 	itemLabel: string
-	description: string
 }
 
-export const List = (props: FormElementProps<IterationAttributes>) => {
+export const List = (props: FormElementProps<ListDef>) => {
 	const {getCollectionSize, addToCollection, deleteFromCollection} = useValues()
 	return (
 		<div className="form-group">
-			<span className="h5 align-middle mr-2">{props.definition.attributes.label}</span>
-			{props.definition.attributes.description && <Description path={props.path} text={props.definition.attributes.description}/>}
+			<span className="h5 align-middle mr-2">{props.def.label}</span>
+			{props.def.description && <Description path={props.path} text={props.def.description}/>}
 			{times(getCollectionSize(props.path), (index: number) =>
 				<div className={'card border-bottom mb-3' + (index === 0 ? ' mt-2' : '')} key={props.path + '_COLLECTION_' + index}>
-					<h6 className="card-header">{ordinal(index + 1)} {props.definition.attributes.itemLabel}
+					<h6 className="card-header">{ordinal(index + 1)} {props.def.itemLabel}
 						<button className="close text-dark" onClick={() => deleteFromCollection(props.path, index)} aria-label="close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</h6>
 					<div className="card-body pb-0">
-						{props.definition.children && <ChildFormElements childFormElements={props.definition.children} parentPath={props.path + '[' + index + ']'}/>}
+						{props.def.children && <ChildFormElements childFormElements={props.def.children} parentPath={props.path + '[' + index + ']'}/>}
 					</div>
 				</div>
 			)}
