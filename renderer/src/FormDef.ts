@@ -4,7 +4,13 @@ export default interface FormDef {
 	elements: ElementDef[]
 	config?: Config
 	referenceData?: ReferenceDataDef
-	submit: { url: string }
+	submit: {
+		url: string,
+		outcomes: {
+			statusCodes: number[]
+			elements: ElementDef[]
+		}[]
+	}
 }
 
 export interface ElementDef {

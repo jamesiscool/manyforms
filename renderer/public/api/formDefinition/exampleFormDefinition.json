@@ -23,8 +23,8 @@
 							"labelKey": "formattedAddress",
 							"valueIsWholeOption": true,
 							"showSwitchToManualEntryLink": true,
-							"switchToManualEntryLinkLabel": "Enter your current residential address manually",
-							"switchToSuggestLinkLabel": "Enter your current residential address using search",
+							"switchToManualEntryLinkLabel": "Enter manually",
+							"switchToSuggestLinkLabel": "Enter using search",
 							"http": {
 								"url": "http://localhost:3001/address?q="
 							},
@@ -98,7 +98,6 @@
 							"label": "What is your NAB ID?",
 							"description": "This will help us identify you. It's an 8-10 digit number found on the back of your NAB card above the black strip. It’s also the number you use to login to internet banking.",
 							"validation": [
-								"required",
 								"numeric",
 								{
 									"name": "validIf",
@@ -116,7 +115,6 @@
 							"label": "How much would you like to borrow?",
 							"description": "The minimum loan amount is $5000. You can borrow up to $55000. Don't include spaces or other punctuation.",
 							"validation": [
-								"required",
 								"currency"
 							]
 						},
@@ -418,10 +416,7 @@
 								{
 									"fieldId": "employerName",
 									"type": "textInput",
-									"label": "Employer's name",
-									"validation": [
-										"required"
-									]
+									"label": "Employer's name"
 								},
 								{
 									"fieldId": "jobTitle",
@@ -551,10 +546,7 @@
 								{
 									"fieldId": "estimatedValue",
 									"type": "textInput",
-									"label": "What's the estimated value?",
-									"validation": [
-										"required"
-									]
+									"label": "What's the estimated value?"
 								},
 								{
 									"fieldId": "ownership",
@@ -617,6 +609,22 @@
 		]
 	},
 	"submit": {
-		"url": "http://localhost:3001/submit"
+		"url": "http://localhost:3001/submit",
+		"outcomes": [
+			{
+				"statusCodes": [
+					200,
+					201,
+					202
+				],
+				"elements": [
+					{
+						"type": "heading",
+						"level": 2,
+						"text": "Success :)"
+					}
+				]
+			}
+		]
 	}
 }
