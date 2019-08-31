@@ -622,6 +622,10 @@
 						"type": "heading",
 						"level": 2,
 						"text": "Success :)"
+					},
+					{
+						"type": "textOutput",
+						"expression": "formState.submitResponse.status"
 					}
 				]
 			}
