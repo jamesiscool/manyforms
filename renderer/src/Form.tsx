@@ -23,7 +23,6 @@ export const Form: React.FC<FormProps> = (props) => {
 	}, [props.formDef])
 
 	const outcomeIndex = useFormState().formState.outcomeIndex
-	console.log('outcomeIndex:', outcomeIndex)
 	if (outcomeIndex != null) {
 		return <div className="outcome container">
 			<ChildFormElements childFormElements={props.formDef.submit.outcomes[outcomeIndex].elements} parentPath=""/>
