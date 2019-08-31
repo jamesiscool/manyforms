@@ -5,6 +5,8 @@ type FormState = {
 	submitClicked?: number
 	submitting?: boolean
 	outcomeIndex?: number
+	submitResponse?:any
+	submitError?:any
 }
 
 const FORM_STATE_STORE_KEY = 'formState'

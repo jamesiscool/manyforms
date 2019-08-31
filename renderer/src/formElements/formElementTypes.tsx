@@ -6,6 +6,7 @@ import {Dropdown} from './input/Dropdown'
 import {TextInput} from './input/TextInput'
 import {Heading} from './output/Heading'
 import {Paragraph} from './output/Paragraph'
+import {TextOutput} from './output/TextOutput'
 import {Accordion} from './pagination/Accordion'
 import {Tabs} from './pagination/Tabs'
 
@@ -21,7 +22,8 @@ export const formElementNonCollectionTypes: FormElementTypesMap = {
 	'paragraph': Paragraph,
 	'buttonGroup': ButtonGroup,
 	'tabs': Tabs,
-	'autocomplete': Autocomplete
+	'autocomplete': Autocomplete,
+	'textOutput': TextOutput
 }
 
 export const formElementCollectionTypes: FormElementTypesMap = {

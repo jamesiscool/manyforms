@@ -17,6 +17,7 @@ export const useSubmit = () => {
 				.then(function (response) {
 					console.log(response)
 					setFormState('submitting', false)
+					setFormState('submitResponse', response)
 					const outcomeIndex = formDef.submit.outcomes.findIndex((outcome) => {
 						if (outcome.statusCodes.includes(response.status)) {
 							return true
@@ -25,7 +26,8 @@ export const useSubmit = () => {
 					})
 					setFormState('outcomeIndex', outcomeIndex)
 				}).catch(function (error) {
-				console.log('error:', error)
+				setFormState('submitError', error)
+				console.error('error:', error)
 			})
 
 		}
