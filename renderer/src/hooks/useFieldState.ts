@@ -1,3 +1,4 @@
+import {useEvent} from './useEvent'
 import {useStore} from './useStore'
 
 interface FieldStates {
@@ -10,19 +11,21 @@ interface FieldState extends EventTimes {
 }
 
 type EventTimes = {
-	[Event in Events]?: number; //Date.now() when event first happened on the field
+	[Event in FieldEvents]?: number; //Date.now() when event first happened on the field
 }
 
-type Events = 'focus' | 'valueChanged' | 'blur'
+export type FieldEvents = 'focus' | 'valueChanged' | 'blur'
 
 const FIELD_STATE_STORE_KEY = 'fieldStates'
 
 export const useFieldState = () => {
 	const {set, get} = useStore()
+	const {handleEvent} = useEvent()
 
 	const getFieldState = (path: string): FieldState => get(`${FIELD_STATE_STORE_KEY}.${path}`, {})
 
-	const eventHappened = (path: string, event: Events) => {
+	const eventHappened = (path: string, event: FieldEvents) => {
+		handleEvent(event,path)
 		if (!getFieldState(path)[event]) {
 			set(`${FIELD_STATE_STORE_KEY}.${path}.${event}`, Date.now())
 		}

@@ -1,4 +1,5 @@
 import {Config} from './hooks/useConfig'
+import {EventDef} from './hooks/useEvent'
 
 export default interface FormDef {
 	elements: ElementDef[]
@@ -11,6 +12,7 @@ export default interface FormDef {
 			elements: ElementDef[]
 		}[]
 	}
+	events: EventDef[]
 }
 
 export interface ElementDef {

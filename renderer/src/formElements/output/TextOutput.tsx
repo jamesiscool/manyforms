@@ -11,7 +11,7 @@ interface TextOutputDef extends FieldDef {
 export const TextOutput = (props: FormElementProps<TextOutputDef>) => {
 	const {evaluate} = useExpression()
 	if (props.def.expression) {
-		return <>{evaluate(props.path, props.def, props.def.expression)}</>
+		return <>{evaluate(props.def.expression, props.path, props.def)}</>
 	}
 	if (props.def.value) {
 		return <>{props.def.value}</>

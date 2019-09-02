@@ -8,7 +8,7 @@ export const useShowIf = () => {
 			if (!def.showIf) {
 				return true
 			}
-			return def.showIf.some(expression => evaluate(path, def, expression))
+			return def.showIf.some(expression => evaluate(expression, path, def))
 		}
 	}
 }

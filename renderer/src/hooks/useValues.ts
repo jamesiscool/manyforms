@@ -32,7 +32,7 @@ export const useValues = () => {
 			return store.getArrayLength(`${VALUES_STORE_KEY}.${path}`)
 		},
 		setValueExpression: (path: string, def: ElementDef, expresion: string, extraContext?: any) => {
-			setValue(path, evaluate(path, def, expresion, false, extraContext))
+			setValue(path, evaluate(expresion, path, def, extraContext, false))
 		},
 		setUp: (initialValues = {}) => {
 			store.set(VALUES_STORE_KEY, initialValues)
