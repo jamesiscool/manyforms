@@ -642,7 +642,7 @@
 				{
 					"action": "setFieldValue",
 					"path": "loanAmount",
-					"expression": "'5000'"
+					"expression": "urlParams.test"
 				},
 				{
 					"action": "setFieldValue",

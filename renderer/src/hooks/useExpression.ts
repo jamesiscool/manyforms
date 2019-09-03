@@ -1,4 +1,6 @@
 import jexl from 'jexl'
+import {fromPairs} from 'lodash-es'
+import {useMemo} from 'react'
 import isAlpha from 'validator/lib/isAlpha'
 import isAlphanumeric from 'validator/lib/isAlphanumeric'
 import isCurrency from 'validator/lib/isCurrency'
@@ -27,6 +29,8 @@ export const useExpression = () => {
 	const {config} = useConfig()
 	const {store, get} = useStore()
 
+	const urlParams = useMemo(()=>fromPairs(Array.from(new URLSearchParams(window.location.search.slice(1)).entries())),[window.location.search])
+
 	return {
 		evaluate: <T>(expression: string, path?: string, def?: ElementDef, extraContex?: any, includeFieldValue = true): T => {
 			const context = {
@@ -34,6 +38,7 @@ export const useExpression = () => {
 				def,
 				path,
 				config,
+				urlParams,
 				...extraContex
 			}
 			if (includeFieldValue) {
