@@ -29,7 +29,7 @@ export const useExpression = () => {
 	const {config} = useConfig()
 	const {store, get} = useStore()
 
-	const urlParams = useMemo(()=>fromPairs(Array.from(new URLSearchParams(window.location.search.slice(1)).entries())),[window.location.search])
+	const urlParams = useMemo(()=>fromPairs(Array.from(new URLSearchParams(window.location.search.slice(1)).entries())),[])
 
 	return {
 		evaluate: <T>(expression: string, path?: string, def?: ElementDef, extraContex?: any, includeFieldValue = true): T => {

@@ -1,6 +1,5 @@
 {
-	"name": "manyforms",
-	"version": "0.1.0",
+	"name": "manyforms-render",
 	"private": true,
 	"homepage": "https://jamesiscool.github.io/manyforms/",
 	"dependencies": {
