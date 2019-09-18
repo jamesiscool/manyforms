@@ -14,7 +14,7 @@ export const useReferenceData = () => {
 	return {
 		referenceData: get<ReferenceData>(REFERENCE_DATA_STORE_KEY),
 		setReferenceData: (name: string, data: any) => {
-			set(`${REFERENCE_DATA_STORE_KEY}.name`, data)
+			set(`${REFERENCE_DATA_STORE_KEY}.${name}`, data)
 		},
 		setupReferenceData: (referenceDataDef: ReferenceDataDef = {}) => {
 			referenceDataDef.http!.forEach(httpReferenceDataDef => {

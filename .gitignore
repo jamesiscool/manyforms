@@ -1,6 +1,6 @@
 .idea
 *.iml
-renderer/build
-renderer/node_modules
-stack
-wget
+*/build
+*/node_modules
+node_modules
+my-app

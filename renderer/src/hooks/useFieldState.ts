@@ -1,9 +1,9 @@
 import {useEvent} from './useEvent'
 import {useStore} from './useStore'
 
-interface FieldStates {
+/*interface FieldStates {
 	[path: string]: FieldState
-}
+}*/
 
 interface FieldState extends EventTimes {
 	selectedSuggestionLabel?: string

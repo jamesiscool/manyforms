@@ -56,10 +56,10 @@ export const useValidation = () => {
 	}
 
 	const validateAndShouldShow = (path: string, def: ElementDef): string | null => {
-		return shouldShowErrors(path, def) ? validate(path, def) : null
+		return shouldShowErrors(path) ? validate(path, def) : null
 	}
 
-	const shouldShowErrors = (path: string, def: ElementDef): boolean => {
+	const shouldShowErrors = (path: string): boolean => {
 		if (nextOrSubmit() || config.showErrors === 'immediately') {
 			return true
 		}

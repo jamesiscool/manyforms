@@ -1,0 +1,15 @@
+{
+  "name": "@manyforms/common",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "dependencies": {
+    "@types/node": "12.7.5",
+    "typescript": "^3.6.3"
+  }
+}

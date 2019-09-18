@@ -16,4 +16,5 @@ export const TextOutput = (props: FormElementProps<TextOutputDef>) => {
 	if (props.def.value) {
 		return <>{props.def.value}</>
 	}
+	return null
 }

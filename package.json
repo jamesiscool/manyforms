@@ -1,0 +1,14 @@
+{
+	"private": true,
+	"workspaces": [
+		"common",
+		"renderer",
+		"server"
+	],
+	"scripts": {
+		"build": "lerna run build"
+	},
+	"devDependencies": {
+		"lerna": "^2.11.0"
+	}
+}

@@ -1,3 +1,4 @@
+import {add} from '@manyforms/common'
 import {useStore} from './useStore'
 
 type showErrors = 'immediately' | 'onFocus' | 'onValueChanged' | 'onBlur' | 'nextOrSummit'
@@ -16,8 +17,10 @@ const defaultConfig: Config = {
 
 const CONFIG_STORE_KEY = 'config'
 
-export const useConfig = (formDefinitionConfig: Partial<Config> = {}) => {
+export const useConfig = () => {
 	const {set, get} = useStore()
+
+	console.log(add(1,2))
 	return {
 		config: get(CONFIG_STORE_KEY) || {},
 		setupConfig: (formDefinitionConfig = {}) => {
