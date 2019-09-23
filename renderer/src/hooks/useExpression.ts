@@ -23,13 +23,13 @@ jexl.addTransform('isEmail', (value) => value && isEmail(value))
 jexl.addTransform('isNumeric', (value) => value && isNumeric(value))
 
 //case-insensitive string equality
-jexl.addBinaryOp('_=', 20, (left, right) => left.toLowerCase() === right.toLowerCase())
+jexl.addBinaryOp('_=', 20, (left, right) => left != null && right != null && left.toLowerCase() === right.toLowerCase())
 
 export const useExpression = () => {
 	const {config} = useConfig()
 	const {store, get} = useStore()
 
-	const urlParams = useMemo(()=>fromPairs(Array.from(new URLSearchParams(window.location.search.slice(1)).entries())),[])
+	const urlParams = useMemo(() => fromPairs(Array.from(new URLSearchParams(window.location.search.slice(1)).entries())), [])
 
 	return {
 		evaluate: <T>(expression: string, path?: string, def?: ElementDef, extraContex?: any, includeFieldValue = true): T => {
