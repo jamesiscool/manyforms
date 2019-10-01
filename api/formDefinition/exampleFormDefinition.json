@@ -101,12 +101,12 @@
 								"numeric",
 								{
 									"name": "validIf",
-									"expression": "formValues.howManyPeopleApplying != 1 || value > 4",
+									"expression": "values.howManyPeopleApplying != 1 || value > 4",
 									"message": "If 1 personal is applying this must greater then 4"
 								}
 							],
 							"showIf": [
-								"formValues.howManyPeopleApplying == 2 && formValues.areYouAnExistingCustomer _= 'no'"
+								"values.howManyPeopleApplying == 2 && values.areYouAnExistingCustomer _= 'no'"
 							]
 						},
 						{
@@ -199,7 +199,7 @@
 					"type": "page",
 					"label": "Tell us about yourself",
 					"showIf": [
-						"formValues.howManyPeopleApplying == 1"
+						"values.howManyPeopleApplying == 1"
 					],
 					"children": [
 						{
@@ -388,7 +388,7 @@
 					"type": "page",
 					"label": "Tell us about your employment",
 					"showIf": [
-						"formValues.howManyPeopleApplying == 2"
+						"values.howManyPeopleApplying == 2"
 					],
 					"children": [
 						{
@@ -642,7 +642,7 @@
 				{
 					"action": "setFieldValue",
 					"path": "loanAmount",
-					"expression": "urlSearchParams.test"
+					"expression": "urlParams.test"
 				},
 				{
 					"action": "setFieldValue",
