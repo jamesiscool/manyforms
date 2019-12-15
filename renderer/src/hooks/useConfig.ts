@@ -18,7 +18,6 @@ const CONFIG_STORE_KEY = 'config'
 
 export const useConfig = () => {
 	const {set, get} = useStore()
-
 	return {
 		config: get(CONFIG_STORE_KEY) || {},
 		setupConfig: (formDefinitionConfig = {}) => {

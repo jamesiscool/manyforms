@@ -62,7 +62,9 @@ export const useEvent = () => {
 
 	return {
 		handleEvent: (eventType: EventType, path?: string, fieldDef?: FieldDef, expressionExtraContex?: any) => {
+			console.log('eventType:', eventType)
 			const eventDefs = (formDef && formDef.events) || []
+			console.log('eventDefs:', eventDefs)
 			const eventsDefWithMatchingTriggers = eventDefs.filter(eventDef => eventDef.triggers.some(trigger => {
 					const triggerEventMatches = trigger.eventType.includes(eventType)
 					const triggerPathMatches = (trigger.path == null && trigger.pathExpression == null)
