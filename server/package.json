@@ -1,28 +1,26 @@
 {
-  "name": "@manyforms/server",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "@manyforms/common": "1.0.0",
-    "@types/koa": "^2.0.49",
-    "@types/koa-bodyparser": "^4.3.0",
-    "@types/koa-json": "^2.0.18",
-    "@types/koa-logger": "^3.1.1",
-    "@types/koa-router": "^7.0.42",
-    "koa": "^2.8.1",
-    "koa-bodyparser": "^4.2.1",
-    "koa-json": "^2.0.2",
-    "koa-logger": "^3.2.1",
-    "koa-router": "^7.4.0"
-  },
-  "devDependencies": {
-    "@types/node": "12.7.5",
-    "ts-node": "^6.1.0",
-    "typescript": "3.6.3"
-  },
-  "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "build": "tsc"
-  }
+	"name": "@manyforms/server",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"dependencies": {
+		"@manyforms/common": "1.0.0",
+		"@types/koa": "^2.11.0",
+		"@types/koa-bodyparser": "^4.3.0",
+		"@types/koa-json": "^2.0.18",
+		"@types/koa-logger": "^3.1.1",
+		"@types/koa-router": "^7.0.42",
+		"@types/node": "12.12.18",
+		"koa": "^2.8.1",
+		"koa-bodyparser": "^4.2.1",
+		"koa-json": "^2.0.2",
+		"koa-logger": "^3.2.1",
+		"koa-router": "^7.4.0",
+		"ts-node": "^8.5.4",
+		"typescript": "~3.7.3"
+	},
+	"scripts": {
+		"start": "ts-node ./src/index.ts",
+		"build": "tsc"
+	}
 }
