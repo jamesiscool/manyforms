@@ -9,6 +9,6 @@
     "start": "tsc --watch"
   },
   "dependencies": {
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.3"
   }
 }
