@@ -1,0 +1,15 @@
+GET http://localhost:3002/formDef/aaaa/1
+Accept: application/json; charset=utf-8
+
+###
+
+POST http://localhost:3002/submit
+Content-Type: application/json
+Accept: application/json; charset=utf-8
+
+{
+	"hello": "world"
+}
+
+###
+

@@ -1,14 +1,14 @@
 {
-  "name": "@manyforms/common",
-  "version": "1.0.0",
-  "main": "build/index.js",
-  "typings": "build/index.d.ts",
-  "license": "MIT",
-  "scripts": {
-    "build": "tsc",
-    "start": "tsc --watch"
-  },
-  "dependencies": {
-    "typescript": "^3.7.3"
-  }
+	"name": "@manyforms/common",
+	"version": "1.0.0",
+	"main": "build/index.js",
+	"typings": "build/index.d.ts",
+	"license": "MIT",
+	"scripts": {
+		"build": "tsc",
+		"start": "tsc --watch"
+	},
+	"dependencies": {
+		"typescript": "^3.7.3"
+	}
 }
