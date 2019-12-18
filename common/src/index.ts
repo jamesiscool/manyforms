@@ -1,3 +1,5 @@
-import * as definitions from './definitions'
-
-export {definitions}
+export * from './definitions/configDef'
+export * from './definitions/eventDef'
+export * from './definitions/formDef'
+export * from './definitions/referenceDataDef'
+export * from './definitions/validationDef'
