@@ -1,4 +1,5 @@
 import Koa from 'koa'
+import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
 import json from 'koa-json'
 import logger from 'koa-logger'
@@ -12,6 +13,7 @@ const app = new Koa()
 app.use(json())
 	.use(logger())
 	.use(bodyParser())
+	.use(cors({origin:'*'}))
 
 //app.use(router.routes()).use(router.allowedMethods())
 app.use(submitRouter.routes()).use(submitRouter.allowedMethods())
