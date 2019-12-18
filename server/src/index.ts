@@ -19,5 +19,5 @@ app.use(formDefRouter.routes()).use(formDefRouter.allowedMethods())
 
 
 app.listen(3002, () => {
-	console.log('Koa started')
+	console.log('Koa started http://localhost:3002')
 })

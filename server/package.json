@@ -16,11 +16,12 @@
 		"koa-json": "^2.0.2",
 		"koa-logger": "^3.2.1",
 		"koa-router": "^7.4.0",
+		"nodemon": "^2.0.2",
 		"ts-node": "^8.5.4",
 		"typescript": "~3.7.3"
 	},
 	"scripts": {
-		"start": "ts-node ./src/index.ts --watch 'src/**/*.ts'",
+		"start": "nodemon --watch src --exec ts-node src/index.ts",
 		"build": "tsc"
 	}
 }
