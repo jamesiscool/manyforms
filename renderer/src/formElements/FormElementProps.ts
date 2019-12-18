@@ -1,5 +1,4 @@
-import {ElementDef} from '../FormDef'
-
+import {ElementDef} from '@manyforms/common'
 
 export interface FormElementProps<Def = ElementDef> {
 	def: Def

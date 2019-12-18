@@ -1,5 +1,5 @@
+import {ReferenceDataDef} from '@manyforms/common'
 import axios from 'axios'
-import {ReferenceDataDef} from '../FormDef'
 import {useStore} from './useStore'
 
 interface ReferenceData {

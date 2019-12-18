@@ -1,6 +1,6 @@
+import {ElementDef} from '@manyforms/common'
 import classNames from 'classnames'
 import React, {useEffect, useRef} from 'react'
-import {ElementDef} from '../../FormDef'
 import {usePagination} from '../../hooks/usePagination'
 import {useShowIf} from '../../hooks/useShowIf'
 import {ChildFormElements} from '../ChildFormElements'

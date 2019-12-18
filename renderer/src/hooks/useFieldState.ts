@@ -25,7 +25,7 @@ export const useFieldState = () => {
 	const getFieldState = (path: string): FieldState => get(`${FIELD_STATE_STORE_KEY}.${path}`, {})
 
 	const eventHappened = (path: string, event: FieldEvents) => {
-		handleEvent(event,path)
+		handleEvent(event, path)
 		if (!getFieldState(path)[event]) {
 			set(`${FIELD_STATE_STORE_KEY}.${path}.${event}`, Date.now())
 		}

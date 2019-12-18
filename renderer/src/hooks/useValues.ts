@@ -1,4 +1,4 @@
-import {ElementDef} from '../FormDef'
+import {ElementDef} from '@manyforms/common'
 import {useExpression} from './useExpression'
 import {useFieldState} from './useFieldState'
 import {useStore} from './useStore'

@@ -1,6 +1,6 @@
+import {FieldDef} from '@manyforms/common'
 import React, {useState} from 'react'
 import {FieldChrome} from '../../display/FieldChrome'
-import {FieldDef} from '../../FormDef'
 import {useFieldState} from '../../hooks/useFieldState'
 
 import {useValues} from '../../hooks/useValues'

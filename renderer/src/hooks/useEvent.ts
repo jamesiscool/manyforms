@@ -1,4 +1,4 @@
-import {FieldDef} from '../FormDef'
+import {FieldDef} from '@manyforms/common'
 import {useExpression} from './useExpression'
 import {FieldEvents} from './useFieldState'
 import {useFormDef} from './useFormDef'

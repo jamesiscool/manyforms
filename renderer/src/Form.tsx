@@ -1,5 +1,5 @@
+import {FormDef} from '@manyforms/common'
 import React, {useLayoutEffect} from 'react'
-import FormDef from './FormDef'
 import {ChildFormElements} from './formElements/ChildFormElements'
 import {useConfig} from './hooks/useConfig'
 import {useFormDef} from './hooks/useFormDef'

@@ -1,4 +1,4 @@
-import {ElementDef} from '../FormDef'
+import {ElementDef} from '@manyforms/common'
 import {useExpression} from '../hooks/useExpression'
 import {useValues} from '../hooks/useValues'
 import {validationRules} from './ValidationRules'

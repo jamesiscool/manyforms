@@ -1,6 +1,6 @@
+import {ElementDef} from '@manyforms/common'
 import {findLastIndex} from 'lodash-es'
 import {useState} from 'react'
-import {ElementDef} from '../FormDef'
 import {useConfig} from './useConfig'
 import {useFormState} from './useFormState'
 import {useShowIf} from './useShowIf'

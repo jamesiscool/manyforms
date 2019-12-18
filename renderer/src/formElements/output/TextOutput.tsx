@@ -1,5 +1,5 @@
+import {FieldDef} from '@manyforms/common'
 import React from 'react'
-import {FieldDef} from '../../FormDef'
 import {useExpression} from '../../hooks/useExpression'
 import {FormElementProps} from '../FormElementProps'
 

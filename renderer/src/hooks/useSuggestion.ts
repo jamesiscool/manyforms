@@ -1,6 +1,6 @@
+import {FieldDef} from '@manyforms/common'
 import axios from 'axios'
 import {useEffect, useState} from 'react'
-import {FieldDef} from '../FormDef'
 import {useFieldState} from './useFieldState'
 import {useReferenceData} from './useReferenceData'
 import {useValues} from './useValues'

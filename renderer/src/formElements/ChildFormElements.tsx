@@ -1,5 +1,5 @@
+import {ElementDef, FieldDef} from '@manyforms/common'
 import React from 'react'
-import {ElementDef, FieldDef} from '../FormDef'
 import {useShowIf} from '../hooks/useShowIf'
 import {createPath} from '../util'
 import {FormElementProps} from './FormElementProps'

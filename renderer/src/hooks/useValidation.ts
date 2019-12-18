@@ -1,4 +1,4 @@
-import {ElementDef, FieldDef, isValidationExpresionDef, ValidationConstraintDef} from '../FormDef'
+import {ElementDef, FieldDef, ValidationConstraintDef, ValidationExpresionDef} from '@manyforms/common'
 import {isTypeACollection} from '../formElements/formElementTypes'
 import {createPath} from '../util'
 import {useValidationExpressions} from '../validation/ValidationExpressions'
@@ -31,6 +31,10 @@ export const useValidation = () => {
 		}, null)
 	}
 
+	function isValidationExpresion(constraint: ValidationConstraintDef): constraint is ValidationExpresionDef {
+		return (constraint as ValidationExpresionDef).expression !== undefined
+	}
+
 	function validateConstraint(constraint: ValidationConstraintDef | string, path: string, def: ElementDef): string | null {
 		if (typeof constraint === 'string') {
 			const fieldValue = getValue(path) || ''
@@ -39,7 +43,7 @@ export const useValidation = () => {
 				return validationRule.defaultMessage
 			}
 			return null
-		} else if (!isValidationExpresionDef(constraint)) {
+		} else if (!isValidationExpresion(constraint)) {
 			const fieldValue = getValue(path) || ''
 			const validationRule = validationRules[constraint.name]
 			if (!validationRule.validate(fieldValue)) {

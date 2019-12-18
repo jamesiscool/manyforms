@@ -1,5 +1,5 @@
+import {FieldDef} from '@manyforms/common'
 import React from 'react'
-import {FieldDef} from '../FormDef'
 import {useValidation} from '../hooks/useValidation'
 import {Description} from './Description'
 import {Label} from './Label'

@@ -1,4 +1,4 @@
-import FormDef from '../FormDef'
+import {FormDef} from '@manyforms/common'
 import {useStore} from './useStore'
 
 const FORM_DEF_STORE_KEY = 'formDef'
