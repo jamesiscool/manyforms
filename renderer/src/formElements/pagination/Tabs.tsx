@@ -45,14 +45,11 @@ export const Tabs = (props: FormElementProps<TabsDef>) => {
 							return null
 						}
 						const key = props.path + '_PAGE_' + index
-						//The bootstrap btn-link doesn't style the same as a link with a href when used as nav-link
-						/* eslint-disable jsx-a11y/anchor-is-valid, no-script-url */
 						if (index < pagination.currentPageIndex) {
 							return <li className="nav-item" key={key}>
-								<a className="nav-link" href="javascript:void(0)" onClick={() => pagination.setCurrentPageIndex(index)}>{page.label}</a>
+								<button className="nav-link btn-link" onClick={() => pagination.setCurrentPageIndex(index)}>{page.label}</button>
 							</li>
 						}
-						/* eslint-enable no-script-url, jsx-a11y/anchor-is-valid */
 						if (index === pagination.currentPageIndex) {
 							return <li className="nav-item" key={key}>
 								<button className="nav-link active">{page.label}</button>
