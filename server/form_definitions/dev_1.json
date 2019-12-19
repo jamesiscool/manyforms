@@ -1,4 +1,6 @@
 {
+	"formId": "dev",
+	"formVersion": 1,
 	"elements": [
 		{
 			"type": "tabs",
@@ -609,7 +611,7 @@
 		]
 	},
 	"submit": {
-		"url": "http://localhost:3001/submit",
+		"url": "http://localhost:3002/submit",
 		"outcomes": [
 			{
 				"statusCodes": [
@@ -621,7 +623,7 @@
 					{
 						"type": "heading",
 						"level": 2,
-						"text": "Success :)"
+						"text": "Success"
 					},
 					{
 						"type": "textOutput",
@@ -633,11 +635,13 @@
 	},
 	"events": [
 		{
-			"triggers": [{
-				"eventType": [
-					"formLoaded"
-				]
-			}],
+			"triggers": [
+				{
+					"eventType": [
+						"formLoaded"
+					]
+				}
+			],
 			"actions": [
 				{
 					"action": "setFieldValue",

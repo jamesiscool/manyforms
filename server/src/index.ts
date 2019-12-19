@@ -1,25 +1,23 @@
-import Koa from 'koa'
 import cors from '@koa/cors'
+import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import json from 'koa-json'
 import logger from 'koa-logger'
-//import Router from 'koa-router'
-import {formDefRouter} from './routes/formDef'
-import {submitRouter} from './routes/submit'
+import {formDefRouter} from './routes/formDefRoute'
+import {submitRouter} from './routes/submitRoute'
+
+const PORT = Number(process.env.PORT) || 3002
 
 const app = new Koa()
-//export const router = new Router()
 
 app.use(json())
 	.use(logger())
 	.use(bodyParser())
-	.use(cors({origin:'*'}))
+	.use(cors({origin: '*'}))
 
-//app.use(router.routes()).use(router.allowedMethods())
 app.use(submitRouter.routes()).use(submitRouter.allowedMethods())
 app.use(formDefRouter.routes()).use(formDefRouter.allowedMethods())
 
-
-app.listen(3002, () => {
-	console.log('Koa started http://localhost:3002')
+app.listen(PORT, () => {
+	console.log(`Koa started on port ${PORT}`)
 })

@@ -4,15 +4,14 @@ import {ReferenceDataDef} from './referenceDataDef'
 import {ValidationConstraintDef} from './validationDef'
 
 export interface FormDef {
+	formId: string
+	formVersion: number
 	elements: ElementDef[]
 	config?: Config
 	referenceData?: ReferenceDataDef
 	submit: {
 		url: string,
-		outcomes: {
-			statusCodes: number[]
-			elements: ElementDef[]
-		}[]
+		outcomes: OutcomeDef[]
 	}
 	events: EventDef[]
 }
@@ -32,4 +31,10 @@ export interface FieldDef extends ElementDef {
 	hidden: boolean
 	description?: string
 	info?: string
+}
+
+export interface OutcomeDef {
+	statusCodes?: number[]
+	outcomeId?: string
+	elements: ElementDef[]
 }

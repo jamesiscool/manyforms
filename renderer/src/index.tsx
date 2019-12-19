@@ -1,5 +1,5 @@
 //import 'react-app-polyfill/ie11'
-import {FormDef} from '@manyforms/common'
+import {GetFormDefResponse} from '@manyforms/common'
 import axios from 'axios'
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -8,11 +8,11 @@ import {StoreProvider} from './hooks/useStore'
 
 import './index.css'
 
-axios.get<FormDef>('api/formDefinition/exampleFormDefinition.json')
+axios.get<GetFormDefResponse>('http://localhost:3002/formDef/dev/1')
 	.then(function (response) {
 		ReactDOM.render(
 			<StoreProvider>
-				<Form formDef={response.data}/>
+				<Form formDef={response.data.formDef}/>
 			</StoreProvider>,
 			document.getElementById('form')
 		)
