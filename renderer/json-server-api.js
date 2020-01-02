@@ -6,7 +6,7 @@ const _ = require('lodash')
 const streetAbbreviations = ['Ally', 'Arc', 'Ave', 'Bvd', 'Bypa', 'Cct', 'Cl', 'Crn', 'Ct', 'Cres', 'Cds', 'Dr', 'Esp', 'Grn', 'Gr', 'Hwy', 'Jnc', 'Lane', 'Link', 'Mews', 'Pde', 'Pl', 'Rdge', 'Rd', 'Sq', 'St', 'Tce']
 
 module.exports = () => {
-	const data = {address: [], submit: {}}
+	const data = {address: []}
 	// Create 1000 users
 	for (let i = 0; i < 1000; i++) {
 		faker.locale = "en_AU"
