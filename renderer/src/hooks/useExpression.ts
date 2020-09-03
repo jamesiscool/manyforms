@@ -7,7 +7,6 @@ import isAlphanumeric from 'validator/lib/isAlphanumeric'
 import isCurrency from 'validator/lib/isCurrency'
 import isEmail from 'validator/lib/isEmail'
 import isNumeric from 'validator/lib/isNumeric'
-import {useConfig} from './useConfig'
 import {useStore} from './useStore'
 import {VALUES_STORE_KEY} from './useValues'
 
@@ -26,7 +25,6 @@ jexl.addTransform('isNumeric', (value) => value && isNumeric(value))
 jexl.addBinaryOp('_=', 20, (left, right) => left != null && right != null && left.toLowerCase() === right.toLowerCase())
 
 export const useExpression = () => {
-	const {config} = useConfig()
 	const {store, get} = useStore()
 
 	const urlParams = useMemo(() => fromPairs(Array.from(new URLSearchParams(window.location.search.slice(1)).entries())), [])
@@ -37,7 +35,6 @@ export const useExpression = () => {
 				...store,
 				def,
 				path,
-				config,
 				urlParams,
 				...extraContex
 			}

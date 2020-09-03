@@ -11,3 +11,8 @@ export interface ValidationExpresionDef {
 	expression: string,
 	message?: string
 }
+
+export interface ServerSideErrors {
+	path?:string,
+	message: string
+}

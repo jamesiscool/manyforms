@@ -2,7 +2,7 @@ import {FormDef} from '@manyforms/common'
 import fs from 'fs'
 import path from 'path'
 
-export const getFormDef = (id: number, version: number): FormDef | null => {
+export const getFormDef = (id: string, version: number): FormDef | null => {
 	try {
 		const formPath = path.join('form_definitions', id + '_' + version + '.json')
 		const formDefString = fs.readFileSync(formPath, 'utf8')
